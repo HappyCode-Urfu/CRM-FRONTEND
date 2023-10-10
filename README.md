@@ -4,7 +4,7 @@
 - TS
 - Axios 
 - React Router Dom 
-- Recoil 
+- Redux Toolkit
 - Vite 
 
 ## Импорт для .env
