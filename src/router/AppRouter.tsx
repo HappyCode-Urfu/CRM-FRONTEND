@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { authRoutes, publicRoutes } from './routes.ts'
+import { authRoutes, publicRoutes } from 'router/routes.ts'
 
 const AppRouter = () => {
   const location = useLocation()

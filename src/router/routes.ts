@@ -1,6 +1,6 @@
-import { CABINET_ROUTE, MAIN_ROUTE } from '../utils/constsRoutes.ts'
-import Main from '../pages/main'
-import Cabinet from '../pages/cabinet'
+import { Cabinet, Main } from 'pages'
+import { CABINET_ROUTE, MAIN_ROUTE } from 'utils/constsRoutes.ts'
+
 export const authRoutes = [
   {
     path: CABINET_ROUTE,

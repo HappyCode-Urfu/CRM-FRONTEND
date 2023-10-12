@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux.ts'
 import { useEffect } from 'react'
-import { fetchUsers } from '../../store/reducers/ActionCreators.ts'
+import { fetchUsers } from 'store/reducers/ActionCreators.ts'
 
-const Main = () => {
+export const Main = () => {
   const dispatch = useAppDispatch()
   const { users, isLoading, error } = useAppSelector(
     (state) => state.userReducer
@@ -18,5 +18,3 @@ const Main = () => {
     </div>
   )
 }
-
-export default Main
