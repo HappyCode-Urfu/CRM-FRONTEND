@@ -2,12 +2,15 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
-import { RecoilRoot } from 'recoil'
+import { Provider } from 'react-redux'
+import { setupStore } from './store/store.ts'
+
+const store = setupStore()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
-    <RecoilRoot>
+    <Provider store={store}>
       <App />
-    </RecoilRoot>
+    </Provider>
   </BrowserRouter>
 )

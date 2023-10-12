@@ -47,6 +47,7 @@ yarn serv-json
     └── src/ - Корневая папка с кодом
         ├── assets/ 
         ├── components/
+        ├── hooks/
         ├── http/
         ├── layout/
         ├── pages/
