@@ -5,7 +5,8 @@
 - Axios 
 - React Router Dom 
 - Redux Toolkit
-- Vite 
+- Vite
+- JSON server - fake api
 
 ## Импорт для .env
 
