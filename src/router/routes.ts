@@ -3,14 +3,14 @@ import Main from '../pages/main'
 import Cabinet from '../pages/cabinet'
 export const authRoutes = [
   {
-    path: MAIN_ROUTE,
-    Component: Main,
+    path: CABINET_ROUTE,
+    Component: Cabinet,
   },
 ]
 
 export const publicRoutes = [
   {
-    path: CABINET_ROUTE,
-    Component: Cabinet,
+    path: MAIN_ROUTE,
+    Component: Main,
   },
 ]
