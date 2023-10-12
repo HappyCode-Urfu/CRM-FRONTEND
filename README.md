@@ -68,4 +68,7 @@ yarn build
 
 # Просмотр собранного проекта
 yarn preview
+
+# Запуск fake api 
+yarn server
 ```
