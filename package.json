@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "server": "json-server -w db.json",
+    "serv-json": "json-server -w fakeapi/db.json -p 4000 -r fakeapi/routes.json -m ./node_modules/json-server-auth",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -31,6 +31,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "json-server": "^0.17.4",
     "json-server-auth": "^2.1.0",
     "prettier": "^3.0.3",
     "typescript": "^5.0.2",
