@@ -13,13 +13,18 @@ const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek }) => {
   })
 
   const hours = Array.from({ length: 24 }, (_, i) => i)
+  const minutes = Array.from({ length: 6 }, (_, i) => i)
 
   return (
     <div className={s.task}>
       {days.map((day) => (
         <div key={day.toISOString()} className={s.day}>
           {hours.map((hour) => (
-            <div key={hour} className={s.hour}></div>
+            <div key={hour} className={s.hour}>
+              {minutes.map((minute) => (
+                <div key={minute} className={s.minutes}></div>
+              ))}
+            </div>
           ))}
         </div>
       ))}
