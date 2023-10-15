@@ -1,11 +1,5 @@
-import Calendar from '../../components/calendar/Calendar.tsx'
-
 const Main = () => {
-  return (
-    <div>
-      <Calendar />
-    </div>
-  )
+  return <div></div>
 }
 
 export default Main

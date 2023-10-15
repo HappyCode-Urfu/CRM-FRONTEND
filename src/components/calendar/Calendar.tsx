@@ -5,7 +5,7 @@ import TaskGrid from './TaskGrid/TaskGrid.tsx'
 import s from './Calendar.module.scss'
 
 const Calendar: React.FC = () => {
-  const [selectedWeek, setSelectedWeek] = useState(new Date())
+  const [selectedWeek, setSelectedWeek] = useState<Date>(new Date())
 
   const handlePrevWeek = () => {
     const newWeek = new Date(selectedWeek)
