@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import userReducer from './reducers/UserSlice.ts'
+import eventReducer from './reducers/Events/EventSlice.ts'
 
 const rootReducer = combineReducers({
-  userReducer,
+  eventReducer,
 })
 
 export const setupStore = () => {

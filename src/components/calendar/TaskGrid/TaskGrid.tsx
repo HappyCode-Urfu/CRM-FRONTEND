@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import s from './TaskGrid.module.scss'
 import { hours, minutes } from '../../../utils/constsTimes.ts'
 import Modal from '../../modal/Modal.tsx'
+import { IEvents } from '../../../models/IEvents.ts'
 
 interface TaskGridProps {
   selectedWeek: Date
+  events: IEvents[]
 }
 
-const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek }) => {
+const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
   const [formType, setFormType] = useState('')
   const [showModal, setShowModal] = useState(false)
 
