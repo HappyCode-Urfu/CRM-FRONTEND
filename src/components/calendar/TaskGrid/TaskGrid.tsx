@@ -1,9 +1,9 @@
 import React from 'react'
 import s from './TaskGrid.module.scss'
 import { hours, minutes } from '../../../utils/constsTimes.ts'
-import Modal from '../../modal/Modal.tsx'
 import { IEvents } from '../../../models/IEvents.ts'
 import useTaskGrid from '../hooks/useTaskGrid.ts'
+import Modal from '../modal/Modal.tsx'
 
 interface TaskGridProps {
   selectedWeek: Date

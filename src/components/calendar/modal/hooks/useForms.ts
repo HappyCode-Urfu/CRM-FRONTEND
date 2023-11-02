@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from '../../../hooks/redux.ts'
-import { postEvent } from '../../../store/reducers/Events/ActionCreators.ts'
+import { useAppDispatch } from '../../../../hooks/redux.ts'
+import { postEvent } from '../../../../store/reducers/Events/ActionCreators.ts'
 
 interface IForms {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
