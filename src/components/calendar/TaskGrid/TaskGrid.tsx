@@ -34,13 +34,15 @@ const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
       {days.map((day) => (
         <div key={day.toISOString()} className={s.day}>
           {filterEventsByDayAndTime(day).map((event) => {
-            //TODO Время +5 часов почему?
-            const eventStart = new Date(event.start_time)
-            const eventEnd = new Date(event.end_time)
+            const eventStart = event.start_time.split(':')
+            const eventEnd = event.end_time.split(':')
             const eventTopPosition =
-              (eventStart.getHours() - 5) * 60 + eventStart.getMinutes()
-            const eventHeight =
-              (eventEnd.getTime() - eventStart.getTime()) / (1000 * 60)
+              parseInt(eventStart[0]) * 60 + parseInt(eventStart[1])
+            const eventStartTime =
+              parseInt(eventStart[0]) * 60 + parseInt(eventStart[1])
+            const eventEndTime =
+              parseInt(eventEnd[0]) * 60 + parseInt(eventEnd[1])
+            const eventHeight = eventEndTime - eventStartTime
 
             const eventStyle = {
               top: `${eventTopPosition}px`,
@@ -48,7 +50,12 @@ const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
             }
 
             return (
-              <div key={event.id} className={s.event} style={eventStyle}>
+              <div
+                key={event.id}
+                className={s.event}
+                style={eventStyle}
+                onClick={() => openForm('view')}
+              >
                 {event.service_name}
               </div>
             )

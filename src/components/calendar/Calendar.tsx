@@ -5,7 +5,7 @@ import s from './Calendar.module.scss'
 import useCalendar from './hooks/useCalendar.ts'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux.ts'
 import { useEffect } from 'react'
-import { fetchEvents } from '../../store/reducers/Events/ActionCreators.ts'
+import { getAllEvents } from '../../store/reducers/Events/ActionCreators.ts'
 
 const Calendar = () => {
   const dispatch = useAppDispatch()
@@ -15,7 +15,7 @@ const Calendar = () => {
   )
 
   useEffect(() => {
-    dispatch(fetchEvents())
+    dispatch(getAllEvents())
   }, [])
 
   return (

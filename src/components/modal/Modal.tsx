@@ -37,7 +37,9 @@ const Modal: React.FC<IModal> = ({
             <button className={s.close} onClick={closeForm}>
               закрыть
             </button>
-            {formType === Form.Create && <CreateForm />}
+            {formType === Form.Create && (
+              <CreateForm setShowModal={setShowModal} />
+            )}
             {formType === Form.Edit && <EditForm />}
             {formType === Form.View && <ViewForm />}
           </div>
