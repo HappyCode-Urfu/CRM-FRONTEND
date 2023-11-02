@@ -6,6 +6,11 @@
   height: 100%;
 
   .hour{
-    height: 67px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 60px;
+    width: 100%;
   }
 }
