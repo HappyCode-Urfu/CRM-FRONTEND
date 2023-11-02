@@ -18,7 +18,7 @@ const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
     setEndTime,
     errors,
     handleSubmit,
-  } = useForms(setShowModal)
+  } = useForms({ setShowModal })
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
@@ -30,7 +30,7 @@ const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
-        {errors.task && <span className="error">{errors.task}</span>}
+        {errors.task && <span className={s.error}>{errors.task}</span>}
       </div>
 
       <div className={s.formGroup}>
@@ -41,7 +41,7 @@ const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
-        {errors.date && <span className="error">{errors.date}</span>}
+        {errors.date && <span className={s.error}>{errors.date}</span>}
       </div>
 
       <div className={s.formGroup}>
@@ -52,7 +52,9 @@ const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
           value={startTime}
           onChange={(e) => setStartTime(e.target.value)}
         />
-        {errors.startTime && <span className="error">{errors.startTime}</span>}
+        {errors.startTime && (
+          <span className={s.error}>{errors.startTime}</span>
+        )}
       </div>
 
       <div className={s.formGroup}>
@@ -63,7 +65,7 @@ const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
           value={endTime}
           onChange={(e) => setEndTime(e.target.value)}
         />
-        {errors.endTime && <span className="error">{errors.endTime}</span>}
+        {errors.endTime && <span className={s.error}>{errors.endTime}</span>}
       </div>
 
       <button type="submit">Отправить</button>

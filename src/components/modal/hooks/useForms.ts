@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useAppDispatch } from '../../../hooks/redux.ts'
 import { postEvent } from '../../../store/reducers/Events/ActionCreators.ts'
 
-export const useForms = (
+interface IForms {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
-) => {
+}
+
+export const useForms = ({ setShowModal }: IForms) => {
   const dispatch = useAppDispatch()
   const [task, setTask] = useState('')
   const [date, setDate] = useState('')
