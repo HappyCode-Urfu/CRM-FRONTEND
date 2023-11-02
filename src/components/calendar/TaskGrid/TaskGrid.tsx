@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import s from './TaskGrid.module.scss'
 import { hours, minutes } from '../../../utils/constsTimes.ts'
 import { IEvents } from '../../../models/IEvents.ts'
@@ -11,6 +11,7 @@ interface TaskGridProps {
 }
 
 const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
+  const dayRef = useRef<HTMLDivElement>(null)
   const days = Array.from({ length: 7 }, (_, i) => {
     const day = new Date(selectedWeek)
     day.setDate(selectedWeek.getDate() + i)
@@ -26,13 +27,32 @@ const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
     })
   }
 
-  const { showModal, formType, openForm, setFormType, setShowModal } =
-    useTaskGrid()
+  const {
+    showModal,
+    formType,
+    openForm,
+    setFormType,
+    setShowModal,
+    startEventPosition,
+    endEventPosition,
+    isCreatingEvent,
+    activeColumn,
+    handleMouseDown,
+    handleMouseUp,
+    handleMouseMove,
+  } = useTaskGrid()
 
   return (
     <div className={s.task}>
       {days.map((day) => (
-        <div key={day.toISOString()} className={s.day}>
+        <div
+          key={day.toISOString()}
+          className={s.day}
+          ref={dayRef}
+          onMouseDown={(e) => handleMouseDown(e, day, dayRef)}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+        >
           {filterEventsByDayAndTime(day).map((event) => {
             const eventStart = event.start_time.split(':')
             const eventEnd = event.end_time.split(':')
@@ -60,6 +80,17 @@ const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
               </div>
             )
           })}
+          {isCreatingEvent &&
+            activeColumn?.toISOString() === day.toISOString() && (
+              <div
+                className={s.event}
+                style={{
+                  top: startEventPosition.y,
+                  width: '225px',
+                  height: endEventPosition.y - startEventPosition.y,
+                }}
+              />
+            )}
           {hours.map((hour) => (
             <div key={hour} className={s.hour}>
               {minutes.map((minute) => (
