@@ -39,12 +39,13 @@ export const login = createAsyncThunk<TUser, TLogin, { rejectValue: string }>(
   'userReducer/login',
   async function (form, { rejectWithValue }) {
     try {
-      const { data } = await $api.post<TUser & { token: string }>(
+      const { data } = await $api.post<TUser & { accessToken: string }>(
         '/login',
         form
       )
-      const { token, ...user } = data
-      localStorage.setItem('accessToken', token)
+      const { accessToken, ...user } = data
+      localStorage.setItem('accessToken', accessToken)
+      console.log(localStorage.getItem('accessToken'))
       return user
     } catch (e) {
       return rejectWithValue('Не удалось авторизоваться')
