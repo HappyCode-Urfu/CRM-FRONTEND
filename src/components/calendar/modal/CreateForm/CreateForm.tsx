@@ -1,4 +1,4 @@
-import { useForms } from '../hooks/useForms.ts'
+import { useForms } from '../index.ts'
 import s from './CreateForm.module.scss'
 import React from 'react'
 
@@ -6,7 +6,7 @@ interface IProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
+export const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
   const {
     task,
     setTask,
@@ -72,5 +72,3 @@ const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
     </form>
   )
 }
-
-export default CreateForm

@@ -1,15 +1,12 @@
-import WeekHeader from './WeekHeader/WeekHeader.tsx'
-import TimeColumn from './TimeColumn/TimeColumn.tsx'
-import TaskGrid from './TaskGrid/TaskGrid.tsx'
+import { TaskGrid, WeekHeader, TimeColumn, UseCalendar } from './index.ts'
 import s from './Calendar.module.scss'
-import useCalendar from './hooks/useCalendar.ts'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux.ts'
 import { useEffect } from 'react'
-import { getAllEvents } from '../../store/reducers/Events/ActionCreators.ts'
+import { useAppDispatch, useAppSelector } from 'hooks/redux.ts'
+import { getAllEvents } from 'store/reducers/Events/ActionCreators.ts'
 
 const Calendar = () => {
   const dispatch = useAppDispatch()
-  const { selectedWeek, handlePrevWeek, handleNextWeek } = useCalendar()
+  const { selectedWeek, handlePrevWeek, handleNextWeek } = UseCalendar()
   const { events, error, isLoading } = useAppSelector(
     (state) => state.eventReducer
   )

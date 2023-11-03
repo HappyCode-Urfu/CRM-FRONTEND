@@ -1,16 +1,15 @@
 import React, { useRef } from 'react'
 import s from './TaskGrid.module.scss'
-import { hours, minutes } from '../../../utils/constsTimes.ts'
-import { IEvents } from '../../../models/IEvents.ts'
-import useTaskGrid from '../hooks/useTaskGrid.ts'
-import Modal from '../modal/Modal.tsx'
+import { hours, minutes } from 'utils/constsTimes.ts'
+import { IEvents } from 'models/IEvents.ts'
+import { UseTaskGrid, Modal } from '../index.ts'
 
 interface TaskGridProps {
   selectedWeek: Date
   events: IEvents[]
 }
 
-const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
+export const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
   const dayRef = useRef<HTMLDivElement>(null)
   const days = Array.from({ length: 7 }, (_, i) => {
     const day = new Date(selectedWeek)
@@ -40,7 +39,7 @@ const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
     handleMouseDown,
     handleMouseUp,
     handleMouseMove,
-  } = useTaskGrid()
+  } = UseTaskGrid()
 
   return (
     <div className={s.task}>
@@ -113,5 +112,3 @@ const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
     </div>
   )
 }
-
-export default TaskGrid

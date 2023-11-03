@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const UseCalendar = () => {
+export const UseCalendar = () => {
   const [selectedWeek, setSelectedWeek] = useState<Date>(new Date())
 
   const handlePrevWeek = () => {
@@ -21,5 +21,3 @@ const UseCalendar = () => {
     handleNextWeek,
   }
 }
-
-export default UseCalendar

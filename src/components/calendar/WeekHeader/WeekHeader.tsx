@@ -7,7 +7,7 @@ interface WeekHeaderProps {
   onNextWeek: () => void
 }
 
-const WeekHeader: React.FC<WeekHeaderProps> = ({
+export const WeekHeader: React.FC<WeekHeaderProps> = ({
   selectedWeek,
   onPrevWeek,
   onNextWeek,
@@ -44,5 +44,3 @@ const WeekHeader: React.FC<WeekHeaderProps> = ({
     </div>
   )
 }
-
-export default WeekHeader

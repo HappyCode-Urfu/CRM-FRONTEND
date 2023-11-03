@@ -1,8 +1,6 @@
 import React from 'react'
 import s from './Modal.module.scss'
-import ViewForm from './ViewForm/ViewForm.tsx'
-import EditForm from './EditForm/EditForm.tsx'
-import CreateForm from './CreateForm/CreateForm.tsx'
+import { CreateForm, ViewForm, EditForm } from './index.ts'
 
 interface IModal {
   // id?: number
@@ -18,7 +16,7 @@ enum Form {
   View = 'view',
 }
 
-const Modal: React.FC<IModal> = ({
+export const Modal: React.FC<IModal> = ({
   showModal = true,
   setShowModal,
   formType,
@@ -48,5 +46,3 @@ const Modal: React.FC<IModal> = ({
     </>
   )
 }
-
-export default Modal

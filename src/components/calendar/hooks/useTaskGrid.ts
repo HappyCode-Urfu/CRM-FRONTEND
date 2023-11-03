@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const UseTaskGrid = () => {
+export const UseTaskGrid = () => {
   const [formType, setFormType] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [isCreatingEvent, setIsCreatingEvent] = useState(false)
@@ -55,5 +55,3 @@ const UseTaskGrid = () => {
     handleMouseMove,
   }
 }
-
-export default UseTaskGrid
