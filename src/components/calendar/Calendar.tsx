@@ -1,26 +1,24 @@
-import React, { useState } from 'react'
-import WeekHeader from './WeekHeader/WeekHeader.tsx'
-import TimeColumn from './TimeColumn/TimeColumn.tsx'
-import TaskGrid from './TaskGrid/TaskGrid.tsx'
+import { TaskGrid, WeekHeader, TimeColumn, UseCalendar } from './index.ts'
 import s from './Calendar.module.scss'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from 'hooks/redux.ts'
+import { getAllEvents } from 'store/reducers/Events/ActionCreators.ts'
 
-const Calendar: React.FC = () => {
-  const [selectedWeek, setSelectedWeek] = useState<Date>(new Date())
+const Calendar = () => {
+  const dispatch = useAppDispatch()
+  const { selectedWeek, handlePrevWeek, handleNextWeek } = UseCalendar()
+  const { events, error, isLoading } = useAppSelector(
+    (state) => state.eventReducer
+  )
 
-  const handlePrevWeek = () => {
-    const newWeek = new Date(selectedWeek)
-    newWeek.setDate(selectedWeek.getDate() - 7)
-    setSelectedWeek(newWeek)
-  }
-
-  const handleNextWeek = () => {
-    const newWeek = new Date(selectedWeek)
-    newWeek.setDate(selectedWeek.getDate() + 7)
-    setSelectedWeek(newWeek)
-  }
+  useEffect(() => {
+    dispatch(getAllEvents())
+  }, [])
 
   return (
     <div className={s.calendar}>
+      {isLoading && <h1>Идет загрузка</h1>}
+      {error && <h1>{error}</h1>}
       <WeekHeader
         selectedWeek={selectedWeek}
         onPrevWeek={handlePrevWeek}
@@ -28,7 +26,7 @@ const Calendar: React.FC = () => {
       />
       <div className={s.body}>
         <TimeColumn />
-        <TaskGrid selectedWeek={selectedWeek} />
+        <TaskGrid events={events} selectedWeek={selectedWeek} />
       </div>
     </div>
   )

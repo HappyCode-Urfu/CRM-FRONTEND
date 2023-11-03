@@ -1,8 +1,8 @@
 import React from 'react'
 import s from './TimeColumn.module.scss'
-import { hours } from '../../../utils/constsTimes.ts'
+import { hours } from 'utils/constsTimes.ts'
 
-const TimeColumn: React.FC = () => {
+export const TimeColumn: React.FC = () => {
   return (
     <div className={s.timeColumn}>
       {hours.map((hour) => (
@@ -11,5 +11,3 @@ const TimeColumn: React.FC = () => {
     </div>
   )
 }
-
-export default TimeColumn
