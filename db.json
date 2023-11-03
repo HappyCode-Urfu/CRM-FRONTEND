@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "firstName": "коноплицкий",
+      "lastName": "илья",
+      "middleName": "павлович",
+      "email": "ilak8390@gmail.com",
+      "password": "123456"
+    }
+  ]
+}

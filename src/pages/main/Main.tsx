@@ -1,5 +1,3 @@
-const Main = () => {
-  return <div></div>
+export const Main = () => {
+  return <div>Main</div>
 }
-
-export default Main

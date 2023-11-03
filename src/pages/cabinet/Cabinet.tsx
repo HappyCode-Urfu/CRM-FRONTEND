@@ -1,3 +1,3 @@
 export const Cabinet = () => {
-  return <div></div>
+  return <div>кабинет</div>
 }

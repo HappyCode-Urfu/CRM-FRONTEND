@@ -1,20 +1,14 @@
-import axios, { InternalAxiosRequestConfig } from 'axios'
+import axios from 'axios'
 
-const $host = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+const API_URL = 'http://localhost:4000'
+
+const $api = axios.create({
+  baseURL: API_URL,
 })
 
-const $authHost = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-})
-
-const authInterceptor = (
-  config: InternalAxiosRequestConfig
-): InternalAxiosRequestConfig => {
-  config.headers.authorization = `Bearer ${localStorage.getItem('token')}`
+$api.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
   return config
-}
+})
 
-$authHost.interceptors.request.use(authInterceptor)
-
-export { $host, $authHost }
+export default $api

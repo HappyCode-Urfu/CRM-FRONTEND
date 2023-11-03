@@ -1,3 +1,99 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "ilak8390@gmail.com",
+      "password": "$2a$10$Y6IGv9mVsX4L99ra2LAuweWJjjPSzq1Z9rjBb7FpqYJaspMT.l3Ee",
+      "id": 1
+    },
+    {
+      "email": "123@gmail.com",
+      "password": "$2a$10$rskCk08Q9jz5QTx7VFp8fuuzQely8Hlyy8r5NxejepYV0YNlvL6Di",
+      "fullName": "илья",
+      "id": 2
+    },
+    {
+      "email": "kot@gmail.com",
+      "password": "$2a$10$pwMEVcNeI3WCwFvHGblBEuFCjL/SbP8K/gNGjlS2UdRVtoh5hN9le",
+      "fullName": "привет",
+      "id": 3
+    },
+    {
+      "email": "ibrakot@gmail.com",
+      "password": "$2a$10$at3B/njWPQWg8vCiL8Ymq.879RH8ew6stkv4eTRuGkyYKQ5OwcBBO",
+      "fullName": "ибра",
+      "id": 4
+    },
+    {
+      "email": "ibrat@gmail.com",
+      "password": "$2a$10$93f8Hzr97KQI8mVP6zuSNeECJv9otvrvDiqkHUZDHfsIgqhNCfwQ2",
+      "fullName": "ен",
+      "id": 5
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "$2a$10$Cc/HTWqANKLv.ihxaeMJ..euFmdX97KawcZv.o7bFnT2xjsVjhKdG",
+      "fullName": "nona",
+      "id": 6
+    },
+    {
+      "email": "56@gmail.com",
+      "password": "$2a$10$d/.hgKzz/sN96ZyEiU4ckuLykhBRY2NtE6OZ5pJIaLoKtJWbT70pW",
+      "fullName": "иброхым",
+      "id": 7
+    },
+    {
+      "email": "test@mail.ru",
+      "password": "$2a$10$8ihAIivmDkDd6R1WL3.VpeRMJW.8MN563dhgLHvetzMPA0Z4/LKce",
+      "fullName": "tesst",
+      "id": 8
+    },
+    {
+      "email": "moloko@mail.ru",
+      "password": "$2a$10$off0U4T2mwF/RM303Akq4uyb9.uc.ObvnTMDTXteZ0HG6tdDy2Osu",
+      "firstName": "",
+      "lastName": "",
+      "middleName": "yaula",
+      "id": 9
+    },
+    {
+      "email": "ryu@mail.ru",
+      "password": "$2a$10$NvEiT8ZKJDV8ohiwT0FpeOLrz77DkF4aJAGqMhpaIFpMEwYrekkj2",
+      "firstName": "коноплицкий",
+      "lastName": "илья",
+      "middleName": "павлович",
+      "id": 10
+    },
+    {
+      "email": "yy@gmail.com",
+      "password": "$2a$10$L9QdU8EA8GaqCGIQBdBlVusBMUFSt60Z/52DSxQiDa0EJmKzEZ1P.",
+      "firstName": "коноплицкий",
+      "lastName": "илья",
+      "middleName": "павлович",
+      "id": 11
+    },
+    {
+      "email": "yama@gmail.com",
+      "password": "$2a$10$./J3eboShWDfR1SfvxowtuvInuwY.CZVNKHqEWBk/de18NHbdFu5u",
+      "firstName": "",
+      "lastName": "",
+      "middleName": "yama",
+      "id": 12
+    },
+    {
+      "email": "lulu@gmail.com",
+      "password": "$2a$10$iHW7O1lFEJYnAPqGBtBmY.t.RUNSp5zSIgGZLBfEOK8NVZQvp9vV.",
+      "firstName": "",
+      "lastName": "",
+      "middleName": "lulu",
+      "id": 13
+    },
+    {
+      "email": "bibo@gmail.com",
+      "password": "$2a$10$jds0oRw/tApiOr0pTjQ9eetEBaN1vbiPWV209MU/Lj6dWlgI1uF/G",
+      "firstName": "",
+      "lastName": "",
+      "middleName": "bibo",
+      "id": 14
+    }
+  ]
 }
