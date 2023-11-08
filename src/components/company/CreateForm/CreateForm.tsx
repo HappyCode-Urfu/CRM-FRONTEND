@@ -5,8 +5,6 @@ import { Button } from 'components/cabinet-module/UI/Button/Button.tsx'
 
 export const CreateForm = () => {
   const {
-    setFormData,
-    formData,
     handleFormSubmit,
     handleNextClick,
     handlePreviousClick,
@@ -24,16 +22,22 @@ export const CreateForm = () => {
         </div>
       </div>
       <div className={s.bottom}>
-        <form className={s.Form}>
+        <form onSubmit={handleFormSubmit} className={s.Form}>
           {currentStep === 1 && (
             <>
               <h2>Шаг 1</h2>
               <div className={s.FormStep}>
-                <Input children={'Название филиала'} />
-                <Input children={'Сфера бизнеса'} />
-                <Input children={'Категория'} />
-                <Input children={'Страна'} />
-                <Input children={'Город'} />
+                <Input
+                  children={'Название филиала'}
+                  onChange={handleInputChange}
+                />
+                <Input
+                  children={'Сфера бизнеса'}
+                  onChange={handleInputChange}
+                />
+                <Input children={'Категория'} onChange={handleInputChange} />
+                <Input children={'Страна'} onChange={handleInputChange} />
+                <Input children={'Город'} onChange={handleInputChange} />
               </div>
               <div className={s.buttonContainer}>
                 <Button
@@ -48,10 +52,13 @@ export const CreateForm = () => {
             <>
               <h2>Шаг 2</h2>
               <div className={s.FormStep}>
-                <Input children={'Адрес'} />
-                <Input children={'Телефон'} />
-                <Input children={'Ссылка на сайт'} />
-                <Input children={'Режим работы'} />
+                <Input children={'Адрес'} onChange={handleInputChange} />
+                <Input children={'Телефон'} onChange={handleInputChange} />
+                <Input
+                  children={'Ссылка на сайт'}
+                  onChange={handleInputChange}
+                />
+                <Input children={'Режим работы'} onChange={handleInputChange} />
               </div>
               <div className={s.buttonContainer}>
                 <Button
