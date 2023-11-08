@@ -19,15 +19,19 @@ const Calendar = () => {
     <div className={s.calendar}>
       {isLoading && <h1>Идет загрузка</h1>}
       {error && <h1>{error}</h1>}
-      <WeekHeader
-        selectedWeek={selectedWeek}
-        onPrevWeek={handlePrevWeek}
-        onNextWeek={handleNextWeek}
-      />
-      <div className={s.body}>
-        <TimeColumn />
-        <TaskGrid events={events} selectedWeek={selectedWeek} />
-      </div>
+      {!isLoading && !error && (
+        <>
+          <WeekHeader
+            selectedWeek={selectedWeek}
+            onPrevWeek={handlePrevWeek}
+            onNextWeek={handleNextWeek}
+          />
+          <div className={s.body}>
+            <TimeColumn />
+            <TaskGrid events={events} selectedWeek={selectedWeek} />
+          </div>
+        </>
+      )}
     </div>
   )
 }
