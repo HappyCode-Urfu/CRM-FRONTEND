@@ -1,0 +1,21 @@
+@import 'assets/styles/styles';
+
+.container {
+  border: none;
+  border-radius: 5px;
+  background-color: $secondaryColor;
+  color: $white;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 16px;
+  text-decoration: none;
+
+  &.active{
+    background: $active;
+  }
+
+  &:hover{
+    background: $primaryColor;
+  }
+}
