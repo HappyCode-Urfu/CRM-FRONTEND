@@ -1,0 +1,17 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  min-height: 800px;
+  background-color: #F5F7F9;
+  padding-bottom: 20px;
+
+  .title{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 30px;
+    padding-left: 8px;
+    border-bottom: 1px solid black;
+  }
+}
