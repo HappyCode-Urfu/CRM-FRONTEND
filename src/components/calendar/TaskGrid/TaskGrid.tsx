@@ -56,11 +56,11 @@ export const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
             const eventStart = event.start_time.split(':')
             const eventEnd = event.end_time.split(':')
             const eventTopPosition =
-              parseInt(eventStart[0]) * 60 + parseInt(eventStart[1])
+              parseInt(eventStart[0]) * 60 + parseInt(eventStart[1]) - 8 * 60
             const eventStartTime =
-              parseInt(eventStart[0]) * 60 + parseInt(eventStart[1])
+              parseInt(eventStart[0]) * 60 + parseInt(eventStart[1]) - 8 * 60
             const eventEndTime =
-              parseInt(eventEnd[0]) * 60 + parseInt(eventEnd[1])
+              parseInt(eventEnd[0]) * 60 + parseInt(eventEnd[1]) - 8 * 60
             const eventHeight = eventEndTime - eventStartTime
 
             const eventStyle = {
@@ -85,7 +85,7 @@ export const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
                 className={s.event}
                 style={{
                   top: startEventPosition.y,
-                  width: '225px',
+                  width: '188px',
                   height: endEventPosition.y - startEventPosition.y,
                 }}
               />

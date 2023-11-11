@@ -1,22 +1,25 @@
-import { useState } from 'react'
+import { eventSlice } from 'store/reducers/Events/EventSlice.ts'
+import { useAppDispatch, useAppSelector } from 'hooks/redux.ts'
 
 export const UseCalendar = () => {
-  const [selectedWeek, setSelectedWeek] = useState<Date>(new Date())
+  const { dateSelect } = useAppSelector((state) => state.eventReducer)
+  const { selectDate } = eventSlice.actions
+  const dispatch = useAppDispatch()
 
   const handlePrevWeek = () => {
-    const newWeek = new Date(selectedWeek)
-    newWeek.setDate(selectedWeek.getDate() - 7)
-    setSelectedWeek(newWeek)
+    const newWeek = new Date(dateSelect)
+    newWeek.setDate(dateSelect.getDate() - 7)
+    dispatch(selectDate(newWeek))
   }
 
   const handleNextWeek = () => {
-    const newWeek = new Date(selectedWeek)
-    newWeek.setDate(selectedWeek.getDate() + 7)
-    setSelectedWeek(newWeek)
+    const newWeek = new Date(dateSelect)
+    newWeek.setDate(dateSelect.getDate() + 7)
+    dispatch(selectDate(newWeek))
   }
 
   return {
-    selectedWeek,
+    dateSelect,
     handlePrevWeek,
     handleNextWeek,
   }

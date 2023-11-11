@@ -12,20 +12,29 @@ export const WeekHeader: React.FC<WeekHeaderProps> = ({
   onPrevWeek,
   onNextWeek,
 }) => {
-  const weekdays = ['В', 'П', 'В', 'С', 'Ч', 'П', 'С']
+  const weekdays = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']
+
+  const isSameDay = (date1: Date, date2: Date) => {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    )
+  }
 
   const renderWeekDays = () => {
     const weekStart = new Date(selectedWeek)
     const weekDays = []
 
     for (let i = 0; i < 7; i++) {
-      const day = new Date(weekStart)
+      const day = new Date()
       day.setDate(weekStart.getDate() + i)
-      const isActive = day.getDay() === new Date().getDay()
+      const isToday = isSameDay(day, new Date())
+      const weekdayIndex = (day.getDay() + 6) % 7
 
       weekDays.push(
-        <div key={i} className={`${s.day} ${isActive ? s.active : ''}`}>
-          <span>{weekdays[i]}</span>
+        <div key={i} className={`${s.day} ${isToday ? s.active : ''}`}>
+          <span>{weekdays[weekdayIndex]}</span>
           <span>{day.getDate()}</span>
         </div>
       )

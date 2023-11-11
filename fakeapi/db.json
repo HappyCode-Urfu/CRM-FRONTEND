@@ -1,4 +1,19 @@
 {
   "users": [],
-  "events": []
+  "events": [
+    {
+      "service_name": "йцукн",
+      "date": "2023-11-12T00:00:00.000Z",
+      "start_time": "09:30",
+      "end_time": "12:00",
+      "id": 2
+    },
+    {
+      "service_name": "1234",
+      "date": "2023-11-13T00:00:00.000Z",
+      "start_time": "09:36",
+      "end_time": "12:36",
+      "id": 3
+    }
+  ]
 }

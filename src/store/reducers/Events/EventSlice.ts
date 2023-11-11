@@ -1,15 +1,17 @@
-import { IEvents } from '../../../models/IEvents.ts'
+import { IEvents } from 'models/IEvents.ts'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { getAllEvents, postEvent } from './ActionCreators.ts'
 
 interface EventState {
   events: IEvents[]
+  dateSelect: Date
   isLoading: boolean
   error: string
 }
 
 const initialState: EventState = {
   events: [],
+  dateSelect: new Date(),
   isLoading: false,
   error: '',
 }
@@ -17,7 +19,11 @@ const initialState: EventState = {
 export const eventSlice = createSlice({
   name: 'event',
   initialState,
-  reducers: {},
+  reducers: {
+    selectDate(state, action: PayloadAction<Date>) {
+      state.dateSelect = action.payload
+    },
+  },
   extraReducers: {
     [getAllEvents.fulfilled.type]: (
       state,

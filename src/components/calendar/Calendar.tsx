@@ -6,7 +6,7 @@ import { getAllEvents } from 'store/reducers/Events/ActionCreators.ts'
 
 const Calendar = () => {
   const dispatch = useAppDispatch()
-  const { selectedWeek, handlePrevWeek, handleNextWeek } = UseCalendar()
+  const { handlePrevWeek, handleNextWeek, dateSelect } = UseCalendar()
   const { events, error, isLoading } = useAppSelector(
     (state) => state.eventReducer
   )
@@ -22,13 +22,13 @@ const Calendar = () => {
       {!isLoading && !error && (
         <>
           <WeekHeader
-            selectedWeek={selectedWeek}
+            selectedWeek={dateSelect}
             onPrevWeek={handlePrevWeek}
             onNextWeek={handleNextWeek}
           />
           <div className={s.body}>
             <TimeColumn />
-            <TaskGrid events={events} selectedWeek={selectedWeek} />
+            <TaskGrid events={events} selectedWeek={dateSelect} />
           </div>
         </>
       )}
