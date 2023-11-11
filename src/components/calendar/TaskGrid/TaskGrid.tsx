@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { FC } from 'react'
 import s from './TaskGrid.module.scss'
 import { hours, minutes } from 'utils/constsTimes.ts'
 import { IEvents } from 'models/IEvents.ts'
@@ -9,8 +9,7 @@ interface TaskGridProps {
   events: IEvents[]
 }
 
-export const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
-  const dayRef = useRef<HTMLDivElement>(null)
+export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
   const days = Array.from({ length: 7 }, (_, i) => {
     const day = new Date(selectedWeek)
     day.setDate(selectedWeek.getDate() + i)
@@ -26,32 +25,13 @@ export const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
     })
   }
 
-  const {
-    showModal,
-    formType,
-    openForm,
-    setFormType,
-    setShowModal,
-    startEventPosition,
-    endEventPosition,
-    isCreatingEvent,
-    activeColumn,
-    handleMouseDown,
-    handleMouseUp,
-    handleMouseMove,
-  } = UseTaskGrid()
+  const { showModal, formType, openForm, setFormType, setShowModal } =
+    UseTaskGrid()
 
   return (
     <div className={s.task}>
       {days.map((day) => (
-        <div
-          key={day.toISOString()}
-          className={s.day}
-          ref={dayRef}
-          onMouseDown={(e) => handleMouseDown(e, day, dayRef)}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-        >
+        <div key={day.toISOString()} className={s.day}>
           {filterEventsByDayAndTime(day).map((event) => {
             const eventStart = event.start_time.split(':')
             const eventEnd = event.end_time.split(':')
@@ -79,17 +59,6 @@ export const TaskGrid: React.FC<TaskGridProps> = ({ selectedWeek, events }) => {
               </div>
             )
           })}
-          {isCreatingEvent &&
-            activeColumn?.toISOString() === day.toISOString() && (
-              <div
-                className={s.event}
-                style={{
-                  top: startEventPosition.y,
-                  width: '188px',
-                  height: endEventPosition.y - startEventPosition.y,
-                }}
-              />
-            )}
           {hours.map((hour) => (
             <div key={hour} className={s.hour}>
               {minutes.map((minute) => (
