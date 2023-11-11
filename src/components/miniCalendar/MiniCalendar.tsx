@@ -1,6 +1,8 @@
 import s from './MiniCalendar.module.scss'
 import { useCalendar } from 'components/miniCalendar/hooks/useMiniCalendr.ts'
 import { checkDateIsEqual, checkIsToday } from 'utils/date'
+import { useNavigate } from 'react-router-dom'
+import { MAIN_ROUTE } from 'utils/constsRoutes.ts'
 
 interface CalendarProps {
   locale?: string
@@ -15,6 +17,7 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
   selectDate,
   firstWeekDayNumber = 2,
 }) => {
+  const navigation = useNavigate()
   const { functions, state } = useCalendar({
     locale,
     selectedDate: date,
@@ -80,6 +83,7 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
                     onClick={() => {
                       functions.setSelectedDay(day)
                       selectDate(day.date)
+                      navigation(MAIN_ROUTE)
                     }}
                     className={[
                       `${s.calendar__day}`,
