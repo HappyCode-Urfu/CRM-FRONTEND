@@ -26,15 +26,31 @@
       z-index: 1;
       transition: background-color 0.3s;
       cursor: pointer;
+      position: relative;
+
+      .timeIndicator {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #007bff;
+        padding: 2px 4px;
+        border-radius: 4px;
+        color: black;
+        z-index: 2;
+        font-size: 0.8rem;
+        transition: all ease-in-out 0.3s;
+      }
 
       &:hover {
-        background-color: yellow;
+        background-color: #007bff;
+        z-index: 7;
       }
     }
 
     .event{
       width: 100%;
-      background-color: yellow;
+      background-color: #007bff;
       position: absolute;
       z-index: 3;
       cursor: pointer;

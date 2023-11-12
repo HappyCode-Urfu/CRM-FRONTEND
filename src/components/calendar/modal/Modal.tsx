@@ -8,6 +8,8 @@ interface IModal {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   formType: string
   setFormType: React.Dispatch<React.SetStateAction<string>>
+  hoveredTime?: string | null
+  hoveredColumn?: string | null
 }
 
 enum Form {
@@ -21,6 +23,8 @@ export const Modal: React.FC<IModal> = ({
   setShowModal,
   formType,
   setFormType,
+  hoveredColumn,
+  hoveredTime,
 }) => {
   const closeForm = () => {
     setFormType('')
@@ -36,7 +40,11 @@ export const Modal: React.FC<IModal> = ({
               закрыть
             </button>
             {formType === Form.Create && (
-              <CreateForm setShowModal={setShowModal} />
+              <CreateForm
+                setShowModal={setShowModal}
+                hoveredColumn={hoveredColumn}
+                hoveredTime={hoveredTime}
+              />
             )}
             {formType === Form.Edit && <EditForm />}
             {formType === Form.View && <ViewForm />}

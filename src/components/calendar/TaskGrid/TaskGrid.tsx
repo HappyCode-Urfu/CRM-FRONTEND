@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useMemo, useState } from 'react'
 import s from './TaskGrid.module.scss'
 import { hours, minutes } from 'utils/constsTimes.ts'
 import { IEvents } from 'models/IEvents.ts'
@@ -10,19 +10,35 @@ interface TaskGridProps {
 }
 
 export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
-  const days = Array.from({ length: 7 }, (_, i) => {
-    const day = new Date(selectedWeek)
-    day.setDate(selectedWeek.getDate() + i)
-    return day
-  })
+  const [lastHoveredTime, setLastHoveredTime] = useState<string | null>(null)
+  const [hoveredTime, setHoveredTime] = useState<string | number | null>(null)
+  const [hoveredColumn, setHoveredColumn] = useState<Date | null>(null)
 
-  const filterEventsByDayAndTime = (day: Date) => {
-    const formattedDay = day.toISOString().split('T')[0]
-    return events.filter((event) => {
-      const eventDate = new Date(event.date)
-      const eventDateString = eventDate.toISOString().split('T')[0]
-      return eventDateString === formattedDay
+  const days = useMemo(() => {
+    return Array.from({ length: 7 }, (_, i) => {
+      const day = new Date(selectedWeek)
+      day.setDate(selectedWeek.getDate() + i)
+      return day
     })
+  }, [selectedWeek])
+
+  const filterEventsByDayAndTime = useMemo(() => {
+    return (day: Date) => {
+      const formattedDay = day.toISOString().split('T')[0]
+      return events.filter((event) => {
+        const eventDate = new Date(event.date)
+        const eventDateString = eventDate.toISOString().split('T')[0]
+        return eventDateString === formattedDay
+      })
+    }
+  }, [events])
+
+  const handleHover = (hour: number, minute: number, column: Date) => {
+    const formattedHour = hour.toString().padStart(2, '0')
+    const formattedMinute = (minute * 10).toString().padStart(2, '0')
+    setHoveredTime(`${formattedHour}:${formattedMinute}`)
+    setLastHoveredTime(`${formattedHour}:${formattedMinute}`)
+    setHoveredColumn(column)
   }
 
   const { showModal, formType, openForm, setFormType, setShowModal } =
@@ -65,8 +81,25 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
                 <div
                   key={minute}
                   className={s.minutes}
+                  onMouseEnter={() => handleHover(hour, minute, day)}
+                  onMouseLeave={() => {
+                    setHoveredTime(null)
+                    setHoveredColumn(null)
+                  }}
                   onClick={() => openForm('create')}
-                ></div>
+                >
+                  {hoveredTime ===
+                    `${hour.toString().padStart(2, '0')}:${(minute * 10)
+                      .toString()
+                      .padStart(2, '0')}` &&
+                    day === hoveredColumn && (
+                      <div className={s.timeIndicator}>
+                        {`${hour.toString().padStart(2, '0')}:${(minute * 10)
+                          .toString()
+                          .padStart(2, '0')}`}
+                      </div>
+                    )}
+                </div>
               ))}
             </div>
           ))}
@@ -76,6 +109,8 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
         showModal={showModal}
         setShowModal={setShowModal}
         formType={formType}
+        hoveredTime={lastHoveredTime}
+        hoveredColumn={hoveredColumn?.toISOString().split('T')[0]}
         setFormType={setFormType}
       />
     </div>
