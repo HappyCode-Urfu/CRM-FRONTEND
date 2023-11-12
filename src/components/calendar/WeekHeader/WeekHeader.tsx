@@ -34,9 +34,11 @@ export const WeekHeader: React.FC<WeekHeaderProps> = ({
       const weekdayIndex = (day.getDay() + 6) % 7
 
       weekDays.push(
-        <div key={i} className={`${s.day} ${isToday ? s.active : ''}`}>
-          <span>{weekdays[weekdayIndex]}</span>
-          <span>{day.getDate()}</span>
+        <div key={i} className={`${s.day}`}>
+          <div className={`${s.dayActiveBorder} ${isToday ? s.active : ''}`}>
+            <span>{weekdays[weekdayIndex]}</span>
+            <span>{day.getDate()}</span>
+          </div>
         </div>
       )
     }
