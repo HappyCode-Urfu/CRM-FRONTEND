@@ -14,7 +14,7 @@ export const WidgetsButton: React.FC<IProps> = ({ name }) => {
 
   return (
     <div
-      className={`${s.dropdown} ${isOpen ? s.open : ''}`}
+      className={`${s.dropdown} ${isOpen ? s.open : s.closing}`}
       style={{ marginBottom: `${isOpen ? '120px' : '0'}` }}
     >
       <button
