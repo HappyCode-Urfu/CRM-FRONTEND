@@ -4,9 +4,15 @@ import React from 'react'
 
 interface IProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  hoveredTime?: string | null
+  hoveredColumn?: string | null
 }
 
-export const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
+export const CreateForm: React.FC<IProps> = ({
+  setShowModal,
+  hoveredColumn,
+  hoveredTime,
+}) => {
   const {
     task,
     setTask,
@@ -18,7 +24,7 @@ export const CreateForm: React.FC<IProps> = ({ setShowModal }) => {
     setEndTime,
     errors,
     handleSubmit,
-  } = useForms({ setShowModal })
+  } = useForms({ setShowModal, hoveredColumn, hoveredTime })
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>

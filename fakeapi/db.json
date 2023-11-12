@@ -14,6 +14,20 @@
       "start_time": "09:36",
       "end_time": "12:36",
       "id": 3
+    },
+    {
+      "service_name": "пкурноге",
+      "date": "2023-11-10T00:00:00.000Z",
+      "start_time": "15:00",
+      "end_time": "19:00",
+      "id": 4
+    },
+    {
+      "service_name": "dwadwa",
+      "date": "2023-11-16T00:00:00.000Z",
+      "start_time": "13:20",
+      "end_time": "14:01",
+      "id": 5
     }
   ]
 }

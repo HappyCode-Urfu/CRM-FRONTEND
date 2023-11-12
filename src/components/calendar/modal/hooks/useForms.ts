@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from '../../../../hooks/redux.ts'
-import { postEvent } from '../../../../store/reducers/Events/ActionCreators.ts'
+import { useAppDispatch } from 'hooks/redux.ts'
+import { postEvent } from 'store/reducers/Events/ActionCreators.ts'
 
 interface IForms {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  hoveredTime?: string | null
+  hoveredColumn?: string | null
 }
 
-export const useForms = ({ setShowModal }: IForms) => {
+export const useForms = ({
+  setShowModal,
+  hoveredTime,
+  hoveredColumn,
+}: IForms) => {
   const dispatch = useAppDispatch()
   const [task, setTask] = useState('')
-  const [date, setDate] = useState('')
-  const [startTime, setStartTime] = useState('')
+  const [date, setDate] = useState<string>(hoveredColumn ? hoveredColumn : '')
+  const [startTime, setStartTime] = useState(hoveredTime ? hoveredTime : '')
   const [endTime, setEndTime] = useState('')
 
   const [errors, setErrors] = useState({
