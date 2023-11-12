@@ -19,4 +19,29 @@
     border-bottom: 1px solid grey;
     z-index: 999;
   }
+
+  .widgets{
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    width: 100%;
+    min-height: 300px;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+  }
+
+  .other{
+    width: 100%;
+    min-height: 300px;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+  }
 }
