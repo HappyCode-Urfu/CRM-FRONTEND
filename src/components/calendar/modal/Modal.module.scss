@@ -17,7 +17,8 @@
   gap: 40px;
   width: 800px;
   min-height: 200px;
-  background: #F5F7F9;
+  color: white;
+  background-color: #3a3e42;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -25,6 +26,11 @@
 }
 
 .close{
+  color: white;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 20px;
   position: absolute;
   top: 24px;
   right: 42px;

@@ -5,6 +5,7 @@
   justify-content: flex-start;
   width: 100%;
   min-height: 800px;
+  color: white;
 }
 
 .top{
@@ -35,7 +36,7 @@
 
 .progress{
   height: 10px;
-  background-color: black;
+  background-color: #93b1ff;
   transition: width 0.5s;
   //width
 }

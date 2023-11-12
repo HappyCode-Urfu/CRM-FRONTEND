@@ -6,7 +6,7 @@
   .day{
     width: 188px;
     height: 720px;
-    border: 1px solid #ccc;
+    border: 1px solid grey;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -15,14 +15,14 @@
     .hour{
       width: 188px;
       height: 58px;
-      border: 1px solid black;
+      border: 1px solid #ccc;
       z-index: 2;
     }
 
     .minutes{
       width: 100%;
       height: 9px;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #575c63;
       z-index: 1;
       transition: background-color 0.3s;
       cursor: pointer;
@@ -33,27 +33,47 @@
         top: 8px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #007bff;
+        color: white;
+        background-color: #93b1ff;
         padding: 2px 4px;
         border-radius: 4px;
-        color: black;
         z-index: 2;
         font-size: 0.8rem;
         transition: all ease-in-out 0.3s;
       }
 
       &:hover {
-        background-color: #007bff;
+        background-color: rgba(147, 177, 255, 0.7);
         z-index: 7;
       }
     }
 
     .event{
-      width: 100%;
-      background-color: #007bff;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: row;
+      width: 99%;
+      background-color: #93b1ff;
       position: absolute;
       z-index: 3;
       cursor: pointer;
+      color: white;
+      border-radius: 8px;
+
+      .name{
+        width: 50%;
+        font-size: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-left: 4px;
+      }
+
+      .time{
+        width: 50%;
+        font-size: 14px;
+      }
     }
   }
 }

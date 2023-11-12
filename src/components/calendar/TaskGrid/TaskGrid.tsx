@@ -71,7 +71,10 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
                 style={eventStyle}
                 onClick={() => openForm('view')}
               >
-                {event.service_name}
+                <p className={s.name}>{event.service_name}</p>
+                <p className={s.time}>
+                  {event.start_time} - {event.end_time}
+                </p>
               </div>
             )
           })}

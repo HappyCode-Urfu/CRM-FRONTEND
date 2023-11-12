@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './WeekHeader.module.scss'
+import { Button } from 'components/cabinet-module/UI/Button/Button.tsx'
 
 interface WeekHeaderProps {
   selectedWeek: Date
@@ -33,9 +34,11 @@ export const WeekHeader: React.FC<WeekHeaderProps> = ({
       const weekdayIndex = (day.getDay() + 6) % 7
 
       weekDays.push(
-        <div key={i} className={`${s.day} ${isToday ? s.active : ''}`}>
-          <span>{weekdays[weekdayIndex]}</span>
-          <span>{day.getDate()}</span>
+        <div key={i} className={`${s.day}`}>
+          <div className={`${s.dayActiveBorder} ${isToday ? s.active : ''}`}>
+            <span>{weekdays[weekdayIndex]}</span>
+            <span>{day.getDate()}</span>
+          </div>
         </div>
       )
     }
@@ -46,8 +49,8 @@ export const WeekHeader: React.FC<WeekHeaderProps> = ({
   return (
     <div className={s.header}>
       <div className={s.selectors}>
-        <button onClick={onPrevWeek}>&lt;</button>
-        <button onClick={onNextWeek}>&gt;</button>
+        <Button onClick={onPrevWeek}>&lt;</Button>
+        <Button onClick={onNextWeek}>&gt;</Button>
       </div>
       <div className={s.days}>{renderWeekDays()}</div>
     </div>
