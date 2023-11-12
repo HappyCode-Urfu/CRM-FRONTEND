@@ -3,6 +3,7 @@ import s from './Calendar.module.scss'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'hooks/redux.ts'
 import { getAllEvents } from 'store/reducers/Events/ActionCreators.ts'
+import { Loading } from 'components/loading/Loading.tsx'
 
 const Calendar = () => {
   const dispatch = useAppDispatch()
@@ -13,11 +14,11 @@ const Calendar = () => {
 
   useEffect(() => {
     dispatch(getAllEvents())
-  }, [dateSelect, dispatch])
+  }, [])
 
   return (
     <div className={s.calendar}>
-      {isLoading && <h1>Идет загрузка</h1>}
+      {isLoading && <Loading />}
       {error && <h1>{error}</h1>}
       {!isLoading && !error && (
         <>

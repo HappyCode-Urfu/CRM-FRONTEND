@@ -25,6 +25,10 @@
 }
 
 .close{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 20px;
   position: absolute;
   top: 24px;
   right: 42px;

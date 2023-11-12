@@ -37,7 +37,7 @@ export const Modal: React.FC<IModal> = ({
         <div className={s.container} onClick={() => setShowModal(false)}>
           <div className={s.modal} onClick={(e) => e.stopPropagation()}>
             <button className={s.close} onClick={closeForm}>
-              закрыть
+              X
             </button>
             {formType === Form.Create && (
               <CreateForm
