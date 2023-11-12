@@ -1,24 +1,13 @@
-import { useState } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 
 export const UseCreateForm = () => {
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({
     logo: '',
     name: '',
-    scopeList: [
-      'Категория 1',
-      'Категория 2',
-      'Категория 3',
-      'Категория 4',
-      'Категория 5',
-    ],
-    categoryList: [
-      'Категория 1',
-      'Категория 2',
-      'Категория 3',
-      'Категория 4',
-      'Категория 5',
-    ],
+    scopeList: ['Сфера 1', 'Сфера 2', 'Сфера 3', 'Сфера 4', 'Сфера 5'],
+    scopeId: 1,
+    categoryList: '',
     selectedScope: '',
     selectedCategory: '',
     country: '',
@@ -30,7 +19,9 @@ export const UseCreateForm = () => {
   })
 
   const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData({ ...formData, [event.target.name]: event.target.value })
   }
@@ -43,7 +34,7 @@ export const UseCreateForm = () => {
     setCurrentStep(currentStep - 1)
   }
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setCurrentStep(3)
   }
