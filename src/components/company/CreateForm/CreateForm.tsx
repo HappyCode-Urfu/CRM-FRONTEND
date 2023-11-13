@@ -1,7 +1,7 @@
 import s from './CreateForm.module.scss'
 import { UseCreateForm } from 'components/company/hooks/useCreateForm.ts'
-import { Input } from 'components/cabinet-module/UI/input/Input.tsx'
-import { Button } from 'components/cabinet-module/UI/Button/Button.tsx'
+import { Input } from 'components/UI/input/Input.tsx'
+import { Button } from 'components/UI/Button/Button.tsx'
 
 export const CreateForm = () => {
   const {

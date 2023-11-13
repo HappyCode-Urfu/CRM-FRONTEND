@@ -1,17 +1,27 @@
 $black: #000000;
 $white: #FFFFFF;
 
-$background: #C5D4C9;
-$primaryColor: #6147C6;
-$secondaryColor: #4FACF7;
-$active: #DF133C;
+$background: #484C52;
+$primaryColor: #484C52;
+$secondaryColor: #FAAA33;
+//$primaryColor: #FAAA33;
+//$secondaryColor: #484C52;
+$blockColor: #D9D9D9;
+$header: #575c63;
+$colorPlaceholder: rgba(255, 255, 255, 0.5);
 
 $fontFamily: 'Roboto';
 $fontSize: '16px';
+$fontColor: #484C52;
 
 $regularWeight: '400';
 $mediumWeight: '500';
 $boldWeight: '700';
+
+$imagesArrow: url('../icon/arrow.svg');
+$iconEmail: url('../icon/mail.svg');
+$iconAccount: url('../icon/account.svg');
+$iconLock: url('../icon/lock.svg');
 
 $miniMobile: 320px;
 $mobile: 480px;

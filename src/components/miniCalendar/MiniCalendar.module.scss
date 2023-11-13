@@ -1,15 +1,17 @@
+@import 'assets/styles/styles';
+
 .calendar {
   width: 100%;
   border-radius: 5px;
   text-transform: capitalize;
-  background-color: var(--background-color-calendar);
+  background-color: $primaryColor;
 }
 
-.calendar__header {
+.header {
   position: relative;
   border-radius: 5px 5px 0 0;
-  background-color: var(--background-color-calendar-header);
-  color: var(--color-text);
+  background-color: $header;
+  color: $white;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -17,33 +19,51 @@
   box-shadow: 0 2px 10px -1px rgba(0, 0, 0, 0.2);
 }
 
-.calendar__header__arrow__left {
-  width: 20px;
-  height: 15px;
-  cursor: pointer;
-  background-image: var(--images-arrow);
-  background-repeat: no-repeat;
+.arrows{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  height: 100%;
+  gap: 5px;
 }
 
-.calendar__header__arrow__right {
+.arrowLeft {
   width: 20px;
-  height: 15px;
+  height: 20px;
+  background-color: $white;
+  border-radius: 25px;
   cursor: pointer;
-  background-image: var(--images-arrow);
+  background-image: $imagesArrow;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50% 50%;
+}
+
+.arrowRight {
+  width: 20px;
+  height: 20px;
+  background-color: $white;
+  border-radius: 25px;
+  cursor: pointer;
+  background-image: $imagesArrow;
   transform: rotate(-180deg);
   background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50% 50%;
 }
 
-.calendar__body {
+.body {
   border-radius: 0 0 5px 5px;
   padding: 5px;
 }
 
-.calendar__week__names {
+.calendarNames {
   height: 20px;
   font-weight: 600;
   font-size: 8px;
-  color: var(--color-additional);
+  color: $secondaryColor;
   text-align: center;
   align-items: center;
   display: grid;
@@ -51,10 +71,10 @@
   gap: 1px 1px;
 }
 
-.calendar__days {
+.calendarDays {
   font-size: 15px;
   font-weight: 400;
-  color: var(--color-text);
+  color: $white;
   text-align: center;
   display: grid;
   align-items: center;
@@ -63,21 +83,22 @@
   gap: 1px 1px;
 }
 
-.calendar__day {
+.calendarDay {
   border-radius: 5px;
   padding: 5.5px 0;
   cursor: pointer;
+
+  &:hover {
+    background-color: $secondaryColor;
+  }
 }
 
-.calendar__day:hover {
-  background-color: var(--color-additional7);
-}
 
 .calendar__additional__day {
   padding: 5.5px;
   font-weight: 300;
   cursor: pointer;
-  color: var(--color-placeholder);
+  color: $colorPlaceholder;
 }
 
 .calendar__pick__item {
@@ -90,24 +111,24 @@
 }
 
 .calendar__pick__item:hover {
-  background-color: var(--color-additional7);
+  background-color: $secondaryColor;
 }
 
 .calendar__today__item {
-  background-color: var(--background-color-calendar-header);
+  background-color: $header;
 }
 
 .calendar__selected__item {
-  color: var(--color-text);
-  background-color: var(--color-additional);
+  color: $white;
+  background-color: $secondaryColor;
 }
 .calendar__selected__item:hover {
-  background-color: var(--color-additional);
+  background-color: $secondaryColor;
 }
 
 .calendar__pick__items__container {
   font-weight: 400;
-  color: var(--color-text);
+  color: $white;
   text-align: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -119,5 +140,5 @@
 .calendar__unchoosable__year {
   font-weight: 300;
   padding: 9px 16px;
-  color: var(--color-placeholder);
+  color: $colorPlaceholder;
 }

@@ -1,11 +1,14 @@
+@import 'assets/styles/styles';
+
 .container{
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-right: 1px solid grey;
   flex-direction: column;
   width: 20%;
   min-height: 100vh;
+  background-color: $primaryColor;
+  border-right: 1px solid $header;
 
   .cabinet{
     display: flex;
@@ -15,14 +18,11 @@
     justify-content: center;
     width: 100%;
     height: 100px;
-    background-color: #575c63;
-    border-bottom: 1px solid grey;
+    background-color: $header;
     z-index: 999;
   }
 
   .widgets{
-    border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
     width: 100%;
     min-height: 300px;
     margin-top: 30px;

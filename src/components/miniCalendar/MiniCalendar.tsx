@@ -25,12 +25,7 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
   })
   return (
     <div className={s.calendar}>
-      <div className={s.calendar__header}>
-        <div
-          aria-hidden
-          className={s.calendar__header__arrow__left}
-          onClick={() => functions.onClickArrow('left')}
-        />
+      <div className={s.header}>
         {state.mode === 'days' && (
           <div aria-hidden onClick={() => functions.setMode('monthes')}>
             {state.monthesNames[state.selectedMonth.monthIndex].month}{' '}
@@ -52,21 +47,26 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
             }
           </div>
         )}
-        <div
-          aria-hidden
-          className={s.calendar__header__arrow__right}
-          onClick={() => functions.onClickArrow('right')}
-        />
+        <div className={s.arrows}>
+          <div
+            className={s.arrowLeft}
+            onClick={() => functions.onClickArrow('left')}
+          />
+          <div
+            className={s.arrowRight}
+            onClick={() => functions.onClickArrow('right')}
+          />
+        </div>
       </div>
-      <div className={s.calendar__body}>
+      <div className={s.body}>
         {state.mode === 'days' && (
           <>
-            <div className={s.calendar__week__names}>
+            <div className={s.calendarNames}>
               {state.weekDaysNames.map((weekDaysName) => (
                 <div key={weekDaysName.dayShort}>{weekDaysName.dayShort}</div>
               ))}
             </div>
-            <div className={s.calendar__days}>
+            <div className={s.calendarDays}>
               {state.calendarDays.map((day) => {
                 const isToday = checkIsToday(day.date)
                 const isSelectedDay = checkDateIsEqual(
@@ -86,7 +86,7 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
                       navigation(MAIN_ROUTE)
                     }}
                     className={[
-                      `${s.calendar__day}`,
+                      `${s.calendarDay}`,
                       isToday ? `${s.calendar__today__item}` : '',
                       isSelectedDay ? `${s.calendar__selected__item}` : '',
                       isAdditionalDay ? `${s.calendar__additional__day}` : '',
