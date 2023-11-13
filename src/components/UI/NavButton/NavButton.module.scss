@@ -3,7 +3,7 @@
 .container {
   border: none;
   border-radius: 5px;
-  background-color: $secondaryColor;
+  background-color: $primaryColor;
   color: $white;
   transition: all ease-in-out 0.3s;
   cursor: pointer;
@@ -12,6 +12,6 @@
   text-decoration: none;
 
   &:hover{
-    background: $primaryColor;
+    background: $secondaryColor;
   }
 }
