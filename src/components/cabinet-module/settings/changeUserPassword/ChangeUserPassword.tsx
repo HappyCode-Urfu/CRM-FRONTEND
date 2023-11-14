@@ -1,7 +1,8 @@
 import s from './ChangeUserPassword.module.scss'
-import { Input } from 'components/cabinet-module/UI/input/Input.tsx'
-import { Button } from 'components/cabinet-module/UI/Button/Button.tsx'
+
 import { UseCabinetModule } from 'components/cabinet-module/hooks/useCabinetModule.ts'
+import { Input } from 'components/UI/input/Input.tsx'
+import { Button } from 'components/UI/Button/Button.tsx'
 
 export const ChangeUserPassword = () => {
   const { userData, setUserData, handleSubmitUserPassword } = UseCabinetModule()

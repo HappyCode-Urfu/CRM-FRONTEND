@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './WeekHeader.module.scss'
-import { Button } from 'components/cabinet-module/UI/Button/Button.tsx'
+import { Button } from 'components/UI/Button/Button.tsx'
 
 interface WeekHeaderProps {
   selectedWeek: Date

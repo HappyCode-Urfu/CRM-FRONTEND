@@ -31,7 +31,7 @@
 
   .dropdownMenu {
     width: 278px;
-    min-height: 100px;
+    min-height: 0;
     position: absolute;
     top: 100%;
     left: 0;
@@ -41,9 +41,8 @@
     padding: 0;
     border: 1px solid #ccc;
     border-top: none;
-    opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s, min-height 0.3s;
+    transition:  min-height 0.3s;
     border-radius: 0 0 8px 8px;
     cursor: pointer;
 
@@ -54,12 +53,44 @@
         background-color: #fafafa;
       }
     }
+
   }
 
   &.open {
     .dropdownMenu {
-      opacity: 1;
+      min-height: 100px;
       visibility: visible;
+      animation: fadeIn 0.3s ease-in-out forwards;
     }
+  }
+
+  &.closing {
+    .dropdownMenu {
+      min-height: 0;
+      visibility: hidden;
+      animation: fadeOut 0.3s ease-in-out forwards;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
   }
 }

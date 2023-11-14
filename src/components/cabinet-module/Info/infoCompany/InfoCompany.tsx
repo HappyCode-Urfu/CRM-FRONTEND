@@ -1,5 +1,5 @@
 import s from './InfoCompany.module.scss'
-import { NavButton } from 'components/cabinet-module/UI/NavButton/NavButton.tsx'
+import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
 import { COMPANIES_ROUTE } from 'utils/constsRoutes.ts'
 
 export const InfoCompany = () => {
