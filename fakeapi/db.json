@@ -1,6 +1,24 @@
 {
   "users": [],
-  "department": [],
+  "department": [
+    {
+      "name": "prod",
+      "businessArea": "option3",
+      "categoryName": "Бизнес",
+      "country": "Россия",
+      "city": "Екатеринбург",
+      "location": {
+        "address": "Россия, Свердловская область, Екатеринбург, улица Блюхера, 41",
+        "district": "",
+        "latitude": 60.641887,
+        "longitude": 56.85279,
+        "zoom": 8
+      },
+      "phoneNumber": "79923338108",
+      "workMode": "10:00-21:00",
+      "id": 1
+    }
+  ],
   "events": [
     {
       "service_name": "йцукн",
