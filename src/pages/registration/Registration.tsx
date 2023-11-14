@@ -1,10 +1,17 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react'
+import { FC, FormEvent } from 'react'
 import classes from './Registration.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { LOGIN } from 'utils/constsRoutes.ts'
+import { CABINET_ROUTE, LOGIN, NOT_FOUND } from 'utils/constsRoutes.ts'
 import { RootState } from 'store/store.ts'
-import { registerUser } from 'store/reducers/RegistarationSlice.ts'
+import {
+  registerUser,
+  ResponseData,
+  TRegister,
+} from 'store/reducers/RegistarationSlice.ts'
 import { useTypedDispatch, useTypedSelector } from '../../hooks/redux.ts'
+import Input from 'components/inputs/Input.tsx'
+import { useInput } from '../../hooks/useInput.ts'
+import { login, TLogin } from 'store/reducers/auth/AuthSlice.ts'
 
 export const Registration: FC = () => {
   const navigate = useNavigate()
@@ -15,91 +22,73 @@ export const Registration: FC = () => {
     (state: RootState) => state.registration.isLoading
   )
 
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    middleName: '',
+  const { values, handleChange } = useInput<TRegister>({
+    name: '',
     email: '',
     password: '',
   })
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    if (name === 'fullName') {
-      const [firstName, lastName, middleName] = value.split(' ')
-      setFormData({
-        ...formData,
-        firstName,
-        lastName,
-        middleName,
-      })
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      })
-    }
-  }
-
-  const handleSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const { firstName, lastName, middleName, email, password } = formData
-    console.log({ firstName, lastName, middleName, email, password })
-    dispatch(
-      registerUser({
-        firstName,
-        lastName,
-        middleName,
-        email,
-        password,
-      })
-    )
+    try {
+      const response = await dispatch(registerUser(values))
+      const responseData: ResponseData = response.payload as ResponseData
+      console.log(responseData)
+
+      if (!isLoading && responseData.status === 200) {
+        const { email, password } = values
+
+        const modal: TLogin = {
+          username: email,
+          password: password,
+          client_secret: 'secret',
+          client_id: 'frontend',
+          grant_type: 'password',
+        }
+        dispatch(login(modal))
+        navigate(CABINET_ROUTE)
+      }
+    } catch (e) {
+      navigate(NOT_FOUND)
+    }
   }
 
   return (
     <div className={classes.container}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div className={classes.header_container}>Регистрация</div>
-        <div className={classes.input_container}>
-          <label>ФИО</label>
-          <input
-            name="fullName"
-            value={
-              formData.firstName +
-              ' ' +
-              formData.lastName +
-              ' ' +
-              formData.middleName
-            }
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={classes.input_container}>
-          <label>Почта</label>
-          <input
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={classes.input_container}>
-          <label>Пароль</label>
-          <input
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-        </div>
+        <Input
+          label="Имя"
+          name="name"
+          value={values.name}
+          onChange={handleChange}
+        />
+        <Input
+          label="Email"
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+        />
+        <Input
+          type="password"
+          label="Password"
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+        />
         <div className={classes.button_container}>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Отправляется...' : 'Отправить'}
+          <button className={classes.button} type="submit" disabled={isLoading}>
+            {isLoading ? 'Отправляется...' : 'Зарегистрироваться'}
           </button>
         </div>
-        <div
-          className={classes.sign_in_container}
-          onClick={() => navigate(LOGIN)}
-        >
-          Есть аккаунт?
+        <div className={classes.acc}>
+          <div className={classes.text_acc}>Есть учетная запись?</div>
+          <button
+            className={classes.button_acc}
+            onClick={() => navigate(LOGIN)}
+          >
+            Войти
+          </button>
         </div>
       </form>
     </div>

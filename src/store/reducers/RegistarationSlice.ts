@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import $api from 'http/index.ts'
+import axios from 'axios'
+import { Guid } from 'guid-typescript'
 
 interface RegistrationState {
   isLoading: boolean
@@ -11,25 +12,43 @@ const initialState: RegistrationState = {
   isError: false,
 }
 
-interface UserData {
-  firstName: string
-  lastName: string
-  middleName: string
+export interface TRegister {
+  name: string
   email: string
   password: string
 }
 
+interface UserData {
+  id: Guid
+  name: string
+  surname: string
+  patronymic: string
+  city: string | null
+  description: string | null
+  avatarUrl: string | null
+  downloadLink: string | null
+  email: string
+  emailConfirmed: boolean
+}
+
+export interface ResponseData {
+  data: UserData
+  status: number
+}
+
 export const registerUser = createAsyncThunk<
-  void,
-  UserData,
+  ResponseData,
+  TRegister,
   { rejectValue: string }
 >(
   'registrationSlice/register',
-  async (userData: UserData, { rejectWithValue }) => {
+  async (userData: TRegister, { rejectWithValue }) => {
     try {
-      const response = await $api.post('/register', userData)
-      console.log(response.data)
-      return response.data
+      const response = await axios.post(
+        'http://localhost:10000/api/v1/accounts/register',
+        userData
+      )
+      return { data: response.data, status: response.status }
     } catch (error) {
       return rejectWithValue('Пользователь уже зарегистрирован')
     }

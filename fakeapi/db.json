@@ -94,6 +94,22 @@
       "lastName": "",
       "middleName": "bibo",
       "id": 14
+    },
+    {
+      "email": "b@gmail.com",
+      "password": "$2a$10$QgfyhRkiXbZQxnFGEQ6wPusrFdh/NQpZK9tKIhVRc1f0cmWlIy3WW",
+      "firstName": "коноплицкий",
+      "lastName": "илья",
+      "middleName": "павлович",
+      "id": 15
+    },
+    {
+      "email": "opa@gmail.com",
+      "password": "$2a$10$YAR2pu2wnb85AtrhuIrumu4UaWIeoOAAS4iXhsKaxPKzrSfmcTpie",
+      "firstName": "",
+      "lastName": "",
+      "middleName": "opa",
+      "id": 16
     }
   ]
 }
