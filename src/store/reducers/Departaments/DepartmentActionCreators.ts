@@ -1,0 +1,42 @@
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { IDepartment } from 'models/IDepartment.ts'
+import { $host } from 'http/index.ts'
+
+export const postDepartment = createAsyncThunk(
+  'event/post',
+  async (
+    {
+      name,
+      businessArea,
+      categoryName,
+      country,
+      city,
+      workMode,
+      phoneNumber,
+      location,
+    }: IDepartment,
+    thunkAPI
+  ) => {
+    try {
+      const response = await $host.post<IDepartment>('/department', {
+        name,
+        businessArea,
+        categoryName,
+        country,
+        city,
+        location: {
+          address: location.address,
+          district: location.district,
+          latitude: location.latitude,
+          longitude: location.longitude,
+          zoom: location.zoom,
+        },
+        phoneNumber,
+        workMode,
+      })
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось создать событие')
+    }
+  }
+)

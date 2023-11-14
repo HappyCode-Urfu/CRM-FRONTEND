@@ -1,5 +1,6 @@
 {
   "users": [],
+  "department": [],
   "events": [
     {
       "service_name": "йцукн",
@@ -35,6 +36,20 @@
       "start_time": "13:10",
       "end_time": "17:28",
       "id": 6
+    },
+    {
+      "service_name": "пкурноге",
+      "date": "2023-11-18T00:00:00.000Z",
+      "start_time": "10:10",
+      "end_time": "15:45",
+      "id": 7
+    },
+    {
+      "service_name": "пкурноге",
+      "date": "2023-11-11T00:00:00.000Z",
+      "start_time": "10:40",
+      "end_time": "20:26",
+      "id": 8
     }
   ]
 }

@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import eventReducer from './reducers/Events/EventSlice.ts'
+import departmentReducer from './reducers/Departaments/DepartmentSlice.ts'
 
 const rootReducer = combineReducers({
   eventReducer,
+  departmentReducer,
 })
 
 export const setupStore = () => {

@@ -1,6 +1,6 @@
 import { $host } from '../../../http'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { IEvents } from '../../../models/IEvents.ts'
+import { IEvents } from 'models/IEvents.ts'
 
 export const getAllEvents = createAsyncThunk(
   'events/getAll',
