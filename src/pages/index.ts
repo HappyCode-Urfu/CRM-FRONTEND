@@ -1,3 +1,7 @@
 export * from './cabinet/Cabinet.tsx'
 export * from './main/Main.tsx'
 export * from './companies/Companies.tsx'
+export * from 'pages/auth/login/Login.tsx'
+export * from './registration/Registration.tsx'
+export * from './auth/forgotPassword/ForgotPassword.tsx'
+export * from './auth/confirmPassword/ConfirmPassword.tsx'

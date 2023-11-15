@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+
+  .header_container {
+    text-align: center;
+    color: #484c52;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    padding: 0 0 66px;
+  }
+
+  .checkbox {
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    padding: 26px 0 79px;
+
+    .remember_me {
+      display: flex;
+    }
+
+    .text_checkbox {
+      color: #000;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 300;
+      padding: 0 9px;
+    }
+  }
+
+  .sign_up_container {
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    color: #000;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .not_acc {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .not_acc_button {
+      width: 179.444px;
+      height: 24px;
+      flex-shrink: 0;
+      border-radius: 40px;
+      background: #faaa33;
+      color: #fff;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      border: none;
+    }
+
+    .not_acc_text {
+      text-align: center;
+      color: #484c52;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      padding: 0 0 7px;
+    }
+  }
+}
