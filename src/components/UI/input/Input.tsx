@@ -21,7 +21,6 @@ export const Input: FC<InputProps> = ({
           containerClass={s.customInputPhone}
           inputProps={{
             required: true,
-            autoFocus: true,
           }}
         />
       </div>

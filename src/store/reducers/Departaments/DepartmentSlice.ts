@@ -23,7 +23,7 @@ export const departmentSlice = createSlice({
     [postDepartment.pending.type]: (state) => {
       state.isLoading = true
     },
-    [postDepartment.fulfilled.type]: (state, action: PayloadAction<string>) => {
+    [postDepartment.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },

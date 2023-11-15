@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import $api from 'http/index.ts'
 
 interface
@@ -18,11 +18,8 @@ export const forgotPassword = createAsyncThunk<void, string, { rejectValue: stri
 const forgotPasswordSlice = createSlice({
   name: 'forgot-password',
   initialState,
-  reducers: {}
+  reducers: {},
   extraReducers: (builder) => {
-    builder
-    .addCase(forgotPassword.pending, (state) => {
-
-    })
-  }
+    builder.addCase(forgotPassword.pending, (state) => {})
+  },
 })

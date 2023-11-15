@@ -8,9 +8,9 @@ import {
   ResponseData,
   TRegister,
 } from 'store/reducers/RegistarationSlice.ts'
-import { useTypedDispatch, useTypedSelector } from '../../hooks/redux.ts'
+import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import Input from 'components/inputs/Input.tsx'
-import { useInput } from '../../hooks/useInput.ts'
+import { useInput } from 'hooks/useInput.ts'
 import { login, TLogin } from 'store/reducers/auth/AuthSlice.ts'
 
 export const Registration: FC = () => {
@@ -18,9 +18,7 @@ export const Registration: FC = () => {
 
   const dispatch = useTypedDispatch()
 
-  const isLoading = useTypedSelector(
-    (state: RootState) => state.registration.isLoading
-  )
+  const isLoading = useTypedSelector((state: RootState) => state.registration.isLoading)
 
   const { values, handleChange } = useInput<TRegister>({
     name: '',
@@ -57,18 +55,8 @@ export const Registration: FC = () => {
     <div className={classes.container}>
       <form onSubmit={onSubmit}>
         <div className={classes.header_container}>Регистрация</div>
-        <Input
-          label="Имя"
-          name="name"
-          value={values.name}
-          onChange={handleChange}
-        />
-        <Input
-          label="Email"
-          name="email"
-          value={values.email}
-          onChange={handleChange}
-        />
+        <Input label="Имя" name="name" value={values.name} onChange={handleChange} />
+        <Input label="Email" name="email" value={values.email} onChange={handleChange} />
         <Input
           type="password"
           label="Password"
@@ -83,10 +71,7 @@ export const Registration: FC = () => {
         </div>
         <div className={classes.acc}>
           <div className={classes.text_acc}>Есть учетная запись?</div>
-          <button
-            className={classes.button_acc}
-            onClick={() => navigate(LOGIN)}
-          >
+          <button className={classes.button_acc} onClick={() => navigate(LOGIN)}>
             Войти
           </button>
         </div>

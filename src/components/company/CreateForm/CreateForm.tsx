@@ -3,6 +3,7 @@ import { UseCreateForm } from 'components/company/hooks/useCreateForm.ts'
 import { Input } from 'components/UI/input/Input.tsx'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { Select } from 'components/UI/Select/Select.tsx'
+import Maps from 'components/map/Map.tsx'
 
 export const CreateForm = () => {
   const {
@@ -22,10 +23,7 @@ export const CreateForm = () => {
     <div className={s.container}>
       <div className={s.top}>
         <div className={s.progressContainer}>
-          <div
-            className={s.progress}
-            style={{ width: `${currentStep * 33}%` }}
-          ></div>
+          <div className={s.progress} style={{ width: `${currentStep * 33}%` }}></div>
         </div>
       </div>
       <div className={s.bottom}>
@@ -77,11 +75,7 @@ export const CreateForm = () => {
                 />
               </div>
               <div className={s.buttonContainer}>
-                <Button
-                  onClick={handleNextClick}
-                  type={'button'}
-                  children={'Далее'}
-                />
+                <Button onClick={handleNextClick} type={'button'} children={'Далее'} />
               </div>
             </>
           )}
@@ -103,20 +97,13 @@ export const CreateForm = () => {
                       onClick={() => SearchAddress()}
                     />
                   </div>
-                  {/*<Maps*/}
-                  {/*  latitude={formData.latitude}*/}
-                  {/*  longitude={formData.longitude}*/}
-                  {/*/>*/}
+                  <Maps latitude={formData.latitude} longitude={formData.longitude} />
                   {formData.availableAddresses.length !== 0 && (
                     <div className={s.bottomAddress}>
                       {formData.availableAddresses.map((value) => (
                         <div
                           onClick={() =>
-                            selectAddress(
-                              value.address,
-                              value.latitude,
-                              value.longitude
-                            )
+                            selectAddress(value.address, value.latitude, value.longitude)
                           }
                           className={s.addressItem}
                         >

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from 'hooks/redux.ts'
+import { useTypedDispatch } from 'hooks/redux.ts'
 import { postEvent } from 'store/reducers/Events/ActionCreators.ts'
 
 interface IForms {
@@ -8,12 +8,8 @@ interface IForms {
   hoveredColumn?: string | null
 }
 
-export const useForms = ({
-  setShowModal,
-  hoveredTime,
-  hoveredColumn,
-}: IForms) => {
-  const dispatch = useAppDispatch()
+export const useForms = ({ setShowModal, hoveredTime, hoveredColumn }: IForms) => {
+  const dispatch = useTypedDispatch()
   const [task, setTask] = useState('')
   const [date, setDate] = useState<string>(hoveredColumn ? hoveredColumn : '')
   const [startTime, setStartTime] = useState(hoveredTime ? hoveredTime : '')

@@ -40,20 +40,17 @@ export const registerUser = createAsyncThunk<
   ResponseData,
   TRegister,
   { rejectValue: string }
->(
-  'registrationSlice/register',
-  async (userData: TRegister, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:10000/api/v1/accounts/register',
-        userData
-      )
-      return { data: response.data, status: response.status }
-    } catch (error) {
-      return rejectWithValue('Пользователь уже зарегистрирован')
-    }
+>('registrationSlice/register', async (userData: TRegister, { rejectWithValue }) => {
+  try {
+    const response = await axios.post(
+      'http://localhost:10000/api/v1/accounts/register',
+      userData
+    )
+    return { data: response.data, status: response.status }
+  } catch (error) {
+    return rejectWithValue('Пользователь уже зарегистрирован')
   }
-)
+})
 
 const registrationSlice = createSlice({
   name: 'register',

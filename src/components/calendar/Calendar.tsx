@@ -1,16 +1,14 @@
 import { TaskGrid, WeekHeader, TimeColumn, UseCalendar } from './index.ts'
 import s from './Calendar.module.scss'
 import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from 'hooks/redux.ts'
+import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { getAllEvents } from 'store/reducers/Events/ActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
 
 const Calendar = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useTypedDispatch()
   const { handlePrevWeek, handleNextWeek, dateSelect } = UseCalendar()
-  const { events, error, isLoading } = useAppSelector(
-    (state) => state.eventReducer
-  )
+  const { events, error, isLoading } = useTypedSelector((state) => state.eventReducer)
 
   useEffect(() => {
     dispatch(getAllEvents())

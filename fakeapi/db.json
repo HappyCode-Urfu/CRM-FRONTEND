@@ -1,6 +1,24 @@
 {
   "users": [],
-  "department": [],
+  "department": [
+    {
+      "name": "Happy code `1",
+      "businessArea": "Технологии и информационные технологии",
+      "categoryName": "разработка ПО",
+      "country": "Россия",
+      "city": "Екатеринбург",
+      "location": {
+        "address": "Россия, Свердловская область, Екатеринбург, улица Блюхера, 41",
+        "district": "Кировский",
+        "latitude": 60.641887,
+        "longitude": 56.85279,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-22:00",
+      "id": 1
+    }
+  ],
   "events": [
     {
       "service_name": "йцукн",

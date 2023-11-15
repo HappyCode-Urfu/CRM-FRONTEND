@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { useAppDispatch } from 'hooks/redux.ts'
+import { useTypedDispatch } from 'hooks/redux.ts'
 import { postDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { IDepartment } from 'models/IDepartment.ts'
 
@@ -22,7 +22,7 @@ interface IFormData {
 }
 
 export const UseCreateForm = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useTypedDispatch()
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState<IFormData>({
     logo: '',
@@ -60,8 +60,8 @@ export const UseCreateForm = () => {
     city: '',
     address: '',
     district: '',
-    latitude: 56.84,
-    longitude: 60.65,
+    latitude: 56.85279,
+    longitude: 60.641887,
     zoom: 8,
     phone_number: '',
     work_time: '',
@@ -92,11 +92,7 @@ export const UseCreateForm = () => {
     })
   }
 
-  const selectAddress = (
-    address: string,
-    latitude: string,
-    longitude: string
-  ) => {
+  const selectAddress = (address: string, latitude: string, longitude: string) => {
     setFormData({
       ...formData,
       address,

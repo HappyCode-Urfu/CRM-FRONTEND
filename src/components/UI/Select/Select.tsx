@@ -10,11 +10,7 @@ type SelectProps = InputHTMLAttributes<HTMLSelectElement> & {
   options: Option[]
 }
 
-export const Select: FC<SelectProps> = ({
-  options,
-  children,
-  ...otherProps
-}) => {
+export const Select: FC<SelectProps> = ({ options, children, ...otherProps }) => {
   return (
     <div className={s.container}>
       <p>{children}</p>
