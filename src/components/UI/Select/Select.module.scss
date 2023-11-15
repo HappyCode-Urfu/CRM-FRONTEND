@@ -10,13 +10,14 @@
   gap: 50px;
 
   select{
-    width: 150px;
+    width: 180px;
     height: 40px;
     border: none;
     background-color: $secondaryColor;
     border-radius: 8px;
     padding: 8px;
     color: $white;
+    font-size: 18px;
 
     option{
       background-color: $header;

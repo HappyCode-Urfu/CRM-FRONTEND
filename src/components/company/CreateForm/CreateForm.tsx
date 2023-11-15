@@ -128,6 +128,7 @@ export const CreateForm = () => {
                 </div>
                 <Input
                   name={'phone_number'}
+                  phone_number={true}
                   value={formData.phone_number}
                   children={'Телефон'}
                   placeholder={'Введите номер телефона'}
