@@ -3,7 +3,6 @@ import { UseCreateForm } from 'components/company/hooks/useCreateForm.ts'
 import { Input } from 'components/UI/input/Input.tsx'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { Select } from 'components/UI/Select/Select.tsx'
-import Maps from 'components/map/Map.tsx'
 
 export const CreateForm = () => {
   const {
@@ -97,7 +96,6 @@ export const CreateForm = () => {
                       onClick={() => SearchAddress()}
                     />
                   </div>
-                  <Maps latitude={formData.latitude} longitude={formData.longitude} />
                   {formData.availableAddresses.length !== 0 && (
                     <div className={s.bottomAddress}>
                       {formData.availableAddresses.map((value) => (

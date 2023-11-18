@@ -17,6 +17,57 @@
       "phoneNumber": "",
       "workMode": "10:00-22:00",
       "id": 1
+    },
+    {
+      "name": "Joker",
+      "businessArea": "Образование и тренинги",
+      "categoryName": "Rfewfew",
+      "country": "Россия",
+      "city": "Екатеринбург",
+      "location": {
+        "address": "Франция",
+        "district": "Ашановский",
+        "latitude": 1.943388,
+        "longitude": 46.790884,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-22:00",
+      "id": 2
+    },
+    {
+      "name": "Joker",
+      "businessArea": "Образование и тренинги",
+      "categoryName": "Rfewfew",
+      "country": "Россия",
+      "city": "Екатеринбург",
+      "location": {
+        "address": "Франция",
+        "district": "Ашановский",
+        "latitude": 1.943388,
+        "longitude": 46.790884,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-22:00",
+      "id": 3
+    },
+    {
+      "name": "Joker",
+      "businessArea": "Образование и тренинги",
+      "categoryName": "Rfewfew",
+      "country": "Россия",
+      "city": "Екатеринбург",
+      "location": {
+        "address": "Франция",
+        "district": "Ашановский",
+        "latitude": 1.943388,
+        "longitude": 46.790884,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-22:00",
+      "id": 4
     }
   ],
   "events": [

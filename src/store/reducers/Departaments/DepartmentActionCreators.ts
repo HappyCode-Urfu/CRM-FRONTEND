@@ -40,3 +40,15 @@ export const postDepartment = createAsyncThunk(
     }
   }
 )
+
+export const getDepartment = createAsyncThunk(
+  'department/getAll',
+  async (_, thunkAPI) => {
+    try {
+      const response = await $host.get<IDepartment>('/department')
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить филиалы')
+    }
+  }
+)
