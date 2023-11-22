@@ -41,7 +41,7 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
     setHoveredColumn(column)
   }
 
-  const { showModal, formType, openForm, setFormType, setShowModal } =
+  const { taskId, showModal, formType, openForm, setFormType, setShowModal } =
     UseTaskGrid()
 
   return (
@@ -69,7 +69,7 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
                 key={event.id}
                 className={s.event}
                 style={eventStyle}
-                onClick={() => openForm('view')}
+                onClick={() => openForm('view', event.id)}
               >
                 <p className={s.name}>{event.service_name}</p>
                 <p className={s.time}>
@@ -109,6 +109,7 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
         </div>
       ))}
       <Modal
+        id={taskId}
         showModal={showModal}
         setShowModal={setShowModal}
         formType={formType}

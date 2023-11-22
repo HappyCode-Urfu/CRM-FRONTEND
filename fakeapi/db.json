@@ -68,6 +68,23 @@
       "phoneNumber": "",
       "workMode": "10:00-22:00",
       "id": 4
+    } ,
+    {
+      "name": "Mfw",
+      "businessArea": "Реклама и маркетинг",
+      "categoryName": "rfnyujhbz",
+      "country": "Россия",
+      "city": "Екатеринбург",
+      "location": {
+        "address": "москва",
+        "district": "пионерка",
+        "latitude": 56.85279,
+        "longitude": 60.641887,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "",
+      "id": 5
     }
   ],
   "events": [
@@ -119,6 +136,13 @@
       "start_time": "10:40",
       "end_time": "20:26",
       "id": 8
+    },
+    {
+      "service_name": "пклуцпк",
+      "date": "2023-11-20T00:00:00.000Z",
+      "start_time": "11:00",
+      "end_time": "16:00",
+      "id": 9
     }
   ]
 }

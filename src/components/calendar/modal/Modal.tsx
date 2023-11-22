@@ -3,7 +3,7 @@ import s from './Modal.module.scss'
 import { CreateForm, ViewForm, EditForm } from './index.ts'
 
 interface IModal {
-  // id?: number
+  id?: number | null
   showModal: boolean
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   formType: string
@@ -19,6 +19,7 @@ enum Form {
 }
 
 export const Modal: React.FC<IModal> = ({
+  id,
   showModal = true,
   setShowModal,
   formType,
@@ -47,7 +48,7 @@ export const Modal: React.FC<IModal> = ({
               />
             )}
             {formType === Form.Edit && <EditForm />}
-            {formType === Form.View && <ViewForm />}
+            {formType === Form.View && <ViewForm id={id} setShowModal={setShowModal} />}
           </div>
         </div>
       ) : null}
