@@ -12,7 +12,7 @@ const Calendar = () => {
 
   useEffect(() => {
     dispatch(getAllEvents())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className={s.calendar}>

@@ -9,10 +9,10 @@ import {
 } from 'utils/constsRoutes.ts'
 import { RootState } from 'store/store.ts'
 import { login, Response, TLogin } from 'store/reducers/auth/AuthSlice.ts'
-import { useTypedDispatch, useTypedSelector } from '../../../hooks/redux.ts'
 import Input from 'components/inputs/Input.tsx'
 import Button from 'components/button/Button.tsx'
-import { useInput } from '../../../hooks/useInput.ts'
+import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
+import { useInput } from 'hooks/useInput.ts'
 
 export const Login: FC = () => {
   const navigate = useNavigate()
