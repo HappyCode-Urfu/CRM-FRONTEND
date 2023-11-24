@@ -63,9 +63,7 @@ export const CreateForm: React.FC<IProps> = ({
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
           />
-          {errors.startTime && (
-            <span className={s.error}>{errors.startTime}</span>
-          )}
+          {errors.startTime && <span className={s.error}>{errors.startTime}</span>}
         </div>
       </div>
 

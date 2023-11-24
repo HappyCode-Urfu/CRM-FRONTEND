@@ -11,21 +11,15 @@ export const ChangeUserData = () => {
       <h2>Личные данные</h2>
       <Input
         children={'Имя'}
-        onChange={(e) =>
-          setUserData({ ...userData, first_name: e.target.value })
-        }
+        onChange={(e) => setUserData({ ...userData, first_name: e.target.value })}
       />
       <Input
         children={'Фамилия'}
-        onChange={(e) =>
-          setUserData({ ...userData, middle_name: e.target.value })
-        }
+        onChange={(e) => setUserData({ ...userData, middle_name: e.target.value })}
       />
       <Input
         children={'Отчество'}
-        onChange={(e) =>
-          setUserData({ ...userData, last_name: e.target.value })
-        }
+        onChange={(e) => setUserData({ ...userData, last_name: e.target.value })}
       />
       <Button type={'submit'} children={'Изменить данные'} />
     </form>

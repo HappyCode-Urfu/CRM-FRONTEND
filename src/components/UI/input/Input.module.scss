@@ -1,6 +1,6 @@
 @import 'assets/styles/styles';
 
-.container{
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,12 +9,12 @@
   height: 100%;
   gap: 10px;
 
-  p{
+  p {
     width: 100px;
     font-size: 15px;
   }
 
-  .customInputPhone{
+  .customInputPhone {
     padding: 11px;
     background-color: transparent;
     border: none;
@@ -25,10 +25,9 @@
     height: 16px;
     transition: border-bottom-color ease-in-out 0.3s;
     color: $black;
-
   }
 
-  .customInput{
+  .customInput {
     padding: 11px;
     background-color: transparent;
     border: none;

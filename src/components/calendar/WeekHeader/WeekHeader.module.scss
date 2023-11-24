@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: center;
 
-  .selectors{
+  .selectors {
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -21,7 +21,7 @@
     justify-content: center;
   }
 
-  .days{
+  .days {
     display: flex;
     flex-direction: row;
     width: 90%;
@@ -36,7 +36,7 @@
     cursor: pointer;
     width: 190px;
 
-    .dayActiveBorder{
+    .dayActiveBorder {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -45,7 +45,7 @@
       height: 50px;
       border-radius: 25px;
 
-      &.active{
+      &.active {
         background-color: $secondaryColor;
       }
     }

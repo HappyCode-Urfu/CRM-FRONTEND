@@ -1,9 +1,3 @@
-import { Cabinet, Companies, Main } from 'pages'
-import {
-  CABINET_ROUTE,
-  MAIN_ROUTE,
-  COMPANIES_ROUTE,
-} from 'utils/constsRoutes.ts'
 import {
   Cabinet,
   ConfirmPassword,
@@ -11,8 +5,10 @@ import {
   Login,
   Main,
   Registration,
+  Companies,
 } from 'pages'
 import {
+  COMPANIES_ROUTE,
   CABINET_ROUTE,
   CONFIRM_PASSWORD,
   FORGOT_PASSWORD,

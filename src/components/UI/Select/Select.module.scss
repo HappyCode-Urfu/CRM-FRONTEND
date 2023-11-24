@@ -1,6 +1,6 @@
 @import 'assets/styles/styles';
 
-.container{
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,7 +9,7 @@
   height: 100%;
   gap: 50px;
 
-  select{
+  select {
     width: 180px;
     height: 40px;
     border: none;
@@ -19,7 +19,7 @@
     color: $white;
     font-size: 18px;
 
-    option{
+    option {
       background-color: $header;
       color: $white;
     }

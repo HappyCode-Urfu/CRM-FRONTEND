@@ -1,11 +1,11 @@
 @import 'assets/styles/styles';
 
-.task{
+.task {
   display: flex;
   flex-direction: row;
   width: 90%;
 
-  .day{
+  .day {
     width: 188px;
     height: 720px;
     border: 1px solid grey;
@@ -14,14 +14,14 @@
     flex-direction: column;
     align-items: center;
 
-    .hour{
+    .hour {
       width: 188px;
       height: 58px;
       border: 1px solid #ccc;
       z-index: 2;
     }
 
-    .minutes{
+    .minutes {
       width: 100%;
       height: 9px;
       border-bottom: 1px solid #575c63;
@@ -50,7 +50,7 @@
       }
     }
 
-    .event{
+    .event {
       display: flex;
       align-items: flex-start;
       justify-content: center;
@@ -63,7 +63,7 @@
       color: white;
       border-radius: 8px;
 
-      .name{
+      .name {
         width: 50%;
         font-size: 15px;
         white-space: nowrap;
@@ -72,7 +72,7 @@
         padding-left: 4px;
       }
 
-      .time{
+      .time {
         width: 50%;
         font-size: 14px;
       }

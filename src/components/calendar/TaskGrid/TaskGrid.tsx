@@ -41,8 +41,7 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
     setHoveredColumn(column)
   }
 
-  const { showModal, formType, openForm, setFormType, setShowModal } =
-    UseTaskGrid()
+  const { showModal, formType, openForm, setFormType, setShowModal } = UseTaskGrid()
 
   return (
     <div className={s.task}>

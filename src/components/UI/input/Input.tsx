@@ -7,11 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   phone_number?: boolean
 }
 
-export const Input: FC<InputProps> = ({
-  children,
-  phone_number,
-  ...otherProps
-}) => {
+export const Input: FC<InputProps> = ({ children, phone_number, ...otherProps }) => {
   if (phone_number) {
     return (
       <div className={s.container}>

@@ -13,9 +13,7 @@ const Maps = ({ latitude, longitude }: MapsProps) => {
   })
 
   return (
-    <YMaps
-      query={{ lang: 'ru_RU', apikey: import.meta.env.VITE_API_KEY_YANDEX_MAP }}
-    >
+    <YMaps query={{ lang: 'ru_RU', apikey: import.meta.env.VITE_API_KEY_YANDEX_MAP }}>
       <Map
         state={mapState}
         width={'500px'}

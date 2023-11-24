@@ -25,10 +25,7 @@ export const eventSlice = createSlice({
     },
   },
   extraReducers: {
-    [getAllEvents.fulfilled.type]: (
-      state,
-      action: PayloadAction<IEvents[]>
-    ) => {
+    [getAllEvents.fulfilled.type]: (state, action: PayloadAction<IEvents[]>) => {
       state.isLoading = false
       state.error = ''
       state.events = action.payload

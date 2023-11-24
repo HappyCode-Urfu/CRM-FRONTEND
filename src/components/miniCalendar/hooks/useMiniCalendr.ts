@@ -26,7 +26,7 @@ export const useCalendar = ({
   selectedDate: date,
   firstWeekDayNumber = 2,
 }: UseCalendarParams) => {
-  const [mode, setMode] = React.useState<'days' | 'monthes' | 'years'>('days')
+  const [mode, setMode] = React.useState<'days' | 'months' | 'years'>('days')
   const [selectedDay, setSelectedDay] = React.useState(createDate({ date }))
   const [selectedMonth, setSelectedMonth] = React.useState(
     createMonth({
@@ -39,7 +39,7 @@ export const useCalendar = ({
     getYearsInterval(selectedDay.year)
   )
 
-  const monthesNames = React.useMemo(() => getMonthesNames(locale), [])
+  const monthsNames = React.useMemo(() => getMonthesNames(locale), [])
   const weekDaysNames = React.useMemo(
     () => getWeekDaysNames(firstWeekDayNumber, locale),
     []
@@ -51,10 +51,7 @@ export const useCalendar = ({
   )
 
   const calendarDays = React.useMemo(() => {
-    const monthNumberOfDays = getMonthNumberOfDays(
-      selectedMonth.monthIndex,
-      selectedYear
-    )
+    const monthNumberOfDays = getMonthNumberOfDays(selectedMonth.monthIndex, selectedYear)
 
     const prevMonthDays = createMonth({
       date: new Date(selectedYear, selectedMonth.monthIndex - 1),
@@ -89,19 +86,11 @@ export const useCalendar = ({
       result[i] = prevMonthDays[prevMonthDays.length - inverted]
     }
 
-    for (
-      let i = numberOfPrevDays;
-      i < totalCalendarDays - numberOfNextDays;
-      i += 1
-    ) {
+    for (let i = numberOfPrevDays; i < totalCalendarDays - numberOfNextDays; i += 1) {
       result[i] = days[i - numberOfPrevDays]
     }
 
-    for (
-      let i = totalCalendarDays - numberOfNextDays;
-      i < totalCalendarDays;
-      i += 1
-    ) {
+    for (let i = totalCalendarDays - numberOfNextDays; i < totalCalendarDays; i += 1) {
       result[i] = nextMonthDays[i - totalCalendarDays + numberOfNextDays]
     }
 
@@ -110,25 +99,21 @@ export const useCalendar = ({
 
   const onClickArrow = (direction: 'right' | 'left') => {
     if (mode === 'years' && direction === 'left') {
-      return setSelectedYearsInterval(
-        getYearsInterval(selectedYearsInterval[0] - 10)
-      )
+      return setSelectedYearsInterval(getYearsInterval(selectedYearsInterval[0] - 10))
     }
 
     if (mode === 'years' && direction === 'right') {
-      return setSelectedYearsInterval(
-        getYearsInterval(selectedYearsInterval[0] + 10)
-      )
+      return setSelectedYearsInterval(getYearsInterval(selectedYearsInterval[0] + 10))
     }
 
-    if (mode === 'monthes' && direction === 'left') {
+    if (mode === 'months' && direction === 'left') {
       const year = selectedYear - 1
       if (!selectedYearsInterval.includes(year))
         setSelectedYearsInterval(getYearsInterval(year))
       return setSelectedYear(selectedYear - 1)
     }
 
-    if (mode === 'monthes' && direction === 'right') {
+    if (mode === 'months' && direction === 'right') {
       const year = selectedYear + 1
       if (!selectedYearsInterval.includes(year))
         setSelectedYearsInterval(getYearsInterval(year))
@@ -137,9 +122,7 @@ export const useCalendar = ({
 
     if (mode === 'days') {
       const monthIndex =
-        direction === 'left'
-          ? selectedMonth.monthIndex - 1
-          : selectedMonth.monthIndex + 1
+        direction === 'left' ? selectedMonth.monthIndex - 1 : selectedMonth.monthIndex + 1
       if (monthIndex === -1) {
         const year = selectedYear - 1
         setSelectedYear(year)
@@ -155,21 +138,15 @@ export const useCalendar = ({
         setSelectedYear(year)
         if (!selectedYearsInterval.includes(year))
           setSelectedYearsInterval(getYearsInterval(year))
-        return setSelectedMonth(
-          createMonth({ date: new Date(year, 0), locale })
-        )
+        return setSelectedMonth(createMonth({ date: new Date(year, 0), locale }))
       }
 
-      setSelectedMonth(
-        createMonth({ date: new Date(selectedYear, monthIndex), locale })
-      )
+      setSelectedMonth(createMonth({ date: new Date(selectedYear, monthIndex), locale }))
     }
   }
 
   const setSelectedMonthByIndex = (monthIndex: number) => {
-    setSelectedMonth(
-      createMonth({ date: new Date(selectedYear, monthIndex), locale })
-    )
+    setSelectedMonth(createMonth({ date: new Date(selectedYear, monthIndex), locale }))
   }
 
   return {
@@ -177,7 +154,7 @@ export const useCalendar = ({
       mode,
       calendarDays,
       weekDaysNames,
-      monthesNames,
+      monthsNames,
       selectedDay,
       selectedMonth,
       selectedYear,

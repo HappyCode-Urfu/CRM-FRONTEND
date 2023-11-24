@@ -19,7 +19,7 @@
   box-shadow: 0 2px 10px -1px rgba(0, 0, 0, 0.2);
 }
 
-.arrows{
+.arrows {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -92,7 +92,6 @@
     background-color: $secondaryColor;
   }
 }
-
 
 .calendar__additional__day {
   padding: 5.5px;

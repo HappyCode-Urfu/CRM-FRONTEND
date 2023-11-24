@@ -40,22 +40,12 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
         {state.mode === 'years' && (
           <div>
             {state.selectedYearsInterval[0]} -{' '}
-            {
-              state.selectedYearsInterval[
-                state.selectedYearsInterval.length - 1
-              ]
-            }
+            {state.selectedYearsInterval[state.selectedYearsInterval.length - 1]}
           </div>
         )}
         <div className={s.arrows}>
-          <div
-            className={s.arrowLeft}
-            onClick={() => functions.onClickArrow('left')}
-          />
-          <div
-            className={s.arrowRight}
-            onClick={() => functions.onClickArrow('right')}
-          />
+          <div className={s.arrowLeft} onClick={() => functions.onClickArrow('left')} />
+          <div className={s.arrowRight} onClick={() => functions.onClickArrow('right')} />
         </div>
       </div>
       <div className={s.body}>
@@ -69,12 +59,8 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
             <div className={s.calendarDays}>
               {state.calendarDays.map((day) => {
                 const isToday = checkIsToday(day.date)
-                const isSelectedDay = checkDateIsEqual(
-                  day.date,
-                  state.selectedDay.date
-                )
-                const isAdditionalDay =
-                  day.monthIndex !== state.selectedMonth.monthIndex
+                const isSelectedDay = checkDateIsEqual(day.date, state.selectedDay.date)
+                const isAdditionalDay = day.monthIndex !== state.selectedMonth.monthIndex
 
                 return (
                   <div
@@ -158,9 +144,7 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
               )
             })}
             <div className={s.calendar__unchoosable__year}>
-              {state.selectedYearsInterval[
-                state.selectedYearsInterval.length - 1
-              ] + 1}
+              {state.selectedYearsInterval[state.selectedYearsInterval.length - 1] + 1}
             </div>
           </div>
         )}
