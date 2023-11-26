@@ -1,6 +1,5 @@
 import s from './Cabinet.module.scss'
 import { InfoUser } from 'components/cabinet-module/Info/infoUser/InfoUser.tsx'
-import { Settings } from 'components/cabinet-module/settings/Settings.tsx'
 import { InfoCompany } from 'components/cabinet-module/Info/infoCompany/InfoCompany.tsx'
 
 export const Cabinet = () => {
@@ -11,10 +10,10 @@ export const Cabinet = () => {
         <InfoUser />
         <InfoCompany />
       </div>
-      <div className={s.settings}>
-        <h2>Настройки</h2>
-        <Settings />
-      </div>
+      {/*<div className={s.settings}>*/}
+      {/*  <h2>Настройки</h2>*/}
+      {/*  <Settings />*/}
+      {/*</div>*/}
     </div>
   )
 }

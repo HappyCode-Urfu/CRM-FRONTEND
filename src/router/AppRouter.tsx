@@ -2,15 +2,23 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { authRoutes, publicRoutes } from 'router/routes.ts'
 import { Navbar } from 'layouts/Navbar/Navbar.tsx'
 import classes from './AppRouter.module.scss'
+import { Button } from 'components/UI/Button/Button.tsx'
 
 const AuthRoutes = () => (
   <div className={classes.container}>
     <Navbar />
-    <Routes>
-      {authRoutes.map(({ path, Component }) => (
-        <Route key={path} path={path} element={<Component />} />
-      ))}
-    </Routes>
+    <div className={classes.content}>
+      <div className={classes.top}>
+        <Button>Выйти из профиля</Button>
+      </div>
+      <div className={classes.bottom}>
+        <Routes>
+          {authRoutes.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
+        </Routes>
+      </div>
+    </div>
   </div>
 )
 

@@ -9,21 +9,25 @@ interface IFormData {
   businessList: { value: string; label: string }[]
   businessName: string
   categoryName: string
-  country: string
-  city: string
   address: string
-  district: string
   latitude: number
   longitude: number
+  country: string
+  city: string
   zoom: number
   phone_number: string
   work_time: string
-  availableAddresses: { address: string; latitude: string; longitude: string }[]
+  availableAddresses: {
+    address: string
+    latitude: string
+    longitude: string
+    country: string
+    city: string
+  }[]
 }
 
 export const UseCreateForm = () => {
   const dispatch = useTypedDispatch()
-  const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState<IFormData>({
     logo: '',
     name: '',
@@ -59,7 +63,6 @@ export const UseCreateForm = () => {
     country: '',
     city: '',
     address: '',
-    district: '',
     latitude: 56.85279,
     longitude: 60.641887,
     zoom: 8,
@@ -76,14 +79,6 @@ export const UseCreateForm = () => {
     setFormData({ ...formData, businessName: event.target.value })
   }
 
-  const handleNextClick = () => {
-    setCurrentStep(currentStep + 1)
-  }
-
-  const handlePreviousClick = () => {
-    setCurrentStep(currentStep - 1)
-  }
-
   const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
     const address = event.target.value
     setFormData({
@@ -92,10 +87,16 @@ export const UseCreateForm = () => {
     })
   }
 
-  const selectAddress = (address: string, latitude: string, longitude: string) => {
+  const selectAddress = (
+    address: string,
+    latitude: string,
+    longitude: string,
+    country: string
+  ) => {
     setFormData({
       ...formData,
       address,
+      country: country,
       latitude: Number(latitude),
       longitude: Number(longitude),
       availableAddresses: [],
@@ -115,11 +116,14 @@ export const UseCreateForm = () => {
       const addresses = featureMembers.map((featureMember: any) => {
         const addressDetails =
           featureMember.GeoObject.metaDataProperty.GeocoderMetaData.Address
+        const countryDetails =
+          featureMember.GeoObject.metaDataProperty.GeocoderMetaData.AddressDetails.Country
         const pointDetails = featureMember.GeoObject.Point.pos.split(' ')
         return {
           address: addressDetails.formatted,
           latitude: pointDetails[0],
           longitude: pointDetails[1],
+          country: countryDetails.CountryName,
         }
       })
 
@@ -127,8 +131,6 @@ export const UseCreateForm = () => {
         ...formData,
         availableAddresses: addresses,
       })
-
-      console.log(formData.availableAddresses)
     } catch (error) {
       console.error('Ошибка при получении координат:', error)
     }
@@ -146,24 +148,19 @@ export const UseCreateForm = () => {
       workMode: formData.work_time,
       location: {
         address: formData.address,
-        district: formData.district,
         latitude: formData.latitude,
         longitude: formData.longitude,
         zoom: formData.zoom,
       },
     }
     dispatch(postDepartment(data))
-    setCurrentStep(3)
   }
 
   return {
-    currentStep,
     formData,
     setFormData,
     handleInputChange,
     handleSelectChange,
-    handleNextClick,
-    handlePreviousClick,
     handleFormSubmit,
     handleAddressChange,
     SearchAddress,

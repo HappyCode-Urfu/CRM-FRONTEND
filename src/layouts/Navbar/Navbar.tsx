@@ -4,7 +4,6 @@ import { MiniCalendar } from 'components/miniCalendar/MiniCalendar.tsx'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { eventSlice } from 'store/reducers/Events/EventSlice.ts'
 import { WidgetsButton } from 'components/UI/WidgetsButton/WidgetsButton.tsx'
-import { Button } from 'components/UI/Button/Button.tsx'
 import { NavLink } from 'react-router-dom'
 
 export const Navbar = () => {
@@ -34,9 +33,6 @@ export const Navbar = () => {
         <WidgetsButton name={'Финансы'} />
         <WidgetsButton name={'Склад'} />
         <WidgetsButton name={'Онлайн запись'} />
-      </div>
-      <div className={s.other}>
-        <Button children={'Выйти'} />
       </div>
     </div>
   )

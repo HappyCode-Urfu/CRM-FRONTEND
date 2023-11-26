@@ -68,6 +68,90 @@
       "phoneNumber": "",
       "workMode": "10:00-22:00",
       "id": 4
+    },
+    {
+      "name": "HTML: ",
+      "businessArea": "",
+      "categoryName": "",
+      "country": "",
+      "city": "",
+      "location": {
+        "address": "Россия, Свердловская область, Екатеринбург, улица Блюхера, 41",
+        "district": "",
+        "latitude": 60.641887,
+        "longitude": 56.85279,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-21:00",
+      "id": 5
+    },
+    {
+      "name": "HTML: ",
+      "businessArea": "Здравоохранение и медицина",
+      "categoryName": "",
+      "country": "",
+      "city": "",
+      "location": {
+        "address": "Россия, Свердловская область, Екатеринбург, улица Блюхера, 41",
+        "district": "",
+        "latitude": 60.641887,
+        "longitude": 56.85279,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-21:00",
+      "id": 6
+    },
+    {
+      "name": "HTML: ",
+      "businessArea": "Здравоохранение и медицина",
+      "categoryName": "",
+      "country": "",
+      "city": "",
+      "location": {
+        "address": "Россия, Свердловская область, Екатеринбург, улица Блюхера, 41",
+        "district": "",
+        "latitude": 60.641887,
+        "longitude": 56.85279,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-21:00",
+      "id": 7
+    },
+    {
+      "name": "HTML: ",
+      "businessArea": "Здравоохранение и медицина",
+      "categoryName": "",
+      "country": "",
+      "city": "",
+      "location": {
+        "address": "Россия, Свердловская область, Екатеринбург, улица Блюхера, 41",
+        "district": "",
+        "latitude": 60.641887,
+        "longitude": 56.85279,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-21:00",
+      "id": 8
+    },
+    {
+      "name": "CSS: ",
+      "businessArea": "Гостинично-ресторанный бизнес",
+      "categoryName": "",
+      "country": "Россия",
+      "city": "",
+      "location": {
+        "address": "Россия, Курган, улица Василия Блюхера, 41",
+        "latitude": 65.366846,
+        "longitude": 55.446473,
+        "zoom": 8
+      },
+      "phoneNumber": "",
+      "workMode": "10:00-22:00",
+      "id": 9
     }
   ],
   "events": [

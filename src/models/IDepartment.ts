@@ -6,7 +6,6 @@ export interface IDepartment {
   city: string
   location: {
     address: string
-    district: string
     latitude: number
     longitude: number
     zoom: number
