@@ -8,7 +8,7 @@ import { Button } from 'components/UI/Button/Button.tsx'
 import { NavLink } from 'react-router-dom'
 
 export const Navbar = () => {
-  const { dateSelect } = useTypedSelector((state) => state.eventReducer)
+  const { dateSelect, events } = useTypedSelector((state) => state.eventReducer)
   const { selectDate } = eventSlice.actions
   const dispatch = useTypedDispatch()
 
@@ -22,6 +22,7 @@ export const Navbar = () => {
         />
       </div>
       <MiniCalendar
+        events={events}
         selectedDate={dateSelect}
         selectDate={(date) => dispatch(selectDate(date))}
       />

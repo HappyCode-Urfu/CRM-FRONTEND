@@ -3,8 +3,10 @@ import { useCalendar } from 'components/miniCalendar/hooks/useMiniCalendr.ts'
 import { checkDateIsEqual, checkIsToday } from 'utils/date'
 import { useNavigate } from 'react-router-dom'
 import { MAIN_ROUTE } from 'utils/constsRoutes.ts'
+import { IEvents } from 'models/IEvents.ts'
 
 interface CalendarProps {
+  events: IEvents[]
   locale?: string
   selectedDate: Date
   selectDate: (date: Date) => void
@@ -12,6 +14,7 @@ interface CalendarProps {
 }
 
 export const MiniCalendar: React.FC<CalendarProps> = ({
+  events,
   locale = 'default',
   selectedDate: date,
   selectDate,
@@ -60,6 +63,9 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
                 const isToday = checkIsToday(day.date)
                 const isSelectedDay = checkDateIsEqual(day.date, state.selectedDay.date)
                 const isAdditionalDay = day.monthIndex !== state.selectedMonth.monthIndex
+                const hasEvent = events.some((event) =>
+                  checkDateIsEqual(day.date, new Date(event.date))
+                )
 
                 return (
                   <div
@@ -75,6 +81,7 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
                       isToday ? `${s.calendar__today__item}` : '',
                       isSelectedDay ? `${s.calendar__selected__item}` : '',
                       isAdditionalDay ? `${s.calendar__additional__day}` : '',
+                      hasEvent ? `${s.calendar__event__day}` : '',
                     ].join(' ')}
                   >
                     {day.dayNumber}

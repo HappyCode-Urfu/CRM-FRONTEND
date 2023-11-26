@@ -4,16 +4,14 @@ import { Navbar } from 'layouts/Navbar/Navbar.tsx'
 import classes from './AppRouter.module.scss'
 
 const AuthRoutes = () => (
-  <>
-    <div className={classes.container}>
-      <Navbar />
-      <Routes>
-        {authRoutes.map(({ path, Component }) => (
-          <Route key={path} path={path} element={<Component />} />
-        ))}
-      </Routes>
-    </div>
-  </>
+  <div className={classes.container}>
+    <Navbar />
+    <Routes>
+      {authRoutes.map(({ path, Component }) => (
+        <Route key={path} path={path} element={<Component />} />
+      ))}
+    </Routes>
+  </div>
 )
 
 const PublicRoutes = () => (
@@ -27,7 +25,13 @@ const PublicRoutes = () => (
 const AppRouter = () => {
   const location = useLocation()
 
-  const privateKeywords = ['/cabinet', '/companies', '/info-user', '/info-login']
+  const privateKeywords = [
+    '/cabinet',
+    '/companies',
+    '/info-user',
+    '/info-login',
+    '/calendar',
+  ]
   const isPrivateRoute =
     privateKeywords.filter((keyword) => location.pathname.includes(keyword)).length > 0
 

@@ -91,6 +91,27 @@
   &:hover {
     background-color: $secondaryColor;
   }
+
+  &.calendar__event__day {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: $secondaryColor;
+    }
+
+    &:hover{
+      &::after {
+        background-color: black;
+      }
+    }
+  }
 }
 
 .calendar__additional__day {

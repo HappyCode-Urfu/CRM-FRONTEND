@@ -32,13 +32,13 @@ export const authRoutes = [
     path: COMPANIES_ROUTE,
     Component: Companies,
   },
-]
-
-export const publicRoutes = [
   {
     path: MAIN_ROUTE,
     Component: Main,
   },
+]
+
+export const publicRoutes = [
   {
     path: LOGIN,
     Component: Login,
