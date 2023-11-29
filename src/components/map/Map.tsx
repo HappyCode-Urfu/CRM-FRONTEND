@@ -18,7 +18,7 @@ const Maps = ({ latitude, longitude }: MapsProps) => {
         state={mapState}
         width={'500px'}
         height={'300px'}
-        onChange={(event) => setMapState(event.originalEvent.state)}
+        onChange={(event: any) => setMapState(event.originalEvent.state)}
       >
         <Placemark geometry={mapState.center} />
       </Map>

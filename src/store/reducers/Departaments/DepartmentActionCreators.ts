@@ -26,7 +26,6 @@ export const postDepartment = createAsyncThunk(
         city,
         location: {
           address: location.address,
-          district: location.district,
           latitude: location.latitude,
           longitude: location.longitude,
           zoom: location.zoom,
