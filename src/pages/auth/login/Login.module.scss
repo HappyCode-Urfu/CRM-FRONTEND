@@ -1,79 +1,60 @@
 @import "assets/styles/styles";
 
-.container {
+.page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  flex-direction: column;
+  background-color: #484c52;
 
-  .header_container {
-    text-align: center;
-    color: $fontColor;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-transform: uppercase;
-    padding: 0 0 66px;
-  }
+  .container {
+    background-color: #484c52;
+    padding: 20px;
+    width: 400px;
 
-  .checkbox {
-    color: $fontColor;
-    display: flex;
-    justify-content: space-between;
-    padding: 26px 0 79px;
+    .header_container {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
 
-    .remember_me {
+    .form_container {
       display: flex;
-    }
+      flex-direction: column;
 
-    .text_checkbox {
-      color: #000;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 300;
-      padding: 0 9px;
-    }
-  }
+      .forgot_password {
+        color: #93B1FFB2;
+        text-decoration: none;
+        font-size: 14px;
 
-  .sign_up_container {
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 300;
-    color: #000;
-    cursor: pointer;
-    text-align: center;
-  }
+        &:hover {
+          text-decoration: underline;
+          opacity: 0.8;
+        }
+      }
 
-  .not_acc {
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+      .not_account {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
 
-    .not_acc_button {
-      width: 179.444px;
-      height: 24px;
-      flex-shrink: 0;
-      border-radius: 5px;
-      background: #faaa33;
-      color: #fff;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 600;
-      border: none;
-    }
+        .not_account_text {
+          color: $fontColor;
+          text-decoration: none;
+          font-size: 14px;
+        }
 
-    .not_acc_text {
-      text-align: center;
-      color: #484c52;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 300;
-      line-height: normal;
-      padding: 0 0 7px;
+        .link_sign_up {
+          color: #93B1FFB2;
+          text-decoration: none;
+          font-size: 14px;
+
+          &:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+          }
+        }
+      }
     }
   }
 }

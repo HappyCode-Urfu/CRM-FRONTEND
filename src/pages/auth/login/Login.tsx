@@ -1,91 +1,135 @@
-import { FC, FormEvent } from 'react'
+import { FC, useState } from 'react'
 import classes from './Login.module.scss'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   CABINET_ROUTE,
   FORGOT_PASSWORD,
   NOT_FOUND,
   REGISTRATION,
 } from 'utils/constsRoutes.ts'
-import { RootState } from 'store/store.ts'
-import { login, Response, TLogin } from 'store/reducers/auth/AuthSlice.ts'
-import Input from 'components/inputs/Input.tsx'
-import Button from 'components/button/Button.tsx'
-import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
-import { useInput } from 'hooks/useInput.ts'
+import { useTypedDispatch } from 'hooks/redux.ts'
+import { login } from 'store/reducers/auth/AuthActionCreator.ts'
+import { ResponseLogin, TLogin } from 'models/Auth.ts'
+import { Button } from 'components/button/Button.tsx'
+import { Controller, useForm } from 'react-hook-form'
+import Input from 'components/inputs/input/Input.tsx'
+import PasswordInput from 'components/inputs/passwordInput/PasswordInput.tsx'
 
 export const Login: FC = () => {
   const navigate = useNavigate()
 
   const dispatch = useTypedDispatch()
 
-  const isLoading = useTypedSelector((state: RootState) => state.auth.isLoading)
+  const [loadingLoginForm, setLoadingLoginForm] = useState<boolean>(false)
 
-  const { values, handleChange } = useInput<TLogin>({
-    username: '',
-    password: '',
-    grant_type: 'password',
-    client_id: 'frontend',
-    client_secret: 'secret',
+  const {
+    handleSubmit,
+    control,
+    formState: { isValid },
+  } = useForm<TLogin>({
+    defaultValues: {
+      username: '',
+      password: '',
+      grant_type: 'password',
+      client_id: 'frontend',
+      client_secret: 'secret',
+    },
+    mode: 'onSubmit',
   })
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const onSubmit = async (values: TLogin) => {
+    if (loadingLoginForm) {
+      return
+    }
 
-    const response = await dispatch(login(values))
-    const responseStatus: Response = response.payload as Response
-    console.log(responseStatus)
+    setLoadingLoginForm(true)
 
-    if (!isLoading && responseStatus.status === 200) {
-      navigate(CABINET_ROUTE)
-    } else {
+    try {
+      const response = await dispatch(login(values))
+      const responseStatus: ResponseLogin = response.payload as ResponseLogin
+      console.log(responseStatus)
+
+      if (responseStatus.status === 200) {
+        navigate(CABINET_ROUTE)
+      }
+    } catch (e) {
       navigate(NOT_FOUND)
+    } finally {
+      setLoadingLoginForm(false)
     }
   }
 
   return (
-    <div className={classes.container}>
-      <form onSubmit={onSubmit}>
+    <div className={classes.page}>
+      <div className={classes.container}>
         <div className={classes.header_container}>Вход</div>
-        <Input
-          label="Email"
-          name="username"
-          value={values.username}
-          type="email"
-          onChange={handleChange}
-        />
-        <Input
-          label="Password"
-          name="password"
-          value={values.password}
-          type="password"
-          onChange={handleChange}
-        />
-        <div className={classes.checkbox}>
-          <div className={classes.remember_me}>
-            <input type="checkbox" />
-            <div className={classes.text_checkbox}>Запомнить меня</div>
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.form_container}>
+          <Controller
+            control={control}
+            name="username"
+            rules={{
+              required: 'Поле обязательно к заполнению',
+              maxLength: {
+                value: 60,
+                message: 'Email не должен превышать 60 символов',
+              },
+              pattern: {
+                value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                message: 'Введите действительный адрес электронной почты',
+              },
+            }}
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                isError={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                label="Email"
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            rules={{
+              required: 'Поле обязательно к заполнению',
+              minLength: {
+                value: 8,
+                message: 'Пароль должен содержать не менее 8 символов',
+              },
+              maxLength: {
+                value: 30,
+                message: 'Пароль должен содержать не более 30 символов',
+              },
+              pattern: {
+                value: /^[A-Za-zА-Яа-я0-9]+$/,
+                message: 'Пароль должен содержать только буквы и цифры',
+              },
+            }}
+            render={({ field, fieldState }) => (
+              <PasswordInput
+                {...field}
+                isError={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                label="Password"
+              />
+            )}
+          />
+          <div>
+            <Link to={FORGOT_PASSWORD} className={classes.forgot_password}>
+              Забыли пароль?
+            </Link>
           </div>
-          <div
-            onClick={() => navigate(FORGOT_PASSWORD)}
-            className={classes.sign_up_container}
-          >
-            Забыли пароль?
+          <Button type="submit" disabled={isValid}>
+            {loadingLoginForm ? 'Загрузка' : 'Войти'}
+          </Button>
+          <div className={classes.not_account}>
+            <div className={classes.not_acc_text}>Нет аккаунта?</div>
+            <Link to={REGISTRATION} className={classes.link_sign_up}>
+              Зарегистрироваться
+            </Link>
           </div>
-        </div>
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? 'Отправляется...' : 'Войти'}
-        </Button>
-        <div className={classes.not_acc}>
-          <div className={classes.not_acc_text}>Нет аккаунта?</div>
-          <button
-            className={classes.not_acc_button}
-            onClick={() => navigate(REGISTRATION)}
-          >
-            Зарегистрироваться
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   )
 }
