@@ -39,6 +39,9 @@ const AppRouter = () => {
     '/info-user',
     '/info-login',
     '/calendar',
+    '/services',
+    '/employees',
+    '/work-schedule',
   ]
   const isPrivateRoute =
     privateKeywords.filter((keyword) => location.pathname.includes(keyword)).length > 0

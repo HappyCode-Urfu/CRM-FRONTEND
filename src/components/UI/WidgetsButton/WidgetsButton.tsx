@@ -1,11 +1,18 @@
 import s from './WidgetsButton.module.scss'
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
-interface IProps {
+interface Router {
+  link: string
   name: string
 }
 
-export const WidgetsButton: React.FC<IProps> = ({ name }) => {
+interface IProps {
+  name: string
+  router: Router[]
+}
+
+export const WidgetsButton: React.FC<IProps> = ({ name, router }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleMenu = () => {
@@ -27,11 +34,13 @@ export const WidgetsButton: React.FC<IProps> = ({ name }) => {
         {name}
         <i className={s.arrowIcon}></i>
       </button>
-      <ul className={s.dropdownMenu}>
-        <li>Button 1</li>
-        <li>Button 2</li>
-        <li>Button 3</li>
-      </ul>
+      <div className={s.dropdownMenu}>
+        {router.map((router) => (
+          <NavLink className={s.navLink} to={router.link}>
+            {router.name}
+          </NavLink>
+        ))}
+      </div>
     </div>
   )
 }

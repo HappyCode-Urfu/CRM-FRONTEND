@@ -5,6 +5,7 @@ import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { eventSlice } from 'store/reducers/Events/EventSlice.ts'
 import { WidgetsButton } from 'components/UI/WidgetsButton/WidgetsButton.tsx'
 import { NavLink } from 'react-router-dom'
+import { ServiceRoute } from 'layouts/Navbar/routing.ts'
 
 export const Navbar = () => {
   const { dateSelect, events } = useTypedSelector((state) => state.eventReducer)
@@ -27,12 +28,7 @@ export const Navbar = () => {
       />
       <div className={s.widgets}>
         <h3 style={{ color: 'white' }}>Виджеты:</h3>
-        <WidgetsButton name={'Сотрудники'} />
-        <WidgetsButton name={'Клиенты'} />
-        <WidgetsButton name={'Аналитика'} />
-        <WidgetsButton name={'Финансы'} />
-        <WidgetsButton name={'Склад'} />
-        <WidgetsButton name={'Онлайн запись'} />
+        <WidgetsButton name={'Настройки записи'} router={ServiceRoute} />
       </div>
     </div>
   )

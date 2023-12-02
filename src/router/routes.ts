@@ -6,6 +6,9 @@ import {
   Main,
   Registration,
   Companies,
+  Employees,
+  Services,
+  WorkSchedule,
 } from 'pages'
 import {
   COMPANIES_ROUTE,
@@ -18,6 +21,9 @@ import {
   MAIN_ROUTE,
   NOT_FOUND,
   REGISTRATION,
+  EMPLOYEES_ROUTE,
+  SERVICES_ROUTE,
+  WORK_SCHEDULE_ROUTE,
 } from 'utils/constsRoutes.ts'
 import InformationPage from 'pages/auth/InformationPage/InformationPage.tsx'
 import InfoLogin from 'pages/auth/infoLogin/InfoLogin.tsx'
@@ -35,6 +41,18 @@ export const authRoutes = [
   {
     path: MAIN_ROUTE,
     Component: Main,
+  },
+  {
+    path: EMPLOYEES_ROUTE,
+    Component: Employees,
+  },
+  {
+    path: SERVICES_ROUTE,
+    Component: Services,
+  },
+  {
+    path: WORK_SCHEDULE_ROUTE,
+    Component: WorkSchedule,
   },
 ]
 

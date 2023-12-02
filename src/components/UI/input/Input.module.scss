@@ -16,7 +16,7 @@
 
   .customInputPhone {
     padding: 11px;
-    background-color: transparent;
+    background-color: white;
     border: none;
     font-size: 16px;
     display: flex;
@@ -29,7 +29,7 @@
 
   .customInput {
     padding: 11px;
-    background-color: transparent;
+    background-color: white;
     border: none;
     border-bottom: 1px solid black;
     font-size: 16px;
@@ -38,7 +38,7 @@
     width: 440px;
     height: 16px;
     transition: border-bottom-color ease-in-out 0.3s;
-    color: $white;
+    color: $black;
 
     &:focus {
       outline: none;

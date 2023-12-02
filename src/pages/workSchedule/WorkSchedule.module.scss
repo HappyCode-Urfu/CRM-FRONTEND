@@ -1,0 +1,106 @@
+@import 'assets/styles/styles';
+
+.container{
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+  width: 100%;
+  gap: 20px;
+  min-height: 800px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+.header {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: $header;
+  width: 100%;
+  height: 10%;
+  align-items: center;
+  justify-content: center;
+
+  .selectors {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    width: 250px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .days {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+  }
+
+  .day {
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 42px;
+
+    .dayActiveBorder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+
+      &.active {
+        color: $secondaryColor;
+      }
+    }
+  }
+}
+
+.graphics{
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 100%;
+
+  .employ{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    .name{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 250px;
+      height: 100%;
+    }
+
+    .daysEmployee{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      width: 90%;
+      height: 100%;
+
+      .dayEmployee{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 60px;
+        border: 1px solid white;
+      }
+    }
+  }
+}
