@@ -89,6 +89,7 @@ export const WorkSchedule = () => {
         <div className={s.selectors}>
           <Button onClick={handlePreviousMonth}>&lt;</Button>
           <span>{currentMonth.toLocaleString('default', { month: 'long' })}</span>
+          <span>{currentMonth.toLocaleString('default', { year: 'numeric' })}</span>
           <Button onClick={handleNextMonth}>&gt;</Button>
         </div>
         <div className={s.days}>{renderWeekDays()}</div>
