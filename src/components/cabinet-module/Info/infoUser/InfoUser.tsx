@@ -32,7 +32,7 @@ export const InfoUser = () => {
               </p>
               <p>Почта: {data.email}</p>
               <p>Город: {data.city !== null ? data.city : 'Отсутствует'}</p>
-              <p>Почта подтверждена: {data.email ? 'Да' : 'Нет'}</p>
+              <p>Почта подтверждена: {data.emailConfirmed === true ? 'Да' : 'Нет'}</p>
               <Button children={'Редактировать данные'} />
             </div>
           </div>
