@@ -34,12 +34,13 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
           onClick={() => inputRef.current?.focus()}
         >
           <input
+            id="password"
             type={showPasswordToggle && showPassword ? 'text' : 'password'}
             ref={inputRef}
             className={inputStyles.input}
             {...props}
           />
-          <label htmlFor="" className={inputStyles.input_label}>
+          <label htmlFor="password" className={inputStyles.input_label}>
             {label}
           </label>
           {showPasswordToggle && (

@@ -18,8 +18,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           className={`${classes.input_container} ${isError ? classes.input_error : ''}`}
           onClick={() => inputRef.current?.focus()}
         >
-          <input autoComplete="off" ref={inputRef} {...props} className={classes.input} />{' '}
-          <label htmlFor="" className={classes.input_label}>
+          <input
+            id={label}
+            autoComplete="off"
+            ref={inputRef}
+            {...props}
+            className={classes.input}
+          />{' '}
+          <label htmlFor={label} className={classes.input_label}>
             {label}
           </label>
         </div>
