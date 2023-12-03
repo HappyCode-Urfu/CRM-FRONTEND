@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import classes from './Registration.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { CABINET_ROUTE, LOGIN, NOT_FOUND } from 'utils/constsRoutes.ts'
-import { useTypedDispatch } from 'hooks/redux.ts'
+import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { TRegister } from 'models/Registration.ts'
 import { TLogin } from 'models/Auth.ts'
 import { ResponseRegistration } from 'models/Registration.ts'
@@ -16,6 +16,7 @@ import PasswordInput from 'components/inputs/passwordInput/PasswordInput.tsx'
 export const Registration: FC = () => {
   const navigate = useNavigate()
   const dispatch = useTypedDispatch()
+  const isError = useTypedSelector((state) => state.registrationSlice.isError)
   const [loading, setLoading] = useState(false)
 
   const {
@@ -62,100 +63,108 @@ export const Registration: FC = () => {
   }
 
   return (
-    <div className={classes.page_container}>
-      <div className={classes.register_container}>
-        <form onSubmit={handleSubmit(onSubmit)} className={classes.form_container}>
-          <div className={classes.header_register}>Регистрация</div>
-          <Controller
-            control={control}
-            name="name"
-            rules={{
-              required: 'Поле обязательно к заполнению',
-              minLength: {
-                value: 3,
-                message: 'Имя должно содержать не менее 3 символов',
-              },
-              maxLength: {
-                value: 50,
-                message: 'Имя не должно содержать более 50 символов',
-              },
-              pattern: {
-                value: /^[A-Za-zА-Яа-я]+$/,
-                message: 'Имя может содержать только буквы',
-              },
-            }}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                isError={!!fieldState.error}
-                helperText={fieldState.error?.message}
-                label="Имя"
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="email"
-            rules={{
-              required: 'Поле обязательно к заполнению',
-              maxLength: {
-                value: 60,
-                message: 'Email не должен превышать 60 символов',
-              },
-              pattern: {
-                value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
-                message: 'Введите действительный адрес электронной почты',
-              },
-            }}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                isError={!!fieldState.error}
-                helperText={fieldState.error?.message}
-                label="Email"
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="password"
-            rules={{
-              required: 'Поле обязательно к заполнению',
-              minLength: {
-                value: 8,
-                message: 'Пароль должен содержать не менее 8 символов',
-              },
-              maxLength: {
-                value: 30,
-                message: 'Пароль не должен превышать 30 символов',
-              },
-              pattern: {
-                value: /^[A-Za-zА-Яа-я0-9]+$/,
-                message: 'Пароль может содержать только буквы и цифры',
-              },
-            }}
-            render={({ field, fieldState }) => (
-              <PasswordInput
-                {...field}
-                isError={!!fieldState.error}
-                helperText={fieldState.error?.message}
-                label="Password"
-              />
-            )}
-          />
-          <div>
-            <Button type="submit" disabled={!isValid}>
-              {loading ? 'Загрузка...' : 'Зарегистрироваться'}
-            </Button>
+    <>
+      <div className={classes.page_container}>
+        <div className={classes.register_container}>
+          <div className={classes.header_register}>Регистрация</div>{' '}
+          {isError && (
+            <p className={classes.bad_request}>
+              Пользователь с таким email уже зарегистрирован
+            </p>
+          )}
+          <form onSubmit={handleSubmit(onSubmit)} className={classes.form_container}>
+            <Controller
+              control={control}
+              name="name"
+              rules={{
+                required: 'Поле обязательно к заполнению',
+                minLength: {
+                  value: 3,
+                  message: 'Имя должно содержать не менее 3 символов',
+                },
+                maxLength: {
+                  value: 50,
+                  message: 'Имя не должно содержать более 50 символов',
+                },
+                pattern: {
+                  value: /^[A-Za-zА-Яа-я]+$/,
+                  message: 'Имя может содержать только буквы',
+                },
+              }}
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  isError={!!fieldState.error}
+                  helperText={fieldState.error?.message}
+                  label="Имя"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="email"
+              rules={{
+                required: 'Поле обязательно к заполнению',
+                maxLength: {
+                  value: 60,
+                  message: 'Email не должен превышать 60 символов',
+                },
+                pattern: {
+                  value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+                  message: 'Введите действительный адрес электронной почты',
+                },
+              }}
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  isError={!!fieldState.error}
+                  helperText={fieldState.error?.message}
+                  label="Email"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="password"
+              rules={{
+                required: 'Поле обязательно к заполнению',
+                minLength: {
+                  value: 8,
+                  message: 'Пароль должен содержать не менее 8 символов',
+                },
+                maxLength: {
+                  value: 30,
+                  message: 'Пароль не должен превышать 30 символов',
+                },
+                pattern: {
+                  value: /^[A-Za-zА-Яа-я0-9]+$/,
+                  message: 'Пароль может содержать только буквы и цифры',
+                },
+              }}
+              render={({ field, fieldState }) => (
+                <PasswordInput
+                  {...field}
+                  isError={!!fieldState.error}
+                  helperText={fieldState.error?.message}
+                  label="Password"
+                />
+              )}
+            />
+            <div>
+              <Button type="submit" disabled={!isValid}>
+                {loading ? 'Загрузка...' : 'Зарегистрироваться'}
+              </Button>
+            </div>
+          </form>
+          <div className={classes.account_container}>
+            <div className={classes.text_account}>Есть учетная запись?</div>
+            <Link to={LOGIN} className={classes.link_sign_in}>
+              Войти
+            </Link>
           </div>
-        </form>
-        <div className={classes.account_container}>
-          <div className={classes.text_account}>Есть учетная запись?</div>
-          <Link to={LOGIN} className={classes.link_sign_in}>
-            Войти
-          </Link>
         </div>
       </div>
-    </div>
+      {isError}
+    </>
   )
 }
