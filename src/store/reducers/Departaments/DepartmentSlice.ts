@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {
-  getDepartment,
-  postDepartment,
-} from 'store/reducers/Departaments/DepartmentActionCreators.ts'
+import { postDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { IDepartment } from 'models/IDepartment.ts'
 
 interface DepartmentState {
@@ -30,18 +27,6 @@ export const departmentSlice = createSlice({
       state.isLoading = true
     },
     [postDepartment.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false
-      state.error = action.payload
-    },
-    [getDepartment.fulfilled.type]: (state, action: PayloadAction<IDepartment[]>) => {
-      state.data = action.payload
-      state.isLoading = false
-      state.error = ''
-    },
-    [getDepartment.pending.type]: (state) => {
-      state.isLoading = true
-    },
-    [getDepartment.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },

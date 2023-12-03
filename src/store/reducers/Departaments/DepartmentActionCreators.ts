@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IDepartment } from 'models/IDepartment.ts'
-import { $host } from 'http/index.ts'
+import { $api } from 'http/index.ts'
+import { jwtDecode, JwtPayload } from 'jwt-decode'
 
 export const postDepartment = createAsyncThunk(
   'event/post',
@@ -18,7 +19,14 @@ export const postDepartment = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const response = await $host.post<IDepartment>('/department', {
+      let token: JwtPayload
+      const accessToken = localStorage.getItem('access_token')
+      if (!accessToken) {
+        throw new Error('Access token not found')
+      }
+      // eslint-disable-next-line prefer-const
+      token = jwtDecode(accessToken)
+      const response = await $api.post(`/departments/${token.sub}`, {
         name,
         businessArea,
         categoryName,
@@ -36,18 +44,6 @@ export const postDepartment = createAsyncThunk(
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось создать событие')
-    }
-  }
-)
-
-export const getDepartment = createAsyncThunk(
-  'department/getAll',
-  async (_, thunkAPI) => {
-    try {
-      const response = await $host.get<IDepartment>('/department')
-      return response.data
-    } catch (e) {
-      return thunkAPI.rejectWithValue('Не удалось получить филиалы')
     }
   }
 )

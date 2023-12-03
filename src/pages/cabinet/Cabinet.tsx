@@ -8,7 +8,7 @@ export const Cabinet = () => {
       <div className={s.info}>
         <h2>Информация</h2>
         <InfoUser />
-        <InfoCompany />
+        {/*<InfoCompany />*/}
       </div>
       {/*<div className={s.settings}>*/}
       {/*  <h2>Настройки</h2>*/}
