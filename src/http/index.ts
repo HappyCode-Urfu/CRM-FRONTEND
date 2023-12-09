@@ -1,9 +1,14 @@
 import axios from 'axios'
+import qs from 'qs'
+import { Token } from 'models/Auth.ts'
 
-const API_URL = 'http://localhost:10000/api/v1'
+const API_URL = '/api/v1'
+
+const FAKE_API_URL = 'http://localhost:4000'
 
 const $host = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  // baseURL: import.meta.env.VITE_API_URL,
+  baseURL: API_URL,
 })
 
 const $api = axios.create({
@@ -25,11 +30,30 @@ $api.interceptors.response.use(
     if (error.response.status == 401 && error.config && !error.config._isRetry) {
       originalRequest._isRetry = true
       try {
-        const response = await axios.get('http://localhost:10001/connect/token', {
-          withCredentials: true,
-        })
-        localStorage.setItem('token', response.data.access_token)
-        return $api.request(originalRequest)
+        console.log('вызван интерцептор 401')
+        const form = {
+          client_id: 'frontend',
+          client_secret: 'secret',
+          grant_type: 'refresh_token',
+          refresh_token: localStorage.getItem('refresh_token'),
+        }
+
+        const optionsInterceptor = {
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          data: qs.stringify(form),
+          url: 'http://localhost:10001/connect/token',
+          method: 'POST',
+        }
+
+        console.log(optionsInterceptor)
+        const { data, status } = await axios<Token>(optionsInterceptor)
+        const { access_token, refresh_token } = data
+
+        localStorage.setItem('access_token', access_token)
+        localStorage.setItem('refresh_token', refresh_token)
+
+        console.log(data)
+        return { data, status }
       } catch (e) {
         console.log('НЕ АВТОРИЗОВАН')
       }

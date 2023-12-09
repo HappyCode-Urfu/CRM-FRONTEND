@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import Input from 'components/inputs/Input.tsx'
+import Input from 'components/inputs/input/Input'
 import Button from 'components/button/Button.tsx'
 import classes from './ForgotPassword.module.scss'
 import { useNavigate } from 'react-router-dom'

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import Input from 'components/inputs/Input.tsx'
+import Input from 'components/inputs/input/Input'
 import classes from './ConfirmPassword.module.scss'
 import Button from 'components/button/Button.tsx'
 

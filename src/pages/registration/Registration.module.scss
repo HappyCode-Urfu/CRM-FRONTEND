@@ -1,71 +1,50 @@
 @import 'assets/styles/styles';
 
-.container {
+.page_container {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
+  background-color: #484c52;
 
-  .header_container {
-    text-align: center;
-    color: $fontColor;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    padding: 0 0 52px;
-  }
+  .register_container {
+    background-color: #484c52;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
 
-  .sign_in_container {
-    text-align: center;
-    cursor: pointer;
-    color: blue;
-  }
+    .header_register {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
 
-  .button_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 52px 0 35px;
-  }
+    .bad_request {
+      color: #E36464;
+      font-size: 14px;
+    }
 
-  .button {
-    width: 295px;
-    height: 63px;
-    background-color: #faaa33;
-    border-radius: 30px;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-  }
+    .account_container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
 
-  .acc {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+      .text_account {
+        color: $fontColor;
+        font-size: 14px;
+      }
 
-  .text_acc {
-    color: #484c52;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    padding: 0 0 7px;
-  }
+      .link_sign_in {
+        color: #93B1FFB2;
+        text-decoration: none;
+        font-size: 14px;
 
-  .button_acc {
-    width: 60px;
-    height: 24px;
-    color: #fff;
-    border-radius: 30px;
-    background: #faaa33;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    border: none;
+        &:hover {
+          opacity: 0.8;
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }
+
