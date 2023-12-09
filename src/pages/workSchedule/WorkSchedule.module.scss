@@ -1,6 +1,6 @@
 @import 'assets/styles/styles';
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   z-index: 5;
@@ -10,7 +10,6 @@
   align-items: center;
   justify-content: flex-start;
 }
-
 
 .header {
   display: flex;
@@ -64,20 +63,20 @@
   }
 }
 
-.graphics{
+.graphics {
   display: flex;
   flex-direction: column;
   height: 80%;
   width: 100%;
 
-  .employ{
+  .employ {
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
     justify-content: center;
 
-    .name{
+    .name {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -85,7 +84,7 @@
       height: 100%;
     }
 
-    .daysEmployee{
+    .daysEmployee {
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -93,7 +92,7 @@
       width: 90%;
       height: 100%;
 
-      .dayEmployee{
+      .dayEmployee {
         display: flex;
         align-items: center;
         justify-content: center;

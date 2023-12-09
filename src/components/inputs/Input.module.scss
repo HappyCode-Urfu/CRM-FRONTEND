@@ -1,4 +1,4 @@
-@import "assets/styles/styles";
+@import 'assets/styles/styles';
 
 .input_container {
   display: flex;
@@ -19,7 +19,7 @@
 
   .input {
     border: none;
-    color: $fontColor ;
+    color: $fontColor;
     font-size: 16px;
     font-weight: 500;
     text-transform: uppercase;
