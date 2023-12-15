@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { jwtDecode, JwtPayload } from 'jwt-decode'
-import { $host } from 'http/index.ts'
+import { $api } from 'http/index.ts'
 
 export const getInfoUser = createAsyncThunk('user/getInfoUser', async (_, thunkAPI) => {
   try {
@@ -11,7 +11,7 @@ export const getInfoUser = createAsyncThunk('user/getInfoUser', async (_, thunkA
     }
     // eslint-disable-next-line prefer-const
     token = jwtDecode(accessToken)
-    const response = await $host.get(`accounts/user/${token.sub}`)
+    const response = await $api.get(`accounts/user/${token.sub}`)
     console.log(response)
     return response.data
   } catch (e: any) {
