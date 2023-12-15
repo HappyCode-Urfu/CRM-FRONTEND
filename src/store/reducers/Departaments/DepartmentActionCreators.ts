@@ -49,3 +49,32 @@ export const getDepartment = createAsyncThunk(
     }
   }
 )
+
+export const addImageDepartment = createAsyncThunk(
+  'department/addImage',
+  async (
+    { departmentId, formData }: { formData: FormData; departmentId: string },
+    thunkAPI
+  ) => {
+    try {
+      const response = await $api.post(`/departments/files/${departmentId}`, {
+        formData,
+      })
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
+    }
+  }
+)
+
+export const delImageDepartment = createAsyncThunk(
+  'department/delImage',
+  async ({ departmentId }: { departmentId: string }, thunkAPI) => {
+    try {
+      const response = await $api.delete(`/departments/files/${departmentId}`)
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
+    }
+  }
+)
