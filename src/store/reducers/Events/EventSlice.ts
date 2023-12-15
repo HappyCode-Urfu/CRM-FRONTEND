@@ -1,9 +1,16 @@
 import { IEvents } from 'models/IEvents.ts'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getAllEvents, postEvent } from './ActionCreators.ts'
+import {
+  getAllSessions,
+  getIdSessions,
+  putSession,
+  delSession,
+  postSession,
+} from './ActionCreators.ts'
 
 interface EventState {
   events: IEvents[]
+  eventId: IEvents
   dateSelect: Date
   isLoading: boolean
   error: string
@@ -11,6 +18,18 @@ interface EventState {
 
 const initialState: EventState = {
   events: [],
+  eventId: {
+    sessionId: '',
+    serviceName: '',
+    visitDate: '',
+    startTime: '',
+    endTime: '',
+    statusStatus: '',
+    employeeId: '',
+    clientName: '',
+    clientPhoneNumber: '',
+    clientEmail: '',
+  },
   dateSelect: new Date(),
   isLoading: false,
   error: '',
@@ -25,27 +44,69 @@ export const eventSlice = createSlice({
     },
   },
   extraReducers: {
-    [getAllEvents.fulfilled.type]: (state, action: PayloadAction<IEvents[]>) => {
+    [getAllSessions.fulfilled.type]: (state, action: PayloadAction<IEvents[]>) => {
       state.isLoading = false
       state.error = ''
       state.events = action.payload
     },
-    [getAllEvents.pending.type]: (state) => {
+    [getAllSessions.pending.type]: (state) => {
       state.isLoading = true
     },
-    [getAllEvents.rejected.type]: (state, action: PayloadAction<string>) => {
+    [getAllSessions.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },
-    [postEvent.fulfilled.type]: (state, action: PayloadAction<IEvents>) => {
+    [getIdSessions.fulfilled.type]: (state, action: PayloadAction<IEvents>) => {
       state.isLoading = false
       state.error = ''
-      state.events.push(action.payload)
+      state.eventId.sessionId = action.payload.sessionId
+      state.eventId.serviceName = action.payload.serviceName
+      state.eventId.visitDate = action.payload.visitDate
+      state.eventId.startTime = action.payload.startTime
+      state.eventId.endTime = action.payload.endTime
+      state.eventId.statusStatus = action.payload.statusStatus
+      state.eventId.employeeId = action.payload.employeeId
+      state.eventId.clientName = action.payload.clientName
+      state.eventId.clientPhoneNumber = action.payload.clientPhoneNumber
+      state.eventId.clientEmail = action.payload.clientEmail
     },
-    [postEvent.pending.type]: (state) => {
+    [getIdSessions.pending.type]: (state) => {
       state.isLoading = true
     },
-    [postEvent.rejected.type]: (state, action: PayloadAction<string>) => {
+    [getIdSessions.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [postSession.fulfilled.type]: (state) => {
+      state.isLoading = false
+      state.error = ''
+    },
+    [postSession.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [postSession.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [putSession.fulfilled.type]: (state) => {
+      state.isLoading = false
+      state.error = ''
+    },
+    [putSession.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [putSession.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [delSession.fulfilled.type]: (state) => {
+      state.isLoading = false
+      state.error = ''
+    },
+    [delSession.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [delSession.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },

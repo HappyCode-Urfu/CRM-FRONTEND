@@ -28,7 +28,7 @@ export const InfoCompany = () => {
               </div>
               <div className={s.companyList}>
                 {data.map((res, index) => (
-                  <div>
+                  <div key={res.id}>
                     <p>{index + 1}</p>
                     <p>{res.name}</p>
                   </div>

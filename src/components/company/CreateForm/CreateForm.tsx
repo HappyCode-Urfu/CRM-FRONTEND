@@ -12,6 +12,7 @@ export const CreateForm = () => {
     handleAddressChange,
     SearchAddress,
     formData,
+    setFormData,
     selectAddress,
   } = UseCreateForm()
 
@@ -26,40 +27,6 @@ export const CreateForm = () => {
               children={'Название филиала'}
               value={formData.name}
               onChange={handleInputChange}
-            />
-            {/*<Input*/}
-            {/*  name={'categoryName'}*/}
-            {/*  value={formData.categoryName}*/}
-            {/*  children={'Категория'}*/}
-            {/*  placeholder={'Введите категорию'}*/}
-            {/*  onChange={handleInputChange}*/}
-            {/*/>*/}
-            {/*<Input*/}
-            {/*  name={'country'}*/}
-            {/*  value={formData.country}*/}
-            {/*  children={'Страна'}*/}
-            {/*  placeholder={'Введите страну'}*/}
-            {/*  onChange={handleInputChange}*/}
-            {/*/>*/}
-            {/*<Input*/}
-            {/*  name={'city'}*/}
-            {/*  value={formData.city}*/}
-            {/*  children={'Город'}*/}
-            {/*  placeholder={'Введите город'}*/}
-            {/*  onChange={handleInputChange}*/}
-            {/*/>*/}
-            {/*<Input*/}
-            {/*  name={'district'}*/}
-            {/*  value={formData.district}*/}
-            {/*  children={'Район'}*/}
-            {/*  placeholder={'Введите район'}*/}
-            {/*  onChange={handleInputChange}*/}
-            {/*/>*/}
-            <Select
-              children={'Сфера бизнеса'}
-              value={formData.businessName}
-              options={formData.businessList}
-              onChange={handleSelectChange}
             />
             <div className={s.searchAddress}>
               <div className={s.topAddress}>
@@ -80,12 +47,7 @@ export const CreateForm = () => {
                   {formData.availableAddresses.map((value) => (
                     <div
                       onClick={() =>
-                        selectAddress(
-                          value.address,
-                          value.latitude,
-                          value.longitude,
-                          value.country
-                        )
+                        selectAddress(value.address, value.latitude, value.longitude)
                       }
                       className={s.addressItem}
                     >
@@ -101,14 +63,34 @@ export const CreateForm = () => {
               value={formData.phone_number}
               children={'Телефон'}
               placeholder={'Введите номер телефона'}
-              onChange={handleInputChange}
+              onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
             />
-            <Input
-              name={'work_time'}
-              value={formData.work_time}
-              children={'Режим работы'}
-              placeholder={'10:00-22:00'}
-              onChange={handleInputChange}
+
+            <div className={s.formGroup}>
+              <label htmlFor="startTime">Режим работы</label>
+              <div className={s.InputBlock}>
+                <input
+                  type="time"
+                  id="startTime"
+                  value={formData.start_time}
+                  onChange={(e) =>
+                    setFormData({ ...formData, start_time: e.target.value })
+                  }
+                />
+                -
+                <input
+                  type="time"
+                  id="startTime"
+                  value={formData.end_time}
+                  onChange={(e) => setFormData({ ...formData, end_time: e.target.value })}
+                />
+              </div>
+            </div>
+            <Select
+              children={'Сфера бизнеса'}
+              value={formData.businessName}
+              options={formData.businessList}
+              onChange={handleSelectChange}
             />
             <div className={s.buttonContainer}>
               <Button

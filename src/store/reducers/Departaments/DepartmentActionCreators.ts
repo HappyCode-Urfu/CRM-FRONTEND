@@ -4,46 +4,48 @@ import { $api } from 'http/index.ts'
 import { jwtDecode, JwtPayload } from 'jwt-decode'
 
 export const postDepartment = createAsyncThunk(
-  'event/post',
+  'department/Create',
   async (
-    {
-      name,
-      businessArea,
-      categoryName,
-      country,
-      city,
-      workMode,
-      phoneNumber,
-      location,
-    }: IDepartment,
+    { name, businessArea, workMode, phoneNumber, location }: IDepartment,
     thunkAPI
   ) => {
     try {
       let token: JwtPayload
       const accessToken = localStorage.getItem('access_token')
       if (!accessToken) {
-        throw new Error('Access token not found')
+        return new Error('Access token not found')
       }
       // eslint-disable-next-line prefer-const
       token = jwtDecode(accessToken)
-      const response = await $api.post(`/departments/${token.sub}`, {
+      const response = await $api.post<IDepartment>(`/departments/${token.sub}`, {
         name,
         businessArea,
-        categoryName,
-        country,
-        city,
-        location: {
-          address: location.address,
-          latitude: location.latitude,
-          longitude: location.longitude,
-          zoom: location.zoom,
-        },
+        location,
         phoneNumber,
         workMode,
       })
       return response.data
     } catch (e) {
-      return thunkAPI.rejectWithValue('Не удалось создать событие')
+      return thunkAPI.rejectWithValue('Не удалось создать филиал')
+    }
+  }
+)
+
+export const getDepartment = createAsyncThunk(
+  'department/GetAll',
+  async (_, thunkAPI) => {
+    try {
+      let token: JwtPayload
+      const accessToken = localStorage.getItem('access_token')
+      if (!accessToken) {
+        return new Error('Access token not found')
+      }
+      // eslint-disable-next-line prefer-const
+      token = jwtDecode(accessToken)
+      const response = await $api.get(`/departments/${token.sub}`)
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
     }
   }
 )

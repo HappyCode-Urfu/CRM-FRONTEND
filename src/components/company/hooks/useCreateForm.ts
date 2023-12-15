@@ -2,21 +2,20 @@ import { useState, ChangeEvent, FormEvent } from 'react'
 import { useTypedDispatch } from 'hooks/redux.ts'
 import { postDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { IDepartment } from 'models/IDepartment.ts'
+import { useNavigate } from 'react-router-dom'
+import { CABINET_ROUTE } from 'utils/constsRoutes.ts'
 
 interface IFormData {
   logo: string
   name: string
   businessList: { value: string; label: string }[]
   businessName: string
-  categoryName: string
   address: string
   latitude: number
   longitude: number
-  country: string
-  city: string
-  zoom: number
   phone_number: string
-  work_time: string
+  start_time: string
+  end_time: string
   availableAddresses: {
     address: string
     latitude: string
@@ -59,17 +58,29 @@ export const UseCreateForm = () => {
       },
     ],
     businessName: '',
-    categoryName: '',
-    country: '',
-    city: '',
     address: '',
-    latitude: 56.85279,
-    longitude: 60.641887,
-    zoom: 8,
+    latitude: 0,
+    longitude: 0,
     phone_number: '',
-    work_time: '',
+    start_time: '',
+    end_time: '',
     availableAddresses: [],
   })
+
+  const clearData = () => {
+    setFormData({
+      ...formData,
+      logo: '',
+      name: '',
+      businessName: '',
+      address: '',
+      latitude: 0,
+      longitude: 0,
+      start_time: '',
+      end_time: '',
+      availableAddresses: [],
+    })
+  }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -87,16 +98,10 @@ export const UseCreateForm = () => {
     })
   }
 
-  const selectAddress = (
-    address: string,
-    latitude: string,
-    longitude: string,
-    country: string
-  ) => {
+  const selectAddress = (address: string, latitude: string, longitude: string) => {
     setFormData({
       ...formData,
       address,
-      country: country,
       latitude: Number(latitude),
       longitude: Number(longitude),
       availableAddresses: [],
@@ -141,19 +146,18 @@ export const UseCreateForm = () => {
     const data: IDepartment = {
       name: formData.name,
       businessArea: formData.businessName,
-      categoryName: formData.categoryName,
-      city: formData.city,
-      country: formData.country,
       phoneNumber: formData.phone_number,
-      workMode: formData.work_time,
+      workMode: {
+        startTime: formData.start_time,
+        endTime: formData.end_time,
+      },
       location: {
         address: formData.address,
         latitude: formData.latitude,
         longitude: formData.longitude,
-        zoom: formData.zoom,
       },
     }
-    dispatch(postDepartment(data))
+    dispatch(postDepartment(data)).then(() => clearData)
   }
 
   return {
