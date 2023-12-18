@@ -10,6 +10,8 @@ interface EventState {
   data: Data[]
   isLoading: boolean
   error: string
+  departmentId: string
+  name: string
 }
 
 interface Data {
@@ -21,12 +23,21 @@ const initialState: EventState = {
   data: [],
   isLoading: false,
   error: '',
+  departmentId: '',
+  name: '',
 }
 
 export const categorySlice = createSlice({
   name: 'category',
   initialState,
-  reducers: {},
+  reducers: {
+    selectDepartmentId(state, action: PayloadAction<string>) {
+      state.departmentId = action.payload
+    },
+    selectName(state, action: PayloadAction<string>) {
+      state.name = action.payload
+    },
+  },
   extraReducers: {
     [getAllCategories.fulfilled.type]: (state, action: PayloadAction<Data[]>) => {
       state.isLoading = false

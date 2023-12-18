@@ -26,7 +26,7 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
     return (day: Date) => {
       const formattedDay = day.toISOString().split('T')[0]
       return events.filter((event) => {
-        const eventDate = new Date(event.date)
+        const eventDate = new Date(event.visitDate)
         const eventDateString = eventDate.toISOString().split('T')[0]
         return eventDateString === formattedDay
       })
@@ -48,8 +48,8 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
       {days.map((day) => (
         <div key={day.toISOString()} className={s.day}>
           {filterEventsByDayAndTime(day).map((event) => {
-            const eventStart = event.start_time.split(':')
-            const eventEnd = event.end_time.split(':')
+            const eventStart = event.startTime.split(':')
+            const eventEnd = event.endTime.split(':')
             const eventTopPosition =
               parseInt(eventStart[0]) * 60 + parseInt(eventStart[1]) - 8 * 60
             const eventStartTime =
@@ -65,14 +65,14 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
 
             return (
               <div
-                key={event.id}
+                key={event.sessionId}
                 className={s.event}
                 style={eventStyle}
                 onClick={() => openForm('view')}
               >
-                <p className={s.name}>{event.service_name}</p>
+                <p className={s.name}>{event.serviceName}</p>
                 <p className={s.time}>
-                  {event.start_time} - {event.end_time}
+                  {event.startTime} - {event.endTime}
                 </p>
               </div>
             )

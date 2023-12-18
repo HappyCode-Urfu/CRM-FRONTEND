@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './WeekHeader.module.scss'
-import { Button } from 'components/UI/Button/Button.tsx'
+// import { Button } from 'components/UI/Button/Button.tsx'
 
 interface WeekHeaderProps {
   selectedWeek: Date
@@ -10,8 +10,8 @@ interface WeekHeaderProps {
 
 export const WeekHeader: React.FC<WeekHeaderProps> = ({
   selectedWeek,
-  onPrevWeek,
-  onNextWeek,
+  // onPrevWeek,
+  // onNextWeek,
 }) => {
   const weekdays = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']
 
@@ -49,8 +49,8 @@ export const WeekHeader: React.FC<WeekHeaderProps> = ({
   return (
     <div className={s.header}>
       <div className={s.selectors}>
-        <Button onClick={onPrevWeek}>&lt;</Button>
-        <Button onClick={onNextWeek}>&gt;</Button>
+        {/*<Button onClick={onPrevWeek}>&lt;</Button>*/}
+        {/*<Button onClick={onNextWeek}>&gt;</Button>*/}
       </div>
       <div className={s.days}>{renderWeekDays()}</div>
     </div>

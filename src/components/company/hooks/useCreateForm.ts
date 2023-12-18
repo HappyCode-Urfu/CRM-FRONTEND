@@ -2,8 +2,8 @@ import { useState, ChangeEvent, FormEvent } from 'react'
 import { useTypedDispatch } from 'hooks/redux.ts'
 import { postDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { IDepartment } from 'models/IDepartment.ts'
-import { useNavigate } from 'react-router-dom'
-import { CABINET_ROUTE } from 'utils/constsRoutes.ts'
+// import { useNavigate } from 'react-router-dom'
+// import { CABINET_ROUTE } from 'utils/constsRoutes.ts'
 
 interface IFormData {
   logo: string

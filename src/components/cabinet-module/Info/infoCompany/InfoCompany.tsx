@@ -1,18 +1,20 @@
 import s from './InfoCompany.module.scss'
 import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
-import { COMPANIES_ROUTE } from 'utils/constsRoutes.ts'
+import { CATEGORY_COMPANY, COMPANIES_ROUTE } from 'utils/constsRoutes.ts'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { useEffect } from 'react'
 import { getDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
+import { categorySlice } from 'store/reducers/Category/CategorySlice.ts'
 
 export const InfoCompany = () => {
   const dispatch = useTypedDispatch()
+  const { selectDepartmentId, selectName } = categorySlice.actions
   const { data, isLoading, error } = useTypedSelector((state) => state.departmentReducer)
 
   useEffect(() => {
     dispatch(getDepartment())
-  }, [])
+  }, [dispatch])
 
   return (
     <>
@@ -31,6 +33,14 @@ export const InfoCompany = () => {
                   <div key={res.id}>
                     <p>{index + 1}</p>
                     <p>{res.name}</p>
+                    <NavButton
+                      onClick={() => {
+                        dispatch(selectDepartmentId(res.id))
+                        dispatch(selectName(res.name))
+                      }}
+                      route={CATEGORY_COMPANY}
+                      children={'Список категорий'}
+                    />
                   </div>
                 ))}
               </div>

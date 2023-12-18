@@ -6,7 +6,6 @@ export const Cabinet = () => {
   return (
     <div className={s.container}>
       <div className={s.info}>
-        <h2>Информация</h2>
         <InfoUser />
         <InfoCompany />
       </div>

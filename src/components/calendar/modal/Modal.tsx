@@ -41,7 +41,7 @@ export const Modal: React.FC<IModal> = ({
             </button>
             {formType === Form.Create && (
               <CreateForm
-                setShowModal={setShowModal}
+                // setShowModal={setShowModal}
                 hoveredColumn={hoveredColumn}
                 hoveredTime={hoveredTime}
               />

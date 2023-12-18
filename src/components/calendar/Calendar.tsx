@@ -2,7 +2,7 @@ import { TaskGrid, WeekHeader, TimeColumn, UseCalendar } from './index.ts'
 import s from './Calendar.module.scss'
 import { useEffect } from 'react'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
-import { getAllEvents } from 'store/reducers/Events/ActionCreators.ts'
+import { getAllSessions } from 'store/reducers/Events/ActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
 
 const Calendar = () => {
@@ -10,9 +10,21 @@ const Calendar = () => {
   const { handlePrevWeek, handleNextWeek, dateSelect } = UseCalendar()
   const { events, error, isLoading } = useTypedSelector((state) => state.eventReducer)
 
+  function formatDate(date: Date) {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
   useEffect(() => {
-    dispatch(getAllEvents())
-  }, [dispatch])
+    dispatch(
+      getAllSessions({
+        startDate: formatDate(dateSelect),
+        endDate: formatDate(new Date(dateSelect.getDate() + 7)),
+      })
+    )
+  }, [dispatch, dateSelect])
 
   return (
     <div className={s.calendar}>

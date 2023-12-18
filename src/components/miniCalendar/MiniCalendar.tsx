@@ -64,7 +64,7 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
                 const isSelectedDay = checkDateIsEqual(day.date, state.selectedDay.date)
                 const isAdditionalDay = day.monthIndex !== state.selectedMonth.monthIndex
                 const hasEvent = events.some((event) =>
-                  checkDateIsEqual(day.date, new Date(event.date))
+                  checkDateIsEqual(day.date, new Date(event.visitDate))
                 )
 
                 return (

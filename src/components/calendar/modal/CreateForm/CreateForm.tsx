@@ -3,13 +3,13 @@ import s from './CreateForm.module.scss'
 import React from 'react'
 
 interface IProps {
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  // setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   hoveredTime?: string | null
   hoveredColumn?: string | null
 }
 
 export const CreateForm: React.FC<IProps> = ({
-  setShowModal,
+  // setShowModal,
   hoveredColumn,
   hoveredTime,
 }) => {
@@ -23,11 +23,10 @@ export const CreateForm: React.FC<IProps> = ({
     endTime,
     setEndTime,
     errors,
-    handleSubmit,
-  } = useForms({ setShowModal, hoveredColumn, hoveredTime })
+  } = useForms({ hoveredColumn, hoveredTime })
 
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
+    <form className={s.form}>
       <div className={s.formGroup}>
         <label htmlFor="task">Название задачи</label>
         <div className={s.InputBlock}>

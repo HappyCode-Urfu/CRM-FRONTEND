@@ -36,6 +36,8 @@ const AppRouter = () => {
   const privateKeywords = [
     '/cabinet',
     '/companies',
+    '/category-company',
+    '/service-company',
     '/info-user',
     '/info-login',
     '/calendar',
