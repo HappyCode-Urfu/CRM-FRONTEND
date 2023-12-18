@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import { Token } from 'models/Auth.ts'
 
-const API_URL = '/api/v1'
+const API_URL = 'http://localhost:10000/api/v1'
 
 const $host = axios.create({
   // baseURL: import.meta.env.VITE_API_URL,

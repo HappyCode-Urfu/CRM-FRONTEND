@@ -29,9 +29,8 @@ export const InfoCompany = () => {
                 <p>Cписок филиалов:</p>
               </div>
               <div className={s.companyList}>
-                {data.map((res, index) => (
+                {data.map((res) => (
                   <div key={res.id}>
-                    <p>{index + 1}</p>
                     <p>{res.name}</p>
                     <NavButton
                       onClick={() => {
