@@ -5,6 +5,7 @@ import eventReducer from './reducers/Events/EventSlice.ts'
 import departmentReducer from './reducers/Departaments/DepartmentSlice.ts'
 import accountReducer from './reducers/Account/AccountSlice.ts'
 import categoryReducer from './reducers/Category/CategorySlice.ts'
+import serviceReducer from './reducers/Service/ServiceSlice.ts'
 
 const rootReducer = combineReducers({
   registrationSlice,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   departmentReducer,
   accountReducer,
   categoryReducer,
+  serviceReducer,
 })
 
 export const setupStore = () => {

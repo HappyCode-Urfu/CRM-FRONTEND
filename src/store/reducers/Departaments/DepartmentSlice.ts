@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
   postDepartment,
   getDepartment,
+  delIdDepartment,
+  updateDepartment,
   delImageDepartment,
   addImageDepartment,
 } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
@@ -24,10 +26,7 @@ export const departmentSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getDepartment.fulfilled.type]: (
-      state,
-      action: PayloadAction<IDepartmentsList[]>
-    ) => {
+    [getDepartment.fulfilled.type]: (state, action: PayloadAction<[]>) => {
       state.data = action.payload
       state.isLoading = false
       state.error = ''
@@ -39,7 +38,8 @@ export const departmentSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [postDepartment.fulfilled.type]: (state) => {
+    [postDepartment.fulfilled.type]: (state, action: PayloadAction<IDepartmentsList>) => {
+      state.data.push(action.payload)
       state.isLoading = false
       state.error = ''
     },
@@ -50,6 +50,38 @@ export const departmentSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
+    [updateDepartment.fulfilled.type]: (
+      state,
+      action: PayloadAction<IDepartmentsList>
+    ) => {
+      state.data.find((id) => {
+        if (id.id == action.payload.id) {
+          id.name = action.payload.name
+        }
+      })
+      state.isLoading = false
+      state.error = ''
+    },
+    [updateDepartment.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [updateDepartment.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [delIdDepartment.fulfilled.type]: (state, action: PayloadAction<string>) => {
+      state.data = state.data.filter((id) => id.id !== action.payload)
+      state.isLoading = false
+      state.error = ''
+    },
+    [delIdDepartment.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [delIdDepartment.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    // TODO Доделать добавление картинки
     [addImageDepartment.fulfilled.type]: (state) => {
       state.isLoading = false
       state.error = ''
@@ -61,6 +93,7 @@ export const departmentSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
+    // TODO Доделать удаление картинки
     [delImageDepartment.fulfilled.type]: (state) => {
       state.isLoading = false
       state.error = ''

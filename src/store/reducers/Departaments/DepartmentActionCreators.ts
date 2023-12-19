@@ -31,6 +31,41 @@ export const postDepartment = createAsyncThunk(
   }
 )
 
+interface IProps {
+  departmentId: string
+  data: IDepartment
+}
+
+export const updateDepartment = createAsyncThunk(
+  'department/Update',
+  async ({ departmentId, data }: IProps, thunkAPI) => {
+    try {
+      const response = await $api.put<IDepartment>(`/departments/${departmentId}`, {
+        name: data.name,
+        businessArea: data.businessArea,
+        location: data.location,
+        phoneNumber: data.phoneNumber,
+        workMode: data.workMode,
+      })
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось создать филиал')
+    }
+  }
+)
+
+export const delIdDepartment = createAsyncThunk(
+  'department/Del',
+  async ({ Id }: { Id: string }, thunkAPI) => {
+    try {
+      const response = await $api.delete(`/departments/${Id}`)
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось загрузить событие')
+    }
+  }
+)
+
 export const getDepartment = createAsyncThunk(
   'department/GetAll',
   async (_, thunkAPI) => {
