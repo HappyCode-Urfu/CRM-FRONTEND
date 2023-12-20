@@ -8,16 +8,17 @@ import {
   getAllCategories,
 } from 'store/reducers/Category/CategoryActionCreators.ts'
 import { Input } from 'components/UI/input/Input.tsx'
+import Map from 'components/map/Map.tsx'
+import { useParams } from 'react-router-dom'
 
 export const CategoryCompany = () => {
   const dispatch = useTypedDispatch()
-  const {
-    data,
-    departmentId,
-    isLoading,
-    error,
-    name: departmentName,
-  } = useTypedSelector((state) => state.categoryReducer)
+  const { data, departmentId, isLoading, error } = useTypedSelector(
+    (state) => state.categoryReducer
+  )
+  const { dataId } = useTypedSelector((state) => state.departmentReducer)
+
+  const { id } = useParams()
 
   const [useData, setUseData] = useState({
     isNewCategory: false,
@@ -48,10 +49,9 @@ export const CategoryCompany = () => {
   }
 
   useEffect(() => {
-    dispatch(getAllCategories({ departmentId }))
-  }, [dispatch, departmentId])
+    dispatch(getAllCategories({ departmentId: id }))
+  }, [dispatch, id])
 
-  console.log(departmentId)
   return (
     <>
       <div className={s.container}>
@@ -60,10 +60,24 @@ export const CategoryCompany = () => {
         {!isLoading && !error && (
           <>
             <div className={s.title}>
-              <h2>{departmentName}</h2>
-              {data.length != 0 && (
-                <Button children={'Создать'} onClick={handleAddCategory} />
-              )}
+              <h2>{dataId?.name}</h2>
+            </div>
+            <div className={s.info}>
+              <div className={s.main}>
+                <h2>Информация</h2>
+                <span>Сфера деятельности: {dataId?.businessArea}</span>
+                <span>Номер телефона: {dataId?.phoneNumber}</span>
+                <span>Адрес: {dataId?.location.address}</span>
+                <span>
+                  Режим работы: {dataId?.workMode.startTime} - {dataId?.workMode.endTime}
+                </span>
+              </div>
+              <div className={s.map}>
+                <Map
+                  latitude={dataId?.location.latitude}
+                  longitude={dataId?.location.longitude}
+                />
+              </div>
             </div>
             <div className={s.list}>
               {data.length == 0 && !useData.isNewCategory ? (
@@ -73,6 +87,12 @@ export const CategoryCompany = () => {
                 </>
               ) : (
                 <>
+                  <div className={s.title}>
+                    <h2>Категории:</h2>
+                    {data.length != 0 && (
+                      <Button children={'Создать'} onClick={handleAddCategory} />
+                    )}
+                  </div>
                   {useData.isNewCategory && (
                     <div className={s.element}>
                       <Input

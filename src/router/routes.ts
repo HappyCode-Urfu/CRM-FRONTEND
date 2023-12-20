@@ -43,7 +43,7 @@ export const authRoutes = [
     Component: Companies,
   },
   {
-    path: CATEGORY_COMPANY,
+    path: CATEGORY_COMPANY + '/:id',
     Component: CategoryCompany,
   },
   {

@@ -16,11 +16,11 @@ export const InfoUser = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.title}>Личные данные</div>
       {isLoading && <Loading />}
       {error && <h1>{error}</h1>}
       {!isLoading && !error && (
         <>
+          <div className={s.title}>Личные данные</div>
           <div className={s.block}>
             <div className={s.avatar}>
               <img src={Avatar} alt="avatar" />

@@ -7,10 +7,11 @@ import {
   delImageDepartment,
   addImageDepartment,
 } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
-import { IDepartmentsList } from 'models/IDepartment.ts'
+import { IDepartment, IDepartmentsList } from 'models/IDepartment.ts'
 
 interface DepartmentState {
-  data: IDepartmentsList[]
+  data: IDepartment[]
+  dataId: IDepartment | undefined
   isLoading: boolean
   error: string
 }
@@ -19,12 +20,31 @@ const initialState: DepartmentState = {
   data: [],
   isLoading: false,
   error: '',
+  dataId: {
+    id: '',
+    name: '',
+    businessArea: '',
+    location: {
+      address: '',
+      latitude: 0,
+      longitude: 0,
+    },
+    phoneNumber: '',
+    workMode: {
+      startTime: '',
+      endTime: '',
+    },
+  },
 }
 
 export const departmentSlice = createSlice({
   name: 'department',
   initialState,
-  reducers: {},
+  reducers: {
+    selectId(state, action: PayloadAction<string>) {
+      state.dataId = state.data.find((item) => item.id === action.payload)
+    },
+  },
   extraReducers: {
     [getDepartment.fulfilled.type]: (state, action: PayloadAction<[]>) => {
       state.data = action.payload
@@ -38,7 +58,7 @@ export const departmentSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [postDepartment.fulfilled.type]: (state, action: PayloadAction<IDepartmentsList>) => {
+    [postDepartment.fulfilled.type]: (state, action: PayloadAction<IDepartment>) => {
       state.data.push(action.payload)
       state.isLoading = false
       state.error = ''

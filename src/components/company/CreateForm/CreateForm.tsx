@@ -21,13 +21,15 @@ export const CreateForm = () => {
       <div className={s.bottom}>
         <form onSubmit={handleFormSubmit} className={s.Form}>
           <div className={s.FormStep}>
-            <Input
-              name={'name'}
-              placeholder={'Введите название'}
-              children={'Название филиала'}
-              value={formData.name}
-              onChange={handleInputChange}
-            />
+            <div className={s.formGroup}>
+              <Input
+                name={'name'}
+                placeholder={'Введите название'}
+                children={'Название филиала'}
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+            </div>
             <div className={s.searchAddress}>
               <div className={s.topAddress}>
                 <Input
@@ -57,14 +59,18 @@ export const CreateForm = () => {
                 </div>
               )}
             </div>
-            <Input
-              name={'phone_number'}
-              phone_number={true}
-              value={formData.phone_number}
-              children={'Телефон'}
-              placeholder={'Введите номер телефона'}
-              onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
-            />
+            <div className={s.formGroup}>
+              <Input
+                name={'phone_number'}
+                phone_number={true}
+                value={formData.phone_number}
+                children={'Телефон'}
+                placeholder={'Введите номер телефона'}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone_number: e.target.value })
+                }
+              />
+            </div>
 
             <div className={s.formGroup}>
               <label htmlFor="startTime">Режим работы</label>

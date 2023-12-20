@@ -1,19 +1,19 @@
 @import 'assets/styles/styles';
 
 .container {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   width: 20%;
-  min-height: 100vh;
+  height: 100%;
   background-color: $primaryColor;
   border-right: 1px solid $header;
 
   .cabinet {
     display: flex;
-    position: sticky;
-    top: 0;
     align-items: center;
     justify-content: center;
     width: 100%;

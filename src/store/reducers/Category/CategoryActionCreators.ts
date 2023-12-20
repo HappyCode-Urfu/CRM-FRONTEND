@@ -3,7 +3,7 @@ import { $api } from 'http/index.ts'
 
 export const getAllCategories = createAsyncThunk(
   'categories/getAll',
-  async ({ departmentId }: { departmentId: string }, thunkAPI) => {
+  async ({ departmentId }: { departmentId: string | undefined }, thunkAPI) => {
     try {
       const response = await $api.get(`/categories/${departmentId}`)
       return response.data
