@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { $api } from 'http/index.ts'
+import { toast } from 'react-toastify'
 
 export const getAllCategories = createAsyncThunk(
   'categories/getAll',
@@ -25,6 +26,7 @@ export const createCategory = createAsyncThunk(
       const response = await $api.post(`/categories/${departmentId}`, {
         name,
       })
+      toast('Категория создана')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось загрузить событие')

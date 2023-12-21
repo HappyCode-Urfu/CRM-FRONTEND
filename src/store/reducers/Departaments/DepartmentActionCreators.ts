@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IDepartment } from 'models/IDepartment.ts'
 import { $api } from 'http/index.ts'
 import { jwtDecode, JwtPayload } from 'jwt-decode'
+import { toast } from 'react-toastify'
 
 export const postDepartment = createAsyncThunk(
   'department/Create',
@@ -24,6 +25,7 @@ export const postDepartment = createAsyncThunk(
         phoneNumber,
         workMode,
       })
+      toast('Филиал создан')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось создать филиал')

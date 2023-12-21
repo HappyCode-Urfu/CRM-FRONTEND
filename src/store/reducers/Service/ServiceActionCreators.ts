@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { $api } from 'http/index.ts'
 import { IService } from 'models/IService.ts'
+import { toast } from 'react-toastify'
 
 export const getAllServices = createAsyncThunk(
   'services/GetAll',
@@ -47,6 +48,7 @@ export const createService = createAsyncThunk(
         imageUrl: data.imageUrl,
         downloadLink: data.downloadLink,
       })
+      toast('Услуга создана')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось загрузить событие')

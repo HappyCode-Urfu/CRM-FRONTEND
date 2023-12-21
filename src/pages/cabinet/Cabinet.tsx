@@ -9,10 +9,6 @@ export const Cabinet = () => {
         <InfoUser />
         <InfoCompany />
       </div>
-      {/*<div className={s.settings}>*/}
-      {/*  <h2>Настройки</h2>*/}
-      {/*  <Settings />*/}
-      {/*</div>*/}
     </div>
   )
 }
