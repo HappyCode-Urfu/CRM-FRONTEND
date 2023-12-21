@@ -6,6 +6,7 @@ import {
   updateDepartment,
   delImageDepartment,
   addImageDepartment,
+  getIdDepartment,
 } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { IDepartment, IDepartmentsList } from 'models/IDepartment.ts'
 
@@ -41,7 +42,7 @@ export const departmentSlice = createSlice({
   name: 'department',
   initialState,
   reducers: {
-    selectId(state, action: PayloadAction<string>) {
+    selectId(state, action: PayloadAction<string | undefined>) {
       state.dataId = state.data.find((item) => item.id === action.payload)
     },
   },
@@ -55,6 +56,18 @@ export const departmentSlice = createSlice({
       state.isLoading = true
     },
     [getDepartment.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [getIdDepartment.fulfilled.type]: (state, action: PayloadAction<IDepartment>) => {
+      state.dataId = action.payload
+      state.isLoading = false
+      state.error = ''
+    },
+    [getIdDepartment.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [getIdDepartment.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },

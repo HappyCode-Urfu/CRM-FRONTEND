@@ -8,6 +8,6 @@ export interface IService {
   onlineNameRecord: string
   description: string
   serviceType: string
-  imageUrl: string
-  downloadLink: string
+  imageUrl?: string
+  downloadLink?: string
 }

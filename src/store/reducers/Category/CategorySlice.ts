@@ -10,7 +10,7 @@ interface EventState {
   data: Data[]
   isLoading: boolean
   error: string
-  departmentId: string
+  departmentId: string | undefined
   name: string
 }
 
@@ -31,7 +31,7 @@ export const categorySlice = createSlice({
   name: 'category',
   initialState,
   reducers: {
-    selectDepartmentId(state, action: PayloadAction<string>) {
+    selectDepartmentId(state, action: PayloadAction<string | undefined>) {
       state.departmentId = action.payload
     },
     selectName(state, action: PayloadAction<string>) {

@@ -11,6 +11,7 @@ import {
   WorkSchedule,
   CategoryCompany,
   ServiceCompany,
+  ServiceIdPage,
 } from 'pages'
 import {
   SERVICE_COMPANY,
@@ -28,6 +29,7 @@ import {
   SERVICES_ROUTE,
   WORK_SCHEDULE_ROUTE,
   CATEGORY_COMPANY,
+  SERVICE_COMPANY_ROUTE,
 } from 'utils/constsRoutes.ts'
 import InformationPage from 'pages/auth/InformationPage/InformationPage.tsx'
 import InfoLogin from 'pages/auth/infoLogin/InfoLogin.tsx'
@@ -47,8 +49,12 @@ export const authRoutes = [
     Component: CategoryCompany,
   },
   {
-    path: SERVICE_COMPANY,
+    path: SERVICE_COMPANY + '/:id',
     Component: ServiceCompany,
+  },
+  {
+    path: SERVICE_COMPANY_ROUTE + '/:id',
+    Component: ServiceIdPage,
   },
   {
     path: MAIN_ROUTE,

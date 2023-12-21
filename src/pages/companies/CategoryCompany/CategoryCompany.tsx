@@ -10,6 +10,9 @@ import {
 import { Input } from 'components/UI/input/Input.tsx'
 import Map from 'components/map/Map.tsx'
 import { useParams } from 'react-router-dom'
+import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
+import { SERVICE_COMPANY } from 'utils/constsRoutes.ts'
+import { getIdDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 
 export const CategoryCompany = () => {
   const dispatch = useTypedDispatch()
@@ -49,6 +52,7 @@ export const CategoryCompany = () => {
   }
 
   useEffect(() => {
+    dispatch(getIdDepartment({ Id: id }))
     dispatch(getAllCategories({ departmentId: id }))
   }, [dispatch, id])
 
@@ -109,6 +113,10 @@ export const CategoryCompany = () => {
                   {data.map((res) => (
                     <div className={s.element} key={res.id}>
                       {res.name}
+                      <NavButton
+                        route={SERVICE_COMPANY + '/' + res.id}
+                        children={'Посмотреть'}
+                      />
                     </div>
                   ))}
                 </>

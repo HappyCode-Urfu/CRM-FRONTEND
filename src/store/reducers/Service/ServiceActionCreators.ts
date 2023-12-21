@@ -4,7 +4,7 @@ import { IService } from 'models/IService.ts'
 
 export const getAllServices = createAsyncThunk(
   'services/GetAll',
-  async ({ categoryId }: { categoryId: string }, thunkAPI) => {
+  async ({ categoryId }: { categoryId: string | undefined }, thunkAPI) => {
     try {
       const response = await $api.get(`/services/categories/${categoryId}`)
       return response.data
@@ -16,7 +16,7 @@ export const getAllServices = createAsyncThunk(
 
 export const getIdService = createAsyncThunk(
   'services/GetId',
-  async ({ serviceId }: { serviceId: string }, thunkAPI) => {
+  async ({ serviceId }: { serviceId: string | undefined }, thunkAPI) => {
     try {
       const response = await $api.get(`/services/${serviceId}`)
       return response.data
@@ -27,7 +27,7 @@ export const getIdService = createAsyncThunk(
 )
 
 interface IProps {
-  Id: string
+  Id: string | undefined
   data: IService
 }
 

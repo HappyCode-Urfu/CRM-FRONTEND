@@ -12,4 +12,6 @@ export const SERVICES_ROUTE = '/services'
 export const EMPLOYEES_ROUTE = '/employees'
 export const WORK_SCHEDULE_ROUTE = '/work-schedule'
 export const CATEGORY_COMPANY = '/category-company'
-export const SERVICE_COMPANY = '/service-company'
+export const SERVICE_COMPANY = '/services-company'
+
+export const SERVICE_COMPANY_ROUTE = '/service-company'

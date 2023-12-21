@@ -85,6 +85,18 @@ export const getDepartment = createAsyncThunk(
   }
 )
 
+export const getIdDepartment = createAsyncThunk(
+  'department/GetId',
+  async ({ Id }: { Id: string | undefined }, thunkAPI) => {
+    try {
+      const response = await $api.get(`/departments/info/${Id}`)
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
+    }
+  }
+)
+
 export const addImageDepartment = createAsyncThunk(
   'department/addImage',
   async (

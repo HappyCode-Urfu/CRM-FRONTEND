@@ -1,5 +1,5 @@
 export interface IDepartment {
-  id: string
+  id?: string
   name: string
   businessArea: string
   location: {

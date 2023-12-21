@@ -14,7 +14,7 @@ export const getAllCategories = createAsyncThunk(
 )
 
 interface IProps {
-  departmentId: string
+  departmentId: string | undefined
   name: string
 }
 
