@@ -20,7 +20,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         >
           <input
             id={label}
-            autoComplete="off"
+            autoComplete={'off'}
             ref={inputRef}
             {...props}
             className={classes.input}

@@ -51,7 +51,8 @@ export const categorySlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [createCategory.fulfilled.type]: (state) => {
+    [createCategory.fulfilled.type]: (state, action: PayloadAction<Data>) => {
+      state.data.push(action.payload)
       state.isLoading = false
       state.error = ''
     },

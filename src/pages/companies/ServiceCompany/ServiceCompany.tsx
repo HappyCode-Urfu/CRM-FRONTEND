@@ -36,6 +36,7 @@ export const ServiceCompany = () => {
             <Button children={'Создать'} onClick={() => openForm('create')} />
           </div>
           <div className={s.list}>
+            {data.length == 0 && <h2>Услуги отсутствуют</h2>}
             {data.map((res) => (
               <div className={s.element} key={res.id}>
                 {res.name}

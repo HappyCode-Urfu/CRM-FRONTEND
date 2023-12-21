@@ -7,12 +7,12 @@ import {
   createCategory,
   getAllCategories,
 } from 'store/reducers/Category/CategoryActionCreators.ts'
-import { Input } from 'components/UI/input/Input.tsx'
 import Map from 'components/map/Map.tsx'
 import { useParams } from 'react-router-dom'
 import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
 import { SERVICE_COMPANY } from 'utils/constsRoutes.ts'
 import { getIdDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
+import Input from 'components/inputs/input/Input.tsx'
 
 export const CategoryCompany = () => {
   const dispatch = useTypedDispatch()
@@ -54,7 +54,7 @@ export const CategoryCompany = () => {
   useEffect(() => {
     dispatch(getIdDepartment({ Id: id }))
     dispatch(getAllCategories({ departmentId: id }))
-  }, [dispatch, id])
+  }, [dispatch])
 
   return (
     <>
@@ -100,14 +100,16 @@ export const CategoryCompany = () => {
                   {useData.isNewCategory && (
                     <div className={s.element}>
                       <Input
-                        name={'Введите название'}
+                        label={'Введите название'}
                         value={useData.newCategoryName}
                         onChange={(e) =>
                           setUseData({ ...useData, newCategoryName: e.target.value })
                         }
                       />
-                      <Button onClick={handleSaveCategory}>Сохранить</Button>
-                      <Button onClick={handleCancelAddCategory}>Отменить</Button>
+                      <div>
+                        <Button onClick={handleSaveCategory}>Сохранить</Button>
+                        <Button onClick={handleCancelAddCategory}>Отменить</Button>
+                      </div>
                     </div>
                   )}
                   {data.map((res) => (

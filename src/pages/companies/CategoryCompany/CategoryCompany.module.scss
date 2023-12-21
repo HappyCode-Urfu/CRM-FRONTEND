@@ -79,5 +79,11 @@
     gap: 20px;
     background-color: #3a3e42;
     min-height: 80px;
+
+    div{
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
   }
 }

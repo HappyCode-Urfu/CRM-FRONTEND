@@ -60,11 +60,12 @@
   div {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    padding-left: 15px;
+    padding: 0 15px;
     gap: 8px;
     background-color: $primaryColor;
+    min-height: 80px;
     width: 95%;
     cursor: pointer;
   }
