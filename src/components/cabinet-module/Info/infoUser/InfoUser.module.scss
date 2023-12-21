@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   width: 90%;
-  min-height: 500px;
+  min-height: 200px;
   background-color: #575c63;
   margin-top: 20px;
+  padding: 20px 0;
 
   .title {
     display: flex;
@@ -22,7 +23,7 @@
   justify-content: center;
   flex-direction: row;
   width: 100%;
-  min-height: 500px;
+  min-height: 100px;
 }
 
 .avatar {
@@ -36,8 +37,8 @@
     background-color: white;
     padding: 20px;
     border-radius: 200px;
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
   }
 }
 
@@ -46,7 +47,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  font-size: 25px;
+  font-size: 18px;
   width: 50%;
-  min-height: 200px;
+  gap: 8px;
+  min-height: 100px;
 }

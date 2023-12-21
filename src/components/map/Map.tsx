@@ -1,4 +1,4 @@
-import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps'
+import { YMaps, Map, Placemark, ZoomControl, GeolocationControl } from 'react-yandex-maps'
 
 interface MapsProps {
   latitude: number | undefined
@@ -13,6 +13,7 @@ const Maps = ({ latitude = 0, longitude = 0 }: MapsProps) => {
         width={'100%'}
         height={'500px'}
       >
+        <GeolocationControl options={{ float: 'right' }} />
         <ZoomControl options={{ float: 'left' }} />
         <Placemark geometry={[longitude, latitude]} />
       </Map>

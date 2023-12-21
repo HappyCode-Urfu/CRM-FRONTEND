@@ -51,7 +51,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   width: 95%;
-  height: 200px;
+  min-height: 200px;
+  max-height: 500px;
   overflow: auto;
   gap: 20px;
   padding-top: 8px;
