@@ -53,6 +53,7 @@ export const delIdCategory = createAsyncThunk(
   async ({ departmentId }: { departmentId: string }, thunkAPI) => {
     try {
       const response = await $api.delete(`/categories/${departmentId}`)
+      toast('Категория удалена')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось загрузить событие')

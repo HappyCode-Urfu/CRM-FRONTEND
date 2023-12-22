@@ -67,7 +67,11 @@ export const Login: FC = () => {
         <div className={classes.container}>
           <div className={classes.header_container}>Вход</div>
           {isError && <p className={classes.bad_request}>Неверный логин или пароль</p>}
-          <form onSubmit={handleSubmit(onSubmit)} className={classes.form_container}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className={classes.form_container}
+            autoComplete="off"
+          >
             <Controller
               control={control}
               name="username"

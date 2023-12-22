@@ -11,7 +11,7 @@ export const login = createAsyncThunk<ResponseLogin, TLogin, { rejectValue: stri
       const options = {
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         data: qs.stringify(form),
-        url: 'http://localhost:10001/connect/token',
+        url: `${import.meta.env.VITE_API_IDENTITY_URL}/connect/token`,
         method: 'POST',
       }
 

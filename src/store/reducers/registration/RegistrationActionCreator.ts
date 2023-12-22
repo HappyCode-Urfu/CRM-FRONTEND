@@ -12,7 +12,7 @@ export const registerUser = createAsyncThunk<
   async function (userData: TRegister, { rejectWithValue }) {
     try {
       const response = await axios.post(
-        'http://localhost:10000/api/v1/accounts/register',
+        `${import.meta.env.VITE_API_URL}/accounts/register`,
         userData
       )
       toast('Регистрация прошла успешно')

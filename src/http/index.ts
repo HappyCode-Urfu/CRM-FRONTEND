@@ -10,7 +10,7 @@ const $host = axios.create({
 })
 
 const $api = axios.create({
-  baseURL: API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 })
 
@@ -39,7 +39,7 @@ $api.interceptors.response.use(
         const optionsInterceptor = {
           headers: { 'content-type': 'application/x-www-form-urlencoded' },
           data: qs.stringify(form),
-          url: 'http://localhost:10001/connect/token',
+          url: `${import.meta.env.VITE_API_IDENTITY_URL}/connect/token`,
           method: 'POST',
         }
 

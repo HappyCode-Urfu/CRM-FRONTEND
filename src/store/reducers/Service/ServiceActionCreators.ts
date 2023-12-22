@@ -84,6 +84,7 @@ export const delIdService = createAsyncThunk(
   async ({ Id }: { Id: string | undefined }, thunkAPI) => {
     try {
       const response = await $api.delete(`/services/${Id}`)
+      toast('Услуга удалена')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось загрузить событие')

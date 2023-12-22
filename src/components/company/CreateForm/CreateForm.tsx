@@ -78,6 +78,8 @@ export const CreateForm = () => {
                 <input
                   type="time"
                   id="startTime"
+                  min="08:00"
+                  max="22:00"
                   value={formData.start_time}
                   onChange={(e) =>
                     setFormData({ ...formData, start_time: e.target.value })
@@ -86,7 +88,9 @@ export const CreateForm = () => {
                 -
                 <input
                   type="time"
-                  id="startTime"
+                  id="endTime"
+                  min="08:00"
+                  max="22:00"
                   value={formData.end_time}
                   onChange={(e) => setFormData({ ...formData, end_time: e.target.value })}
                 />

@@ -31,7 +31,7 @@ export const ServiceIdPage = () => {
                 Цена: {dataId?.priceFrom} Руб.{' '}
                 {dataId?.priceTo !== 0 ? `- ${dataId.priceTo} Руб.` : ''}
               </span>
-              <span>Часы работы: {dataId.duration.split('.')[0]} Часа</span>
+              <span>Часы работы: {dataId.duration.split('.')[0]}</span>
               <span>Есть Онлайн запись?: {dataId.isOnlineAvailable ? 'Да' : 'Нет'}</span>
               {dataId.isOnlineAvailable && (
                 <span>Название Онлайн записи: {dataId.onlineNameRecord}</span>
