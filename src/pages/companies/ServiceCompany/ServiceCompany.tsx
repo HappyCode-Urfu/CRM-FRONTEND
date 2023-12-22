@@ -1,7 +1,10 @@
 import s from './ServiceCompany.module.scss'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { useEffect, useState } from 'react'
-import { getAllServices } from 'store/reducers/Service/ServiceActionCreators.ts'
+import {
+  delIdService,
+  getAllServices,
+} from 'store/reducers/Service/ServiceActionCreators.ts'
 import { useParams } from 'react-router-dom'
 import { Loading } from 'components/loading/Loading.tsx'
 import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
@@ -40,10 +43,16 @@ export const ServiceCompany = () => {
             {data.map((res) => (
               <div className={s.element} key={res.id}>
                 {res.name}
-                <NavButton
-                  route={SERVICE_COMPANY_ROUTE + '/' + res.id}
-                  children={'Посмотреть'}
-                />
+                <div className={s.buttons}>
+                  <NavButton
+                    route={SERVICE_COMPANY_ROUTE + '/' + res.id}
+                    children={'Посмотреть'}
+                  />
+                  <Button
+                    children={'Удалить'}
+                    onClick={() => dispatch(delIdService({ Id: res.id }))}
+                  />
+                </div>
               </div>
             ))}
           </div>

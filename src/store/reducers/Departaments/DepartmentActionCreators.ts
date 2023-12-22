@@ -58,7 +58,7 @@ export const updateDepartment = createAsyncThunk(
 
 export const delIdDepartment = createAsyncThunk(
   'department/Del',
-  async ({ Id }: { Id: string }, thunkAPI) => {
+  async ({ Id }: { Id: string | undefined }, thunkAPI) => {
     try {
       const response = await $api.delete(`/departments/${Id}`)
       return response.data

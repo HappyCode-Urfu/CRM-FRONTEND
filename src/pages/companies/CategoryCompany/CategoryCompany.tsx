@@ -5,6 +5,7 @@ import { Loading } from 'components/loading/Loading.tsx'
 import { useEffect, useState } from 'react'
 import {
   createCategory,
+  delIdCategory,
   getAllCategories,
 } from 'store/reducers/Category/CategoryActionCreators.ts'
 import Map from 'components/map/Map.tsx'
@@ -115,10 +116,18 @@ export const CategoryCompany = () => {
                   {data.map((res) => (
                     <div className={s.element} key={res.id}>
                       {res.name}
-                      <NavButton
-                        route={SERVICE_COMPANY + '/' + res.id}
-                        children={'Посмотреть'}
-                      />
+                      <div className={s.buttons}>
+                        <NavButton
+                          route={SERVICE_COMPANY + '/' + res.id}
+                          children={'Посмотреть'}
+                        />
+                        <Button
+                          children={'Удалить'}
+                          onClick={() =>
+                            dispatch(delIdCategory({ departmentId: res.id }))
+                          }
+                        />
+                      </div>
                     </div>
                   ))}
                 </>

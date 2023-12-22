@@ -3,10 +3,14 @@ import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
 import { CATEGORY_COMPANY, COMPANIES_ROUTE } from 'utils/constsRoutes.ts'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { useEffect } from 'react'
-import { getDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
+import {
+  delIdDepartment,
+  getDepartment,
+} from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
 import { departmentSlice } from 'store/reducers/Departaments/DepartmentSlice.ts'
 import { categorySlice } from 'store/reducers/Category/CategorySlice.ts'
+import { Button } from 'components/UI/Button/Button.tsx'
 
 export const InfoCompany = () => {
   const dispatch = useTypedDispatch()
@@ -34,14 +38,20 @@ export const InfoCompany = () => {
                 {data.map((res) => (
                   <div key={res.id}>
                     <p>{res.name}</p>
-                    <NavButton
-                      onClick={() => {
-                        dispatch(selectId(res.id))
-                        dispatch(selectDepartmentId(res.id))
-                      }}
-                      route={CATEGORY_COMPANY + '/' + res.id}
-                      children={'Посмотреть'}
-                    />
+                    <div className={s.buttons}>
+                      <NavButton
+                        onClick={() => {
+                          dispatch(selectId(res.id))
+                          dispatch(selectDepartmentId(res.id))
+                        }}
+                        route={CATEGORY_COMPANY + '/' + res.id}
+                        children={'Посмотреть'}
+                      />
+                      <Button
+                        children={'Удалить'}
+                        onClick={() => dispatch(delIdDepartment({ Id: res.id }))}
+                      />
+                    </div>
                   </div>
                 ))}
               </div>

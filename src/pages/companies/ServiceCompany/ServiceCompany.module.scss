@@ -44,4 +44,13 @@
     background-color: $primaryColor;
     min-height: 80px;
   }
+
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 20%;
+  }
 }

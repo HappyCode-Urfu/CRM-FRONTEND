@@ -74,7 +74,8 @@ export const categorySlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [delIdCategory.fulfilled.type]: (state) => {
+    [delIdCategory.fulfilled.type]: (state, action: PayloadAction<string>) => {
+      state.data = state.data.filter((id) => id.id !== action.payload)
       state.isLoading = false
       state.error = ''
     },
