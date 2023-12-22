@@ -48,10 +48,6 @@ export const WeekHeader: React.FC<WeekHeaderProps> = ({
 
   return (
     <div className={s.header}>
-      <div className={s.selectors}>
-        {/*<Button onClick={onPrevWeek}>&lt;</Button>*/}
-        {/*<Button onClick={onNextWeek}>&gt;</Button>*/}
-      </div>
       <div className={s.days}>{renderWeekDays()}</div>
     </div>
   )

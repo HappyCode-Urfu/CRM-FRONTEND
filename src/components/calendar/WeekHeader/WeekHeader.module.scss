@@ -24,7 +24,7 @@
   .days {
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 80%;
   }
 
   .day {
@@ -34,7 +34,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 190px;
+    width: 15%;
 
     .dayActiveBorder {
       display: flex;

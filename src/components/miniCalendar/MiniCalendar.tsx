@@ -30,12 +30,20 @@ export const MiniCalendar: React.FC<CalendarProps> = ({
     <div className={s.calendar}>
       <div className={s.header}>
         {state.mode === 'days' && (
-          <div aria-hidden onClick={() => functions.setMode('months')}>
+          <div
+            style={{ cursor: 'pointer' }}
+            aria-hidden
+            onClick={() => functions.setMode('months')}
+          >
             {state.monthsNames[state.selectedMonth.monthIndex].month} {state.selectedYear}
           </div>
         )}
         {state.mode === 'months' && (
-          <div aria-hidden onClick={() => functions.setMode('years')}>
+          <div
+            style={{ cursor: 'pointer' }}
+            aria-hidden
+            onClick={() => functions.setMode('years')}
+          >
             {state.selectedYear}
           </div>
         )}
