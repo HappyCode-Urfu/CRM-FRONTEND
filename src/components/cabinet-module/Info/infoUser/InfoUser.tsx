@@ -27,12 +27,12 @@ export const InfoUser = () => {
             </div>
             <div className={s.infoUser}>
               <p>
-                ФИО: {data.surname ? data.surname : ''} {data.name}
+                ФИО: {data.surname ? data.surname : ''} {data.name}{' '}
                 {data.patronymic ? data.patronymic : ''}
               </p>
               <p>Почта: {data.email}</p>
               <p>Город: {data.city !== null ? data.city : 'Отсутствует'}</p>
-              <p>Почта подтверждена: {data.emailConfirmed === true ? 'Да' : 'Нет'}</p>
+              {data.emailConfirmed === true ? '' : <p>Почта подтверждена: Нет</p>}
               <Button children={'Редактировать данные'} />
             </div>
           </div>
