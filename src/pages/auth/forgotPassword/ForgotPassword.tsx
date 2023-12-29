@@ -5,7 +5,7 @@ import classes from './ForgotPassword.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { INFORMATION_USER } from 'utils/constsRoutes.ts'
 
-export const ForgotPassword: FC = () => {
+const ForgotPassword: FC = () => {
   const navigate = useNavigate()
   return (
     <div className={classes.forgot_password_container}>
@@ -15,3 +15,5 @@ export const ForgotPassword: FC = () => {
     </div>
   )
 }
+
+export default ForgotPassword

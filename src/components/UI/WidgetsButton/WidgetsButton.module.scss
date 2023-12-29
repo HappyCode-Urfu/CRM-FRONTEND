@@ -52,6 +52,7 @@
       padding: 10px;
       text-decoration: none;
       color: black;
+      border-radius: 0 0 8px 8px;
 
       &:hover {
         background-color: #fafafa;
@@ -61,7 +62,7 @@
 
   &.open {
     .dropdownMenu {
-      min-height: 100px;
+      min-height: 50px;
       visibility: visible;
       animation: fadeIn 0.3s ease-in-out forwards;
     }

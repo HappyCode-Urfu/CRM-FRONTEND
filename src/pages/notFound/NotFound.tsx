@@ -1,7 +1,8 @@
 import s from './NotFound.module.scss'
 import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
 import { CABINET_ROUTE, LOGIN } from 'utils/constsRoutes.ts'
-const NotFound = () => {
+import { memo } from 'react'
+const NotFound = memo(() => {
   return (
     <div className={s.container}>
       <h2>404</h2>
@@ -20,6 +21,6 @@ const NotFound = () => {
       />
     </div>
   )
-}
+})
 
 export default NotFound

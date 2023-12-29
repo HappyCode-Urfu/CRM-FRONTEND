@@ -2,7 +2,7 @@ import s from './CategoryCompany.module.scss'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { Loading } from 'components/loading/Loading.tsx'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import {
   createCategory,
   delIdCategory,
@@ -15,7 +15,7 @@ import { SERVICE_COMPANY } from 'utils/constsRoutes.ts'
 import { getIdDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { Input } from 'components/UI/input/Input.tsx'
 
-export const CategoryCompany = () => {
+const CategoryCompany = memo(() => {
   const dispatch = useTypedDispatch()
   const { data, departmentId, isLoading, error } = useTypedSelector(
     (state) => state.categoryReducer
@@ -76,6 +76,7 @@ export const CategoryCompany = () => {
                 <span>
                   Режим работы: {dataId?.workMode.startTime} - {dataId?.workMode.endTime}
                 </span>
+                <Button>Редактировать данные</Button>
               </div>
               <div className={s.map}>
                 <Map
@@ -138,4 +139,6 @@ export const CategoryCompany = () => {
       </div>
     </>
   )
-}
+})
+
+export default CategoryCompany

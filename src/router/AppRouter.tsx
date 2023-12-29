@@ -1,20 +1,26 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
+import { Suspense } from 'react'
 import { authRoutes, publicRoutes } from 'router/routes.ts'
 import { Navbar } from 'layouts/Navbar/Navbar.tsx'
 import classes from './AppRouter.module.scss'
-// import { Button } from 'components/UI/Button/Button.tsx'
+import { Loading } from 'components/loading/Loading.tsx'
 
 const AuthRoutes = () => (
   <div className={classes.container}>
     <Navbar />
     <div className={classes.content}>
-      {/*<div className={classes.top}>*/}
-      {/*  <Button>Выйти из профиля</Button>*/}
-      {/*</div>*/}
       <div className={classes.bottom}>
         <Routes>
           {authRoutes.map(({ path, Component }) => (
-            <Route key={path} path={path} element={<Component />} />
+            <Route
+              key={path}
+              path={path}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Component />
+                </Suspense>
+              }
+            />
           ))}
         </Routes>
       </div>
@@ -25,7 +31,15 @@ const AuthRoutes = () => (
 const PublicRoutes = () => (
   <Routes>
     {publicRoutes.map(({ path, Component }) => (
-      <Route key={path} path={path} element={<Component />} />
+      <Route
+        key={path}
+        path={path}
+        element={
+          <Suspense fallback={<Loading />}>
+            <Component />
+          </Suspense>
+        }
+      />
     ))}
   </Routes>
 )

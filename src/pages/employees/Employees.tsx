@@ -3,7 +3,7 @@ import { Input } from 'components/UI/input/Input.tsx'
 import { Button } from 'components/UI/Button/Button.tsx'
 // import { Select } from 'components/UI/Select/Select.tsx'
 
-export const Employees = () => {
+const Employees = () => {
   // const list = [
   //   { value: 'Финансы и инвестиции', label: 'Финансы и инвестиции' },
   //   {
@@ -74,3 +74,5 @@ export const Employees = () => {
     </div>
   )
 }
+
+export default Employees

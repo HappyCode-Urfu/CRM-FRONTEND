@@ -1,10 +1,13 @@
 import s from './Companies.module.scss'
 import { CreateForm } from 'components/company/CreateForm/CreateForm.tsx'
+import { memo } from 'react'
 
-export const Companies = () => {
+const Companies = memo(() => {
   return (
     <div className={s.container}>
       <CreateForm />
     </div>
   )
-}
+})
+
+export default Companies

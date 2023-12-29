@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { getIdService } from 'store/reducers/Service/ServiceActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
+import { Button } from 'components/UI/Button/Button.tsx'
 
-export const ServiceIdPage = () => {
+const ServiceIdPage = () => {
   const dispatch = useTypedDispatch()
   const { dataId, isLoading, error } = useTypedSelector((state) => state.serviceReducer)
   const { id } = useParams()
@@ -39,6 +40,7 @@ export const ServiceIdPage = () => {
               <span>
                 Формат: {dataId.serviceType === 'group' ? 'Групповой' : 'Индивидуальный'}
               </span>
+              <Button>Редактировать данные</Button>
             </div>
           </div>
         </>
@@ -46,3 +48,5 @@ export const ServiceIdPage = () => {
     </div>
   )
 }
+
+export default ServiceIdPage

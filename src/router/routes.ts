@@ -1,19 +1,4 @@
 import {
-  Cabinet,
-  ConfirmPassword,
-  ForgotPassword,
-  Login,
-  Main,
-  Registration,
-  Companies,
-  Employees,
-  Services,
-  WorkSchedule,
-  CategoryCompany,
-  ServiceCompany,
-  ServiceIdPage,
-} from 'pages'
-import {
   SERVICE_COMPANY,
   COMPANIES_ROUTE,
   CABINET_ROUTE,
@@ -31,9 +16,34 @@ import {
   CATEGORY_COMPANY,
   SERVICE_COMPANY_ROUTE,
 } from 'utils/constsRoutes.ts'
-import InformationPage from 'pages/auth/InformationPage/InformationPage.tsx'
-import InfoLogin from 'pages/auth/infoLogin/InfoLogin.tsx'
-import NotFound from 'pages/notFound/NotFound.tsx'
+import { lazy } from 'react'
+
+const InformationPage = lazy(
+  () => import('pages/auth/InformationPage/InformationPage.tsx')
+)
+const InfoLogin = lazy(() => import('pages/auth/infoLogin/InfoLogin.tsx'))
+const NotFound = lazy(() => import('pages/notFound/NotFound.tsx'))
+const Login = lazy(() => import('pages/auth/login/Login.tsx'))
+const Cabinet = lazy(() => import('pages/cabinet/Cabinet.tsx'))
+const Companies = lazy(() => import('pages/companies/Companies.tsx'))
+const CategoryCompany = lazy(
+  () => import('pages/companies/CategoryCompany/CategoryCompany.tsx')
+)
+const ServiceCompany = lazy(
+  () => import('pages/companies/ServiceCompany/ServiceCompany.tsx')
+)
+const ServiceIdPage = lazy(
+  () => import('pages/companies/ServiceCompany/ServiceIdPage/ServiceIdPage.tsx')
+)
+const Main = lazy(() => import('pages/main/Main.tsx'))
+const Employees = lazy(() => import('pages/employees/Employees.tsx'))
+const Services = lazy(() => import('pages/services/Services.tsx'))
+const WorkSchedule = lazy(() => import('pages/workSchedule/WorkSchedule.tsx'))
+const Registration = lazy(() => import('pages/registration/Registration.tsx'))
+const ForgotPassword = lazy(() => import('pages/auth/forgotPassword/ForgotPassword.tsx'))
+const ConfirmPassword = lazy(
+  () => import('pages/auth/confirmPassword/ConfirmPassword.tsx')
+)
 
 export const authRoutes = [
   {

@@ -14,8 +14,7 @@ import { Button } from 'components/button/Button.tsx'
 import { Controller, useForm } from 'react-hook-form'
 import Input from 'components/inputs/input/Input.tsx'
 import PasswordInput from 'components/inputs/passwordInput/PasswordInput.tsx'
-
-export const Login: FC = () => {
+const Login: FC = () => {
   const navigate = useNavigate()
 
   const dispatch = useTypedDispatch()
@@ -142,3 +141,5 @@ export const Login: FC = () => {
     </>
   )
 }
+
+export default Login

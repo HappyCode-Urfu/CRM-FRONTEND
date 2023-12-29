@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, memo, useMemo, useState } from 'react'
 import s from './TaskGrid.module.scss'
 import { hours, minutes } from 'utils/constsTimes.ts'
 import { IEvents } from 'models/IEvents.ts'
@@ -9,7 +9,7 @@ interface TaskGridProps {
   events: IEvents[]
 }
 
-export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
+export const TaskGrid: FC<TaskGridProps> = memo(({ selectedWeek, events }) => {
   const [lastHoveredTime, setLastHoveredTime] = useState<string | null>(null)
   const [hoveredTime, setHoveredTime] = useState<string | number | null>(null)
   const [hoveredColumn, setHoveredColumn] = useState<Date | null>(null)
@@ -117,4 +117,4 @@ export const TaskGrid: FC<TaskGridProps> = ({ selectedWeek, events }) => {
       />
     </div>
   )
-}
+})

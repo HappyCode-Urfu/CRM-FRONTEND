@@ -3,10 +3,10 @@ import Avatar from 'assets/icon/avatar.svg'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { Loading } from 'components/loading/Loading.tsx'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { getInfoUser } from 'store/reducers/Account/AccountActionCreator.ts'
 
-export const InfoUser = () => {
+export const InfoUser = memo(() => {
   const dispatch = useTypedDispatch()
   const { data, error, isLoading } = useTypedSelector((state) => state.accountReducer)
 
@@ -40,4 +40,4 @@ export const InfoUser = () => {
       )}
     </div>
   )
-}
+})

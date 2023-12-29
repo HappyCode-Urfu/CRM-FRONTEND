@@ -2,7 +2,7 @@ import { useState } from 'react'
 import s from './WorkSchedule.module.scss'
 import { Button } from 'components/UI/Button/Button.tsx'
 
-export const WorkSchedule = () => {
+const WorkSchedule = () => {
   const weekdays = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС']
   const employees = [
     'Сотрудник 1',
@@ -107,3 +107,5 @@ export const WorkSchedule = () => {
     </div>
   )
 }
+
+export default WorkSchedule

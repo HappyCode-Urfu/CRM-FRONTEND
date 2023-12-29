@@ -2,7 +2,7 @@ import s from './InfoCompany.module.scss'
 import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
 import { CATEGORY_COMPANY, COMPANIES_ROUTE } from 'utils/constsRoutes.ts'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import {
   delIdDepartment,
   getDepartment,
@@ -12,7 +12,7 @@ import { departmentSlice } from 'store/reducers/Departaments/DepartmentSlice.ts'
 import { categorySlice } from 'store/reducers/Category/CategorySlice.ts'
 import { Button } from 'components/UI/Button/Button.tsx'
 
-export const InfoCompany = () => {
+export const InfoCompany = memo(() => {
   const dispatch = useTypedDispatch()
   const { selectId } = departmentSlice.actions
   const { selectDepartmentId } = categorySlice.actions
@@ -64,4 +64,4 @@ export const InfoCompany = () => {
       )}
     </>
   )
-}
+})

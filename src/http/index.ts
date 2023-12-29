@@ -28,7 +28,6 @@ $api.interceptors.response.use(
     if (error.response.status == 401 && error.config && !error.config._isRetry) {
       originalRequest._isRetry = true
       try {
-        console.log('вызван интерцептор 401')
         const form = {
           client_id: 'frontend',
           client_secret: 'secret',
@@ -43,15 +42,18 @@ $api.interceptors.response.use(
           method: 'POST',
         }
 
-        console.log(optionsInterceptor)
         const { data, status } = await axios<Token>(optionsInterceptor)
         const { access_token, refresh_token } = data
 
         localStorage.setItem('access_token', access_token)
         localStorage.setItem('refresh_token', refresh_token)
 
-        console.log(data)
-        return { data, status }
+        //return  $api.request(originalRequest)
+
+        return {
+          data,
+          status,
+        }
       } catch (e) {
         console.log('НЕ АВТОРИЗОВАН')
       }

@@ -12,7 +12,7 @@ import { SERVICE_COMPANY_ROUTE } from 'utils/constsRoutes.ts'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { ServiceForm } from 'components/company/ServiceForm/ServiceForm.tsx'
 
-export const ServiceCompany = () => {
+const ServiceCompany = () => {
   const dispatch = useTypedDispatch()
   const { data, isLoading, error } = useTypedSelector((state) => state.serviceReducer)
   const { id } = useParams()
@@ -68,3 +68,5 @@ export const ServiceCompany = () => {
     </div>
   )
 }
+
+export default ServiceCompany

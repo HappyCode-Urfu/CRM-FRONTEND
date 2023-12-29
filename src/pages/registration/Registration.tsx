@@ -13,7 +13,7 @@ import { registerUser } from 'store/reducers/registration/RegistrationActionCrea
 import { login } from 'store/reducers/auth/AuthActionCreator.ts'
 import PasswordInput from 'components/inputs/passwordInput/PasswordInput.tsx'
 
-export const Registration: FC = () => {
+const Registration: FC = () => {
   const navigate = useNavigate()
   const dispatch = useTypedDispatch()
   const isError = useTypedSelector((state) => state.registrationSlice.isError)
@@ -168,3 +168,5 @@ export const Registration: FC = () => {
     </>
   )
 }
+
+export default Registration

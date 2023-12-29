@@ -2,7 +2,7 @@ import s from './Services.module.scss'
 import { Input } from 'components/UI/input/Input.tsx'
 import { Button } from 'components/UI/Button/Button.tsx'
 
-export const Services = () => {
+const Services = () => {
   return (
     <div className={s.container}>
       <div className={s.top}>
@@ -28,3 +28,5 @@ export const Services = () => {
     </div>
   )
 }
+
+export default Services
