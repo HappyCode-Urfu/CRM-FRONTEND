@@ -1,9 +1,9 @@
-@import 'assets/styles/styles';
+@import '../../assets/styles/styles';
 
 .input_container {
   position: relative;
   display: flex;
-  background: #3a3e42b2;
+  background: $backgroundInput;
   border-radius: 5px;
   padding: 20px 15px 9px;
   margin-bottom: 15px;
@@ -11,7 +11,7 @@
   cursor: text;
 
   &:hover {
-    background-color: #3a3e42;
+    background-color: $inputHover;
   }
 
   .input_label {
@@ -50,7 +50,7 @@
   }
 
   &.input_error {
-    background: $backgroundInput;
+    background: $backgroundInputError;
   }
 }
 
@@ -60,4 +60,22 @@
   line-height: 14px;
   color: $errorColor;
   padding-left: 10px;
+}
+
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: transparent;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+
+.show_or_hide_password {
+  cursor: pointer;
+  position: relative;
+  top: 6px;
 }

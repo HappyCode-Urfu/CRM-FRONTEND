@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, forwardRef, RefObject } from 'react'
-import classes from './Input.module.scss'
+import classes from '../Inputs.module.scss'
 
 interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'placeholder'> {
   label: string
@@ -18,13 +18,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           className={`${classes.input_container} ${isError ? classes.input_error : ''}`}
           onClick={() => inputRef.current?.focus()}
         >
-          <input
-            id={label}
-            autoComplete={'off'}
-            ref={inputRef}
-            {...props}
-            className={classes.input}
-          />{' '}
+          <input id={label} ref={inputRef} {...props} className={classes.input} />{' '}
           <label htmlFor={label} className={classes.input_label}>
             {label}
           </label>
