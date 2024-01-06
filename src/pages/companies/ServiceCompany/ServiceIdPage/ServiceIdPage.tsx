@@ -1,15 +1,22 @@
 import s from './ServiceIdPage.module.scss'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getIdService } from 'store/reducers/Service/ServiceActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
 import { Button } from 'components/UI/Button/Button.tsx'
+import { ServiceForm } from 'components/company/ServiceForm/ServiceForm.tsx'
 
 const ServiceIdPage = () => {
   const dispatch = useTypedDispatch()
   const { dataId, isLoading, error } = useTypedSelector((state) => state.serviceReducer)
   const { id } = useParams()
+  const [formType, setFormType] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const openForm = (type: string) => {
+    setFormType(type)
+    setShowModal(true)
+  }
 
   useEffect(() => {
     dispatch(getIdService({ serviceId: id }))
@@ -40,9 +47,17 @@ const ServiceIdPage = () => {
               <span>
                 Формат: {dataId.serviceType === 'group' ? 'Групповой' : 'Индивидуальный'}
               </span>
-              <Button>Редактировать данные</Button>
+              <Button children={'Ред.'} onClick={() => openForm('edit')} />
             </div>
           </div>
+          <ServiceForm
+            id={id}
+            dataId={dataId}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            formType={formType}
+            setFormType={setFormType}
+          />
         </>
       )}
     </div>

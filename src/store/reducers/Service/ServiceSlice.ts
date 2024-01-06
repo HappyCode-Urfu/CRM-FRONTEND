@@ -78,11 +78,16 @@ export const serviceSlice = createSlice({
       state.error = action.payload
     },
     [updateService.fulfilled.type]: (state, action: PayloadAction<IService>) => {
-      state.data.find((id) => {
-        if (id.id == action.payload.id) {
-          id.name = action.payload.name
-        }
-      })
+      state.dataId.name = action.payload.name
+      state.dataId.priceFrom = action.payload.priceFrom
+      state.dataId.priceTo = action.payload.priceTo
+      state.dataId.duration = action.payload.duration
+      state.dataId.isOnlineAvailable = action.payload.isOnlineAvailable
+      state.dataId.onlineNameRecord = action.payload.onlineNameRecord
+      state.dataId.description = action.payload.description
+      state.dataId.serviceType = action.payload.serviceType
+      state.dataId.imageUrl = action.payload.imageUrl
+      state.dataId.downloadLink = action.payload.downloadLink
       state.isLoading = false
       state.error = ''
     },

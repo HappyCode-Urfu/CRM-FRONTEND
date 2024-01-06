@@ -11,7 +11,7 @@ import {
 import Map from 'components/map/Map.tsx'
 import { useParams } from 'react-router-dom'
 import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
-import { SERVICE_COMPANY } from 'utils/constsRoutes.ts'
+import { COMPANIES_ROUTE, SERVICE_COMPANY } from 'utils/constsRoutes.ts'
 import { getIdDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { Input } from 'components/UI/input/Input.tsx'
 
@@ -76,7 +76,10 @@ const CategoryCompany = memo(() => {
                 <span>
                   Режим работы: {dataId?.workMode.startTime} - {dataId?.workMode.endTime}
                 </span>
-                <Button>Редактировать данные</Button>
+                <NavButton
+                  route={COMPANIES_ROUTE + '/' + id}
+                  children={'Редактировать'}
+                />
               </div>
               <div className={s.map}>
                 <Map

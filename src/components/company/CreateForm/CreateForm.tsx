@@ -3,13 +3,25 @@ import { UseCreateForm } from 'components/company/hooks/useCreateForm.ts'
 import { Input } from 'components/UI/input/Input.tsx'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { Select } from 'components/UI/Select/Select.tsx'
+import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { getIdDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
+import { useTypedDispatch } from 'hooks/redux.ts'
 
 export const CreateForm = () => {
+  const { id } = useParams()
+  const dispatch = useTypedDispatch()
+
+  useEffect(() => {
+    dispatch(getIdDepartment({ Id: id }))
+  }, [id, dispatch])
+
   const {
     handleFormSubmit,
     handleInputChange,
     handleSelectChange,
     handleAddressChange,
+    handleEditFormSubmit,
     SearchAddress,
     formData,
     setFormData,
@@ -19,7 +31,10 @@ export const CreateForm = () => {
   return (
     <div className={s.container}>
       <div className={s.bottom}>
-        <form onSubmit={handleFormSubmit} className={s.Form}>
+        <form
+          onSubmit={id !== undefined ? handleEditFormSubmit : handleFormSubmit}
+          className={s.Form}
+        >
           <div className={s.FormStep}>
             <div className={s.formGroup}>
               <Input
@@ -103,11 +118,8 @@ export const CreateForm = () => {
               onChange={handleSelectChange}
             />
             <div className={s.buttonContainer}>
-              <Button
-                onClick={() => handleFormSubmit}
-                type={'submit'}
-                children={'Отправить'}
-              />
+              {id !== undefined && <Button type={'submit'} children={'Обновить'} />}
+              {id === undefined && <Button type={'submit'} children={'Отправить'} />}
             </div>
           </div>
         </form>

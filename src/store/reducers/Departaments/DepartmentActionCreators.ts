@@ -34,7 +34,7 @@ export const postDepartment = createAsyncThunk(
 )
 
 interface IProps {
-  departmentId: string
+  departmentId: string | undefined
   data: IDepartment
 }
 
@@ -49,6 +49,7 @@ export const updateDepartment = createAsyncThunk(
         phoneNumber: data.phoneNumber,
         workMode: data.workMode,
       })
+      toast('Филиал обновлён')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось создать филиал')

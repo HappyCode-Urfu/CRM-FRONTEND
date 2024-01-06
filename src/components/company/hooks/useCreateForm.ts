@@ -1,9 +1,10 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { useTypedDispatch } from 'hooks/redux.ts'
-import { postDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
+import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
+import {
+  postDepartment,
+  updateDepartment,
+} from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { IDepartment } from 'models/IDepartment.ts'
-// import { useNavigate } from 'react-router-dom'
-// import { CABINET_ROUTE } from 'utils/constsRoutes.ts'
 
 interface IFormData {
   logo: string
@@ -27,9 +28,10 @@ interface IFormData {
 
 export const UseCreateForm = () => {
   const dispatch = useTypedDispatch()
+  const { dataId } = useTypedSelector((state) => state.departmentReducer)
   const [formData, setFormData] = useState<IFormData>({
     logo: '',
-    name: '',
+    name: dataId?.name ? dataId?.name : '',
     businessList: [
       { value: 'Финансы и инвестиции', label: 'Финансы и инвестиции' },
       {
@@ -57,13 +59,13 @@ export const UseCreateForm = () => {
         label: 'Консалтинг и бизнес-услуги',
       },
     ],
-    businessName: '',
-    address: '',
+    businessName: dataId?.businessArea ? dataId?.businessArea : '',
+    address: dataId?.location?.address ? dataId?.location?.address : '',
     latitude: 0,
     longitude: 0,
-    phone_number: '',
-    start_time: '',
-    end_time: '',
+    phone_number: dataId?.phoneNumber ? dataId?.phoneNumber : '',
+    start_time: dataId?.workMode?.startTime ? dataId?.workMode?.startTime : '',
+    end_time: dataId?.workMode?.endTime ? dataId?.workMode?.endTime : '',
     availableAddresses: [],
   })
 
@@ -160,12 +162,32 @@ export const UseCreateForm = () => {
     dispatch(postDepartment(data)).then(() => clearData)
   }
 
+  const handleEditFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data: IDepartment = {
+      name: formData.name,
+      businessArea: formData.businessName,
+      phoneNumber: formData.phone_number,
+      workMode: {
+        startTime: formData.start_time,
+        endTime: formData.end_time,
+      },
+      location: {
+        address: formData.address,
+        latitude: formData.latitude,
+        longitude: formData.longitude,
+      },
+    }
+    dispatch(updateDepartment({ departmentId: dataId?.id, data })).then(() => clearData)
+  }
+
   return {
     formData,
     setFormData,
     handleInputChange,
     handleSelectChange,
     handleFormSubmit,
+    handleEditFormSubmit,
     handleAddressChange,
     SearchAddress,
     selectAddress,

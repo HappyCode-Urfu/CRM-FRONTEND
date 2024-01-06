@@ -8,7 +8,7 @@ import {
   addImageDepartment,
   getIdDepartment,
 } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
-import { IDepartment, IDepartmentsList } from 'models/IDepartment.ts'
+import { IDepartment } from 'models/IDepartment.ts'
 
 interface DepartmentState {
   data: IDepartment[]
@@ -83,10 +83,7 @@ export const departmentSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [updateDepartment.fulfilled.type]: (
-      state,
-      action: PayloadAction<IDepartmentsList>
-    ) => {
+    [updateDepartment.fulfilled.type]: (state, action: PayloadAction<IDepartment>) => {
       state.data.find((id) => {
         if (id.id == action.payload.id) {
           id.name = action.payload.name

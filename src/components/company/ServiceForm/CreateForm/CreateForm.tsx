@@ -3,23 +3,28 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { Select } from 'components/UI/Select/Select.tsx'
 import { useTypedDispatch } from 'hooks/redux.ts'
 import { IService } from 'models/IService.ts'
-import { createService } from 'store/reducers/Service/ServiceActionCreators.ts'
+import {
+  createService,
+  updateService,
+} from 'store/reducers/Service/ServiceActionCreators.ts'
 
 interface IProps {
   id: string | undefined
+  dataId?: IService
+  type: string
 }
 
-export const ServiceCreateForm = ({ id }: IProps) => {
+export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
   const dispatch = useTypedDispatch()
   const [serviceData, setServiceData] = useState({
-    name: '',
-    priceFrom: 0,
-    priceTo: 0,
-    duration: '',
-    isOnlineAvailable: false,
-    onlineNameRecord: '',
-    description: '',
-    serviceType: '0',
+    name: dataId?.name ? dataId?.name : '',
+    priceFrom: dataId?.priceFrom ? dataId?.priceFrom : 0,
+    priceTo: dataId?.priceTo ? dataId?.priceTo : 0,
+    duration: dataId?.duration ? dataId?.duration.split('.')[0] : '',
+    isOnlineAvailable: dataId?.isOnlineAvailable ? dataId?.isOnlineAvailable : false,
+    onlineNameRecord: dataId?.onlineNameRecord ? dataId?.onlineNameRecord : '',
+    description: dataId?.description ? dataId?.description : '',
+    serviceType: dataId?.serviceType ? dataId?.serviceType : '0',
     list: [
       {
         value: '0',
@@ -51,8 +56,26 @@ export const ServiceCreateForm = ({ id }: IProps) => {
     dispatch(createService({ Id: id, data }))
   }
 
+  const handleEditFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data: IService = {
+      name: serviceData.name,
+      priceFrom: serviceData.priceFrom,
+      priceTo: serviceData.priceTo,
+      duration: serviceData.duration,
+      isOnlineAvailable: serviceData.isOnlineAvailable,
+      onlineNameRecord: serviceData.onlineNameRecord,
+      description: serviceData.description,
+      serviceType: serviceData.serviceType,
+    }
+    dispatch(updateService({ Id: dataId?.id, data }))
+  }
+
   return (
-    <form className={s.form} onSubmit={handleFormSubmit}>
+    <form
+      className={s.form}
+      onSubmit={type === 'create' ? handleFormSubmit : handleEditFormSubmit}
+    >
       <div className={s.formGroup}>
         <label htmlFor="name">Название Услуги</label>
         <div className={s.InputBlock}>
@@ -157,7 +180,7 @@ export const ServiceCreateForm = ({ id }: IProps) => {
         onChange={handleSelectChange}
       />
 
-      <button type="submit">Отправить</button>
+      <button type="submit">{type === 'create' ? 'Отправить' : 'Обновить'}</button>
     </form>
   )
 }
