@@ -12,8 +12,8 @@ import { login } from 'store/reducers/auth/AuthActionCreator.ts'
 import { ResponseLogin, TLogin } from 'models/Auth.ts'
 import { Button } from 'components/button/Button.tsx'
 import { Controller, useForm } from 'react-hook-form'
-import Input from 'components/inputs/input/Input.tsx'
-import PasswordInput from 'components/inputs/passwordInput/PasswordInput.tsx'
+import Input from 'components/fields/input/Input.tsx'
+import PasswordInput from 'components/fields/passwordInput/PasswordInput.tsx'
 const Login: FC = () => {
   const navigate = useNavigate()
 

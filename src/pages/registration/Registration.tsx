@@ -6,12 +6,12 @@ import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { TRegister } from 'models/Registration.ts'
 import { TLogin } from 'models/Auth.ts'
 import { ResponseRegistration } from 'models/Registration.ts'
-import Input from 'components/inputs/input/Input.tsx'
+import Input from 'components/fields/input/Input.tsx'
 import Button from 'components/button/Button.tsx'
 import { Controller, useForm } from 'react-hook-form'
 import { registerUser } from 'store/reducers/registration/RegistrationActionCreator.ts'
 import { login } from 'store/reducers/auth/AuthActionCreator.ts'
-import PasswordInput from 'components/inputs/passwordInput/PasswordInput.tsx'
+import PasswordInput from 'components/fields/passwordInput/PasswordInput.tsx'
 
 const Registration: FC = () => {
   const navigate = useNavigate()
