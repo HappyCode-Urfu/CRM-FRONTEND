@@ -27,6 +27,8 @@
 
 .avatar {
   display: flex;
+  flex-direction: column;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 50%;
@@ -38,6 +40,14 @@
     border-radius: 200px;
     width: 150px;
     height: 150px;
+  }
+
+  .avatar_button {
+    position: absolute;
+    bottom: -30px;
+    //border: none;
+    //cursor: pointer;
+    //display: inline-block;
   }
 }
 

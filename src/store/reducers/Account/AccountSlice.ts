@@ -1,11 +1,12 @@
 import { IAccount } from 'models/Account.ts'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { getInfoUser } from 'store/reducers/Account/AccountActionCreator.ts'
+import { getInfoUser, sendAvatar } from 'store/reducers/Account/AccountActionCreator.ts'
 
 interface AccountState {
   data: IAccount
   isLoading: boolean
   error: string
+  avatarUrl: string | null
 }
 
 const initialState: AccountState = {
@@ -23,9 +24,10 @@ const initialState: AccountState = {
   },
   isLoading: false,
   error: '',
+  avatarUrl: null,
 }
 
-export const AccountSlice = createSlice({
+const AccountSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
@@ -50,6 +52,13 @@ export const AccountSlice = createSlice({
     [getInfoUser.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
+    },
+    [sendAvatar.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [sendAvatar.fulfilled.type]: (state, action: PayloadAction<string>) => {
+      state.avatarUrl = action.payload
+      state.isLoading = false
     },
   },
 })
