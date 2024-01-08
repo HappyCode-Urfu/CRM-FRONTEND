@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { jwtDecode, JwtPayload } from 'jwt-decode'
 import { $api } from 'http/index.ts'
-import { toast } from 'react-toastify'
 
 export const getInfoUser = createAsyncThunk('user/getInfoUser', async (_, thunkAPI) => {
   try {
@@ -25,7 +24,8 @@ export const sendAvatar = createAsyncThunk<string, FormData>(
   async (formData, thunkAPI) => {
     try {
       const { data } = await $api.post('accounts/upload-avatar', formData)
-      toast('Изображение загружено')
+      localStorage.setItem('avatarUrl', data)
+      console.log(data)
       return data
     } catch {
       return thunkAPI.rejectWithValue('Не удалось отправить изображение изображение')
