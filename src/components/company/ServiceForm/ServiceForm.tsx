@@ -2,6 +2,8 @@ import React from 'react'
 import s from './ServiceForm.module.scss'
 import { ServiceCreateForm } from 'components/company/ServiceForm/CreateForm/CreateForm.tsx'
 import { IService } from 'models/IService.ts'
+import { EmployeeForm } from 'components/company/EmployeeForm/EmployeeForm.tsx'
+import { daysNumb, IEmployee } from 'models/IEmployee.ts'
 
 interface IModal {
   id: string | undefined
@@ -10,11 +12,15 @@ interface IModal {
   formType: string
   setFormType: React.Dispatch<React.SetStateAction<string>>
   dataId?: IService
+  employeeId?: string | undefined
+  employee?: IEmployee<daysNumb>[]
 }
 
 enum Form {
   Create = 'create',
   Edit = 'edit',
+  CreateEmployee = 'CreateEmployee',
+  EditEmployee = 'EditEmployee',
 }
 
 export const ServiceForm: React.FC<IModal> = ({
@@ -24,11 +30,15 @@ export const ServiceForm: React.FC<IModal> = ({
   formType,
   setFormType,
   dataId,
+  employee,
+  employeeId,
 }) => {
   const closeForm = () => {
     setFormType('')
     setShowModal(false)
   }
+
+  const employeeIdData = employee?.find((res) => res.id === employeeId)
 
   return (
     <>
@@ -41,6 +51,15 @@ export const ServiceForm: React.FC<IModal> = ({
             {formType === Form.Create && <ServiceCreateForm type={Form.Create} id={id} />}
             {formType === Form.Edit && (
               <ServiceCreateForm type={Form.Edit} id={id} dataId={dataId} />
+            )}
+            {formType === Form.CreateEmployee && <EmployeeForm id={id} type={formType} />}
+            {formType === Form.EditEmployee && (
+              <EmployeeForm
+                id={id}
+                employee={employeeIdData}
+                type={formType}
+                employeeId={employeeId}
+              />
             )}
           </div>
         </div>

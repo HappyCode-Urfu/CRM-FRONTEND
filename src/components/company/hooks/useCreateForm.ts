@@ -61,6 +61,7 @@ export const UseCreateForm = () => {
     ],
     businessName: dataId?.businessArea ? dataId?.businessArea : '',
     address: dataId?.location?.address ? dataId?.location?.address : '',
+    //TODO Исправить состояние
     latitude: 0,
     longitude: 0,
     phone_number: dataId?.phoneNumber ? dataId?.phoneNumber : '',

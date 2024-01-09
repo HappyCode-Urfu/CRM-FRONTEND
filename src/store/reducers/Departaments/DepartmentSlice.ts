@@ -7,12 +7,18 @@ import {
   delImageDepartment,
   addImageDepartment,
   getIdDepartment,
+  getAllEmployee,
+  addEmployee,
+  editEmployee,
+  delEmployeeId,
 } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { IDepartment } from 'models/IDepartment.ts'
+import { daysNumb, IEmployee } from 'models/IEmployee.ts'
 
 interface DepartmentState {
   data: IDepartment[]
   dataId: IDepartment | undefined
+  employees: IEmployee<daysNumb>[]
   isLoading: boolean
   error: string
 }
@@ -20,6 +26,7 @@ interface DepartmentState {
 const initialState: DepartmentState = {
   data: [],
   isLoading: false,
+  employees: [],
   error: '',
   dataId: {
     id: '',
@@ -132,6 +139,68 @@ export const departmentSlice = createSlice({
       state.isLoading = true
     },
     [delImageDepartment.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [getAllEmployee.fulfilled.type]: (
+      state,
+      action: PayloadAction<IEmployee<daysNumb>[]>
+    ) => {
+      state.employees = action.payload
+      state.isLoading = false
+      state.error = ''
+    },
+    [getAllEmployee.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [getAllEmployee.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [addEmployee.fulfilled.type]: (state, action: PayloadAction<IEmployee<daysNumb>>) => {
+      state.employees.push(action.payload)
+      state.isLoading = false
+      state.error = ''
+    },
+    [addEmployee.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [addEmployee.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [editEmployee.fulfilled.type]: (
+      state,
+      action: PayloadAction<IEmployee<daysNumb>>
+    ) => {
+      state.employees.find((id) => {
+        if (id.id == action.payload.id) {
+          id.name = action.payload.name
+          id.email = action.payload.email
+          id.workDays = action.payload.workDays
+          id.workMode.startTime = action.payload.workMode.startTime
+          id.workMode.endTime = action.payload.workMode.endTime
+        }
+      })
+      state.isLoading = false
+      state.error = ''
+    },
+    [editEmployee.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [editEmployee.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false
+      state.error = action.payload
+    },
+    [delEmployeeId.fulfilled.type]: (state, action: PayloadAction<string>) => {
+      state.employees = state.employees.filter((id) => id.id !== action.payload)
+      state.isLoading = false
+      state.error = ''
+    },
+    [delEmployeeId.pending.type]: (state) => {
+      state.isLoading = true
+    },
+    [delEmployeeId.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
     },

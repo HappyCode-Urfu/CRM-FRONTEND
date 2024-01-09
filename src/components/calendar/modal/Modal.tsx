@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './Modal.module.scss'
-import { CreateForm, ViewForm, EditForm } from './index.ts'
+import { CreateForm } from './index.ts'
 
 interface IModal {
   // id?: number
@@ -46,8 +46,6 @@ export const Modal: React.FC<IModal> = ({
                 hoveredTime={hoveredTime}
               />
             )}
-            {formType === Form.Edit && <EditForm />}
-            {formType === Form.View && <ViewForm />}
           </div>
         </div>
       ) : null}

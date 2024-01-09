@@ -3,9 +3,7 @@ import { CABINET_ROUTE, LOGIN } from 'utils/constsRoutes.ts'
 import { MiniCalendar } from 'components/miniCalendar/MiniCalendar.tsx'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { eventSlice } from 'store/reducers/Events/EventSlice.ts'
-import { WidgetsButton } from 'components/UI/WidgetsButton/WidgetsButton.tsx'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { ServiceRoute } from 'layouts/Navbar/routing.ts'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { memo } from 'react'
 
@@ -36,8 +34,8 @@ export const Navbar = memo(() => {
         selectDate={(date) => dispatch(selectDate(date))}
       />
       <div className={s.widgets}>
-        <h3 style={{ color: 'white' }}>Виджеты:</h3>
-        <WidgetsButton name={'Настройки записи'} router={ServiceRoute} />
+        {/*  <h3 style={{ color: 'white' }}>Виджеты:</h3>*/}
+        {/*  /!*<WidgetsButton name={'Настройки записи'} router={ServiceRoute} />*!/*/}
       </div>
       <Button onClick={logoutAction}>Выйти из профиля</Button>
     </div>

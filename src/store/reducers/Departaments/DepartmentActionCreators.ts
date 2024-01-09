@@ -3,6 +3,7 @@ import { IDepartment } from 'models/IDepartment.ts'
 import { $api } from 'http/index.ts'
 import { jwtDecode, JwtPayload } from 'jwt-decode'
 import { toast } from 'react-toastify'
+import { daysNumb, IEmployee } from 'models/IEmployee.ts'
 
 export const postDepartment = createAsyncThunk(
   'department/Create',
@@ -123,6 +124,91 @@ export const delImageDepartment = createAsyncThunk(
   async ({ departmentId }: { departmentId: string }, thunkAPI) => {
     try {
       const response = await $api.delete(`/departments/files/${departmentId}`)
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
+    }
+  }
+)
+
+export const addEmployee = createAsyncThunk(
+  'employee/add',
+  async (
+    {
+      departmentId,
+      data,
+    }: { departmentId: string | undefined; data: IEmployee<daysNumb> },
+    thunkAPI
+  ) => {
+    try {
+      const response = await $api.post<IEmployee<daysNumb>>(
+        `/departments/employees/${departmentId}`,
+        {
+          name: data.name,
+          email: data.email,
+          workDays: data.workDays,
+          workMode: data.workMode,
+        }
+      )
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
+    }
+  }
+)
+
+export const editEmployee = createAsyncThunk(
+  'employee/edit',
+  async (
+    {
+      departmentId,
+      data,
+    }: { departmentId: string | undefined; data: IEmployee<daysNumb> },
+    thunkAPI
+  ) => {
+    try {
+      const response = await $api.put<IEmployee<daysNumb>>(
+        `/departments/employee/${departmentId}`,
+        {
+          employeeId: data.id,
+          name: data.name,
+          email: data.email,
+          workDays: data.workDays,
+          workMode: data.workMode,
+        }
+      )
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
+    }
+  }
+)
+
+export const getAllEmployee = createAsyncThunk(
+  'employee/getAll',
+  async ({ departmentId }: { departmentId: string | undefined }, thunkAPI) => {
+    try {
+      const response = await $api.get(`/departments/employees/${departmentId}`)
+      return response.data
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
+    }
+  }
+)
+
+export const delEmployeeId = createAsyncThunk(
+  'employee/delId',
+  async (
+    {
+      departmentId,
+      employeeId,
+    }: { departmentId: string | undefined; employeeId: string | undefined },
+    thunkAPI
+  ) => {
+    try {
+      const response = await $api.delete(
+        `/departments/employee/${departmentId}/${employeeId}`
+      )
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось получить список филиалов')

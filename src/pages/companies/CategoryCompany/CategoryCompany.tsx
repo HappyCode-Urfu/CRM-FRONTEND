@@ -11,19 +11,29 @@ import {
 import Map from 'components/map/Map.tsx'
 import { useParams } from 'react-router-dom'
 import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
-import { COMPANIES_ROUTE, SERVICE_COMPANY } from 'utils/constsRoutes.ts'
-import { getIdDepartment } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
+import { CABINET_ROUTE, COMPANIES_ROUTE, SERVICE_COMPANY } from 'utils/constsRoutes.ts'
+import {
+  delEmployeeId,
+  getAllEmployee,
+  getIdDepartment,
+} from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { Input } from 'components/UI/input/Input.tsx'
+import { ServiceForm } from 'components/company/ServiceForm/ServiceForm.tsx'
 
 const CategoryCompany = memo(() => {
   const dispatch = useTypedDispatch()
-  const { data, departmentId, isLoading, error } = useTypedSelector(
-    (state) => state.categoryReducer
-  )
-  const { dataId } = useTypedSelector((state) => state.departmentReducer)
-
+  const { data, isLoading, error } = useTypedSelector((state) => state.categoryReducer)
+  const { dataId, employees } = useTypedSelector((state) => state.departmentReducer)
   const { id } = useParams()
 
+  const [formType, setFormType] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [employeeId, setEmployeeId] = useState<string | undefined>('')
+
+  const openForm = (type: string) => {
+    setFormType(type)
+    setShowModal(true)
+  }
   const [useData, setUseData] = useState({
     isNewCategory: false,
     newCategoryName: '',
@@ -42,20 +52,15 @@ const CategoryCompany = memo(() => {
   }
 
   const handleSaveCategory = () => {
-    dispatch(
-      createCategory({ departmentId: departmentId, name: useData.newCategoryName })
-    )
-    setUseData((prevState) => ({
-      ...prevState,
-      isNewCategory: true,
-      newCategoryName: '',
-    }))
+    dispatch(createCategory({ departmentId: id, name: useData.newCategoryName }))
+    handleCancelAddCategory()
   }
 
   useEffect(() => {
     dispatch(getIdDepartment({ Id: id }))
     dispatch(getAllCategories({ departmentId: id }))
-  }, [dispatch])
+    dispatch(getAllEmployee({ departmentId: id }))
+  }, [dispatch, id])
 
   return (
     <>
@@ -66,6 +71,7 @@ const CategoryCompany = memo(() => {
           <>
             <div className={s.title}>
               <h2>{dataId?.name}</h2>
+              <NavButton route={CABINET_ROUTE} children={'Вернуться'} />
             </div>
             <div className={s.info}>
               <div className={s.main}>
@@ -87,6 +93,51 @@ const CategoryCompany = memo(() => {
                   longitude={dataId?.location.longitude}
                 />
               </div>
+            </div>
+            <div className={s.list}>
+              {employees.length == 0 ? (
+                <>
+                  <h2>Сотрудники отсутствуют</h2>
+                  <Button
+                    children={'Добавить'}
+                    onClick={() => openForm('CreateEmployee')}
+                  />
+                </>
+              ) : (
+                <>
+                  <div className={s.title}>
+                    <h2>Сотрудники:</h2>
+                    {employees.length != 0 && (
+                      <Button
+                        children={'Добавить'}
+                        onClick={() => openForm('CreateEmployee')}
+                      />
+                    )}
+                  </div>
+                  {employees.map((res) => (
+                    <div className={s.element}>
+                      {res.name}
+                      <div>
+                        <Button
+                          children={'Ред.'}
+                          onClick={() => {
+                            openForm('EditEmployee')
+                            setEmployeeId(res.id)
+                          }}
+                        />
+                        <Button
+                          children={'Удалить'}
+                          onClick={() =>
+                            dispatch(
+                              delEmployeeId({ departmentId: id, employeeId: res.id })
+                            )
+                          }
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
             <div className={s.list}>
               {data.length == 0 && !useData.isNewCategory ? (
@@ -140,6 +191,15 @@ const CategoryCompany = memo(() => {
           </>
         )}
       </div>
+      <ServiceForm
+        id={id}
+        employeeId={employeeId}
+        employee={employees}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        formType={formType}
+        setFormType={setFormType}
+      />
     </>
   )
 })

@@ -24,7 +24,6 @@ const initialState: EventState = {
     visitDate: '',
     startTime: '',
     endTime: '',
-    statusStatus: '',
     employeeId: '',
     clientName: '',
     clientPhoneNumber: '',
@@ -64,7 +63,6 @@ export const eventSlice = createSlice({
       state.eventId.visitDate = action.payload.visitDate
       state.eventId.startTime = action.payload.startTime
       state.eventId.endTime = action.payload.endTime
-      state.eventId.statusStatus = action.payload.statusStatus
       state.eventId.employeeId = action.payload.employeeId
       state.eventId.clientName = action.payload.clientName
       state.eventId.clientPhoneNumber = action.payload.clientPhoneNumber

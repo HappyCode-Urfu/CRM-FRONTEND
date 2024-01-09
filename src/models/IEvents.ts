@@ -4,7 +4,6 @@ export interface IEvents {
   visitDate: string
   startTime: string
   endTime: string
-  statusStatus: string
   employeeId: string
   clientName: string
   clientPhoneNumber: string
