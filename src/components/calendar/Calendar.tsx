@@ -18,10 +18,12 @@ const Calendar = memo(() => {
   }
 
   useEffect(() => {
+    const startDate = new Date(dateSelect.getFullYear(), dateSelect.getMonth(), 1)
+    const endDate = new Date(dateSelect.getFullYear(), dateSelect.getMonth() + 1, 0)
     dispatch(
       getAllSessions({
-        startDate: formatDate(dateSelect),
-        endDate: formatDate(new Date(dateSelect.getDate() + 7)),
+        startDate: formatDate(startDate),
+        endDate: formatDate(endDate),
       })
     )
   }, [dispatch, dateSelect])
