@@ -6,9 +6,11 @@ import { getIdService } from 'store/reducers/Service/ServiceActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { ServiceForm } from 'components/company/ServiceForm/ServiceForm.tsx'
+import { Option } from 'components/UI/Select/Select.tsx'
 
 const ServiceIdPage = () => {
   const dispatch = useTypedDispatch()
+  const EmployeeList = JSON.parse(localStorage.getItem('Employee') || '[]') as Option[]
   const { dataId, isLoading, error } = useTypedSelector((state) => state.serviceReducer)
   const { id } = useParams()
   const [formType, setFormType] = useState('')
@@ -44,6 +46,10 @@ const ServiceIdPage = () => {
               {dataId.isOnlineAvailable && (
                 <span>Название Онлайн записи: {dataId.onlineNameRecord}</span>
               )}
+              <span>
+                Сoтрудник:{' '}
+                {EmployeeList.find((res) => res.value == dataId.employeeId)?.label}
+              </span>
               <span>
                 Формат: {dataId.serviceType === 'group' ? 'Групповой' : 'Индивидуальный'}
               </span>

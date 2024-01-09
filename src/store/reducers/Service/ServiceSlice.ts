@@ -20,6 +20,7 @@ interface ServiceState {
 const initialState: ServiceState = {
   data: [],
   dataId: {
+    employeeId: '',
     id: '',
     name: '',
     priceFrom: 0,
@@ -78,6 +79,7 @@ export const serviceSlice = createSlice({
       state.error = action.payload
     },
     [updateService.fulfilled.type]: (state, action: PayloadAction<IService>) => {
+      state.dataId.employeeId = action.payload.employeeId
       state.dataId.name = action.payload.name
       state.dataId.priceFrom = action.payload.priceFrom
       state.dataId.priceTo = action.payload.priceTo

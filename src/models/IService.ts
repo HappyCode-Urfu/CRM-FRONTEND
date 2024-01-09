@@ -1,5 +1,6 @@
 export interface IService {
   id?: string
+  employeeId: string
   name: string
   priceFrom: number
   priceTo: number

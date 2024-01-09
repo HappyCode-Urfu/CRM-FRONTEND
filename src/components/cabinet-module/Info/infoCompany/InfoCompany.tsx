@@ -55,9 +55,11 @@ export const InfoCompany = memo(() => {
                   </div>
                 ))}
               </div>
-              <div className={s.route}>
-                <NavButton route={COMPANIES_ROUTE} children={'Создать филиал'} />
-              </div>
+              {data.length == 0 && (
+                <div className={s.route}>
+                  <NavButton route={COMPANIES_ROUTE} children={'Создать филиал'} />
+                </div>
+              )}
             </div>
           </div>
         </>

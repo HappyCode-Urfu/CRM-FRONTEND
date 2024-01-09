@@ -94,7 +94,8 @@ export const getIdDepartment = createAsyncThunk(
   'department/GetId',
   async ({ Id }: { Id: string | undefined }, thunkAPI) => {
     try {
-      const response = await $api.get(`/departments/info/${Id}`)
+      const response = await $api.get<IDepartment>(`/departments/info/${Id}`)
+      localStorage.setItem('departmentId', JSON.stringify(response.data.id))
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
@@ -189,6 +190,11 @@ export const getAllEmployee = createAsyncThunk(
   async ({ departmentId }: { departmentId: string | undefined }, thunkAPI) => {
     try {
       const response = await $api.get(`/departments/employees/${departmentId}`)
+      const employees = response.data.map((employee: { id: string; name: string }) => ({
+        value: employee.id,
+        label: employee.name,
+      }))
+      localStorage.setItem('Employee', JSON.stringify(employees))
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось получить список филиалов')

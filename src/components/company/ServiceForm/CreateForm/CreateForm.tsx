@@ -1,6 +1,6 @@
 import s from './CreateForm.module.scss'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { Select } from 'components/UI/Select/Select.tsx'
+import { Option, Select } from 'components/UI/Select/Select.tsx'
 import { useTypedDispatch } from 'hooks/redux.ts'
 import { IService } from 'models/IService.ts'
 import {
@@ -16,15 +16,16 @@ interface IProps {
 
 export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
   const dispatch = useTypedDispatch()
+  const EmployeeList = JSON.parse(localStorage.getItem('Employee') || '[]') as Option[]
   const [serviceData, setServiceData] = useState({
-    name: dataId?.name ? dataId?.name : '',
-    priceFrom: dataId?.priceFrom ? dataId?.priceFrom : 0,
-    priceTo: dataId?.priceTo ? dataId?.priceTo : 0,
-    duration: dataId?.duration ? dataId?.duration.split('.')[0] : '',
-    isOnlineAvailable: dataId?.isOnlineAvailable ? dataId?.isOnlineAvailable : false,
-    onlineNameRecord: dataId?.onlineNameRecord ? dataId?.onlineNameRecord : '',
-    description: dataId?.description ? dataId?.description : '',
-    serviceType: dataId?.serviceType ? dataId?.serviceType : '0',
+    name: dataId?.name ?? '',
+    priceFrom: dataId?.priceFrom ?? 0,
+    priceTo: dataId?.priceTo ?? 0,
+    duration: dataId?.duration.split('.')[0] ?? '',
+    isOnlineAvailable: dataId?.isOnlineAvailable ?? false,
+    onlineNameRecord: dataId?.onlineNameRecord ?? '',
+    description: dataId?.description ?? '',
+    serviceType: dataId?.serviceType ?? '0',
     list: [
       {
         value: '0',
@@ -35,15 +36,22 @@ export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
         label: 'Групповая',
       },
     ],
+    employeeList: EmployeeList,
+    employeeId: dataId?.employeeId ?? '',
   })
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setServiceData({ ...serviceData, serviceType: event.target.value })
   }
 
+  const handleSelectEmployeeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setServiceData({ ...serviceData, employeeId: event.target.value })
+  }
+
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data: IService = {
+      employeeId: serviceData.employeeId,
       name: serviceData.name,
       priceFrom: serviceData.priceFrom,
       priceTo: serviceData.priceTo,
@@ -59,6 +67,7 @@ export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
   const handleEditFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data: IService = {
+      employeeId: serviceData.employeeId,
       name: serviceData.name,
       priceFrom: serviceData.priceFrom,
       priceTo: serviceData.priceTo,
@@ -178,6 +187,13 @@ export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
         value={serviceData.serviceType}
         options={serviceData.list}
         onChange={handleSelectChange}
+      />
+
+      <Select
+        children={'Сотрудник'}
+        value={serviceData.employeeId}
+        options={serviceData.employeeList}
+        onChange={handleSelectEmployeeChange}
       />
 
       <button type="submit">{type === 'create' ? 'Отправить' : 'Обновить'}</button>

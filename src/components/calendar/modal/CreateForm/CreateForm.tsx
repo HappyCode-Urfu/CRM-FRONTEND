@@ -1,42 +1,28 @@
 import { useForms } from '../index.ts'
 import s from './CreateForm.module.scss'
 import React from 'react'
+import { Select } from 'components/UI/Select/Select.tsx'
 
 interface IProps {
-  // setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   hoveredTime?: string | null
   hoveredColumn?: string | null
 }
 
-export const CreateForm: React.FC<IProps> = ({
-  // setShowModal,
-  hoveredColumn,
-  hoveredTime,
-}) => {
-  const {
-    task,
-    setTask,
-    date,
-    setDate,
-    startTime,
-    setStartTime,
-    endTime,
-    setEndTime,
-    errors,
-  } = useForms({ hoveredColumn, hoveredTime })
+export const CreateForm: React.FC<IProps> = ({ hoveredColumn, hoveredTime }) => {
+  const { useData, setUseData, handleSubmit, handleSelectEmployeeChange, EmployeeList } =
+    useForms({ hoveredColumn, hoveredTime })
 
   return (
-    <form className={s.form}>
+    <form className={s.form} onSubmit={handleSubmit}>
       <div className={s.formGroup}>
         <label htmlFor="task">Название задачи</label>
         <div className={s.InputBlock}>
           <input
             type="text"
             id="task"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
+            value={useData.serviceName}
+            onChange={(e) => setUseData({ ...useData, serviceName: e.target.value })}
           />
-          {errors.task && <span className={s.error}>{errors.task}</span>}
         </div>
       </div>
 
@@ -46,10 +32,9 @@ export const CreateForm: React.FC<IProps> = ({
           <input
             type="date"
             id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            value={useData.visitDate}
+            onChange={(e) => setUseData({ ...useData, visitDate: e.target.value })}
           />
-          {errors.date && <span className={s.error}>{errors.date}</span>}
         </div>
       </div>
 
@@ -59,10 +44,9 @@ export const CreateForm: React.FC<IProps> = ({
           <input
             type="time"
             id="startTime"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
+            value={useData.startTime}
+            onChange={(e) => setUseData({ ...useData, startTime: e.target.value })}
           />
-          {errors.startTime && <span className={s.error}>{errors.startTime}</span>}
         </div>
       </div>
 
@@ -72,10 +56,58 @@ export const CreateForm: React.FC<IProps> = ({
           <input
             type="time"
             id="endTime"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
+            value={useData.endTime}
+            onChange={(e) => setUseData({ ...useData, endTime: e.target.value })}
           />
-          {errors.endTime && <span className={s.error}>{errors.endTime}</span>}
+        </div>
+      </div>
+
+      <div className={s.formGroup}>
+        <label htmlFor="task">Имя Клиента</label>
+        <div className={s.InputBlock}>
+          <input
+            type="text"
+            id="task"
+            value={useData.clientName}
+            onChange={(e) => setUseData({ ...useData, clientName: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <div className={s.formGroup}>
+        <label htmlFor="task">Почта Клиента</label>
+        <div className={s.InputBlock}>
+          <input
+            type="text"
+            id="task"
+            value={useData.clientEmail}
+            onChange={(e) => setUseData({ ...useData, clientEmail: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <div className={s.formGroup}>
+        <label htmlFor="task">Номер телефона Клиента</label>
+        <div className={s.InputBlock}>
+          <input
+            type="text"
+            id="task"
+            value={useData.clientPhoneNumber}
+            onChange={(e) =>
+              setUseData({ ...useData, clientPhoneNumber: e.target.value })
+            }
+          />
+        </div>
+      </div>
+
+      <div className={s.formGroup}>
+        <div className={s.InputBlock}>
+          <Select
+            children={'Сотрудник'}
+            value={useData.employeeId}
+            options={EmployeeList}
+            onChange={handleSelectEmployeeChange}
+          />
         </div>
       </div>
 

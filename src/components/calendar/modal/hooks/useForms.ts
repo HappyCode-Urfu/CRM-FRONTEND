@@ -1,90 +1,58 @@
-import { useState } from 'react'
-// import { useTypedDispatch } from 'hooks/redux.ts'
-// import { postSession } from 'store/reducers/Events/ActionCreators.ts'
+import { ChangeEvent, FormEvent, useState } from 'react'
+import { useTypedDispatch } from 'hooks/redux.ts'
+import {
+  postSession,
+  putSession,
+  delSession,
+} from 'store/reducers/Events/ActionCreators.ts'
+import { Option } from 'components/UI/Select/Select.tsx'
+import { IEvents } from 'models/IEvents.ts'
 
 interface IForms {
-  // setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   hoveredTime?: string | null
   hoveredColumn?: string | null
 }
 
-export const useForms = ({
-  // setShowModal,
-  hoveredTime,
-  hoveredColumn,
-}: IForms) => {
-  // const dispatch = useTypedDispatch()
-  const [task, setTask] = useState('')
-  const [date, setDate] = useState<string>(hoveredColumn ? hoveredColumn : '')
-  const [startTime, setStartTime] = useState(hoveredTime ? hoveredTime : '')
-  const [endTime, setEndTime] = useState('')
-
-  const [errors, setErrors] = useState({
-    task: '',
-    date: '',
-    startTime: '',
+export const useForms = ({ hoveredTime, hoveredColumn }: IForms) => {
+  const dispatch = useTypedDispatch()
+  const EmployeeList = JSON.parse(localStorage.getItem('Employee') || '[]') as Option[]
+  const DepartmentId = JSON.parse(localStorage.getItem('departmentId') || '')
+  const [useData, setUseData] = useState({
+    sessionId: '',
+    serviceName: '',
+    visitDate: hoveredColumn ?? '',
+    startTime: hoveredTime ?? '',
     endTime: '',
+    employeeId: '',
+    clientName: '',
+    clientPhoneNumber: '',
+    clientEmail: '',
   })
 
-  // const validateForm = () => {
-  //   let isValid = true
-  //   const newErrors = {
-  //     task: '',
-  //     date: '',
-  //     startTime: '',
-  //     endTime: '',
-  //   }
-  //
-  //   if (!task) {
-  //     isValid = false
-  //     newErrors.task = 'Введите название задачи'
-  //   }
-  //
-  //   if (!date) {
-  //     isValid = false
-  //     newErrors.date = 'Введите дату проведения'
-  //   }
-  //
-  //   if (!startTime) {
-  //     isValid = false
-  //     newErrors.startTime = 'Введите время начала задачи'
-  //   }
-  //
-  //   if (!endTime) {
-  //     isValid = false
-  //     newErrors.endTime = 'Введите время окончания задачи'
-  //   }
-  //
-  //   setErrors(newErrors)
-  //   return isValid
-  // }
+  const handleSelectEmployeeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setUseData({ ...useData, employeeId: event.target.value })
+  }
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   if (validateForm()) {
-  //     dispatch(
-  //       postSession({
-  //         service_name: task,
-  //         date: new Date(date),
-  //         start_time: startTime,
-  //         end_time: endTime,
-  //       })
-  //     )
-  //     setShowModal(false)
-  //   }
-  // }
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data: IEvents = {
+      serviceName: useData.serviceName,
+      visitDate: useData.visitDate,
+      startTime: useData.startTime,
+      endTime: useData.endTime,
+      employeeId: useData.employeeId,
+      clientName: useData.clientName,
+      clientPhoneNumber: useData.clientPhoneNumber,
+      clientEmail: useData.clientEmail,
+    }
+    dispatch(postSession({ departmentId: DepartmentId, data }))
+  }
 
   return {
-    task,
-    setTask,
-    date,
-    setDate,
-    startTime,
-    setStartTime,
-    endTime,
-    setEndTime,
-    errors,
-    setErrors,
-    // handleSubmit,
+    useData,
+    EmployeeList,
+    handleSelectEmployeeChange,
+    setUseData,
+    handleSubmit,
   }
 }

@@ -10,7 +10,7 @@
   justify-content: stretch;
 }
 
-.title{
+.title {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -20,7 +20,7 @@
   min-height: 50px;
 }
 
-.info{
+.info {
   display: flex;
   flex-direction: row;
   width: 80%;
@@ -28,7 +28,7 @@
   background-color: $header;
   gap: 20px;
 
-  .main{
+  .main {
     padding: 40px 20px;
     display: flex;
     flex-direction: column;
@@ -38,12 +38,12 @@
     align-items: flex-start;
     justify-content: flex-start;
 
-    h2{
+    h2 {
       height: 70px;
       font-weight: bold;
     }
 
-    span{
+    span {
       height: 50px;
       font-weight: bold;
     }

@@ -10,7 +10,7 @@
   padding-bottom: 50px;
 }
 
-.title{
+.title {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -20,7 +20,7 @@
   min-height: 50px;
 }
 
-.info{
+.info {
   display: flex;
   flex-direction: row;
   width: 80%;
@@ -28,7 +28,7 @@
   background-color: $header;
   gap: 20px;
 
-  .main{
+  .main {
     padding: 40px 20px;
     display: flex;
     flex-direction: column;
@@ -38,18 +38,18 @@
     align-items: flex-start;
     justify-content: flex-start;
 
-    h2{
+    h2 {
       height: 70px;
       font-weight: bold;
     }
 
-    span{
+    span {
       height: 50px;
       font-weight: bold;
     }
   }
 
-  .map{
+  .map {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -59,7 +59,7 @@
   }
 }
 
-.list{
+.list {
   padding: 40px 0;
   background-color: $header;
   width: 80%;
@@ -71,7 +71,7 @@
   justify-content: flex-start;
   gap: 20px;
 
-  .element{
+  .element {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -82,14 +82,14 @@
     background-color: $primaryColor;
     min-height: 80px;
 
-    div{
+    div {
       display: flex;
       flex-direction: row;
       gap: 10px;
     }
   }
 
-  .buttons{
+  .buttons {
     display: flex;
     flex-direction: row;
     align-items: center;

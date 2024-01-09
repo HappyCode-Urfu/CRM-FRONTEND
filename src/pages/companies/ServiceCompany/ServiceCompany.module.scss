@@ -10,7 +10,7 @@
   justify-content: stretch;
 }
 
-.title{
+.title {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -20,7 +20,7 @@
   min-height: 50px;
 }
 
-.list{
+.list {
   padding: 40px 0;
   background-color: $header;
   width: 80%;
@@ -33,7 +33,7 @@
   justify-content: flex-start;
   gap: 20px;
 
-  .element{
+  .element {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -45,7 +45,7 @@
     min-height: 80px;
   }
 
-  .buttons{
+  .buttons {
     display: flex;
     flex-direction: row;
     align-items: center;

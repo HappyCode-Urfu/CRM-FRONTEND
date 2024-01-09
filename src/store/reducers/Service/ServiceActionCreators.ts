@@ -37,6 +37,7 @@ export const createService = createAsyncThunk(
   async ({ Id, data }: IProps, thunkAPI) => {
     try {
       const response = await $api.post(`/services/${Id}`, {
+        employeeId: data.employeeId,
         name: data.name,
         priceFrom: data.priceFrom,
         priceTo: data.priceTo,
@@ -61,6 +62,7 @@ export const updateService = createAsyncThunk(
   async ({ Id, data }: IProps, thunkAPI) => {
     try {
       const response = await $api.put(`/services/${Id}`, {
+        employeeId: data.employeeId,
         name: data.name,
         priceFrom: data.priceFrom,
         priceTo: data.priceTo,
