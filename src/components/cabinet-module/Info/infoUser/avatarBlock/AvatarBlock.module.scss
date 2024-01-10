@@ -1,0 +1,61 @@
+@import "../../../../../assets/styles/styles";
+
+.avatar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+
+  .fileList {
+    width: 150px;
+    height: 78px;
+    display: none;
+    position: absolute;
+    bottom: -50px;
+    right: 50px;
+    background-color: $primaryColor;
+    border-radius: 8px;
+
+    .file_container {
+      display: flex;
+      flex-direction: column;
+
+      .label_container {
+        padding: 10px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        &:hover {
+          background: $secondaryColor;
+        }
+      }
+
+      .input {
+        display: none;
+        padding: 10px;
+      }
+
+      .send {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+
+        &:hover {
+          background: $secondaryColor;
+        }
+      }
+    }
+  }
+
+  img {
+    background-color: white;
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+  }
+}

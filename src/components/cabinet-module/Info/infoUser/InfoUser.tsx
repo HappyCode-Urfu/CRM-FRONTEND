@@ -1,18 +1,30 @@
+import { memo } from 'react'
 import s from './InfoUser.module.scss'
-import Avatar from 'assets/icon/avatar.svg'
-import { Button } from 'components/UI/Button/Button.tsx'
-import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
+import ModalUniversal from 'components/cabinet-module/Info/infoUser/ModalUpdateInfoUser/ModalUniversal.tsx'
 import { Loading } from 'components/loading/Loading.tsx'
-import { memo, useEffect } from 'react'
-import { getInfoUser } from 'store/reducers/Account/AccountActionCreator.ts'
+import Input from 'components/fields/input/Input.tsx'
+import AvatarBlock from 'components/cabinet-module/Info/infoUser/avatarBlock/AvatarBlock.tsx'
+import UserInfoBlock from 'components/cabinet-module/Info/infoUser/userInfoBlock/UserInfoBlock.tsx'
+import { useInfoUser } from 'components/cabinet-module/Info/infoUser/hooks/useInfoUser.ts'
+import Button from 'components/button/Button.tsx'
 
 export const InfoUser = memo(() => {
-  const dispatch = useTypedDispatch()
-  const { data, error, isLoading } = useTypedSelector((state) => state.accountReducer)
-
-  useEffect(() => {
-    dispatch(getInfoUser())
-  }, [dispatch])
+  const {
+    data,
+    fileRef,
+    error,
+    isLoading,
+    avatarUrl,
+    show,
+    modalActive,
+    values,
+    handleChange,
+    toggleBlock,
+    handleUpload,
+    handleImageChange,
+    handleSubmit,
+    setModalActive,
+  } = useInfoUser()
 
   return (
     <div className={s.container}>
@@ -22,19 +34,45 @@ export const InfoUser = memo(() => {
         <>
           <div className={s.title}>Личные данные</div>
           <div className={s.block}>
-            <div className={s.avatar}>
-              <img src={Avatar} alt="avatar" />
-            </div>
-            <div className={s.infoUser}>
-              <p>
-                ФИО: {data.surname ? data.surname : ''} {data.name}{' '}
-                {data.patronymic ? data.patronymic : ''}
-              </p>
-              <p>Почта: {data.email}</p>
-              <p>Город: {data.city !== null ? data.city : 'Отсутствует'}</p>
-              {data.emailConfirmed === true ? '' : <p>Почта подтверждена: Нет</p>}
-              <Button children={'Редактировать данные'} />
-            </div>
+            <AvatarBlock
+              avatarUrl={avatarUrl}
+              onImageChange={handleImageChange}
+              onUpload={handleUpload}
+              show={show}
+              toggleBlock={toggleBlock}
+              fileRef={fileRef}
+            />
+            <UserInfoBlock
+              name={data.name}
+              email={data.email}
+              city={data.city}
+              emailConfirmed={data.emailConfirmed}
+              setModalActive={setModalActive}
+            />
+            <ModalUniversal active={modalActive} setActive={setModalActive}>
+              <form onSubmit={handleSubmit}>
+                <h1 className={s.title_modal}>Изменить данные</h1>
+                <Input
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange}
+                  label="Имя"
+                />
+                <Input
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  label="Email"
+                />
+                <Input
+                  name="city"
+                  value={values.city}
+                  onChange={handleChange}
+                  label="Город"
+                />
+                <Button type="submit">Отправить</Button>
+              </form>
+            </ModalUniversal>
           </div>
         </>
       )}
