@@ -4,11 +4,13 @@ import { memo, useEffect } from 'react'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { getAllSessions } from 'store/reducers/Events/ActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
+import { getAllEmployee } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 
 const Calendar = memo(() => {
   const dispatch = useTypedDispatch()
   const { handlePrevWeek, handleNextWeek, dateSelect } = UseCalendar()
   const { events, error, isLoading } = useTypedSelector((state) => state.eventReducer)
+  const departId = JSON.parse(localStorage.getItem('departmentId') || '')
 
   function formatDate(date: Date) {
     const year = date.getFullYear()
@@ -16,6 +18,10 @@ const Calendar = memo(() => {
     const day = String(date.getDate()).padStart(2, '0')
     return `${year}-${month}-${day}`
   }
+
+  useEffect(() => {
+    dispatch(getAllEmployee({ departmentId: departId }))
+  }, [dispatch, departId])
 
   useEffect(() => {
     const startDate = new Date(dateSelect.getFullYear(), dateSelect.getMonth(), 1)

@@ -19,6 +19,7 @@ import {
 } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { Input } from 'components/UI/input/Input.tsx'
 import { ServiceForm } from 'components/company/ServiceForm/ServiceForm.tsx'
+import { jwtDecode, JwtPayload } from 'jwt-decode'
 
 const CategoryCompany = memo(() => {
   const dispatch = useTypedDispatch()
@@ -28,7 +29,13 @@ const CategoryCompany = memo(() => {
   const [formType, setFormType] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [employeeId, setEmployeeId] = useState<string | undefined>('')
-
+  let accId: JwtPayload
+  const accessToken = localStorage.getItem('access_token')
+  if (!accessToken) {
+    throw new Error('Access token not found')
+  }
+  // eslint-disable-next-line prefer-const
+  accId = jwtDecode(accessToken)
   const openForm = (type: string) => {
     setFormType(type)
     setShowModal(true)
@@ -124,14 +131,16 @@ const CategoryCompany = memo(() => {
                             setEmployeeId(res.id)
                           }}
                         />
-                        <Button
-                          children={'Удалить'}
-                          onClick={() =>
-                            dispatch(
-                              delEmployeeId({ departmentId: id, employeeId: res.id })
-                            )
-                          }
-                        />
+                        {accId.sub !== res.id && (
+                          <Button
+                            children={'Удалить'}
+                            onClick={() =>
+                              dispatch(
+                                delEmployeeId({ departmentId: id, employeeId: res.id })
+                              )
+                            }
+                          />
+                        )}
                       </div>
                     </div>
                   ))}

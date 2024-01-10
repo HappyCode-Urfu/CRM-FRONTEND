@@ -11,18 +11,23 @@ import { NavButton } from 'components/UI/NavButton/NavButton.tsx'
 import { SERVICE_COMPANY_ROUTE } from 'utils/constsRoutes.ts'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { ServiceForm } from 'components/company/ServiceForm/ServiceForm.tsx'
+import { getAllEmployee } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 
 const ServiceCompany = () => {
   const dispatch = useTypedDispatch()
   const { data, isLoading, error } = useTypedSelector((state) => state.serviceReducer)
   const { id } = useParams()
-
+  const departId = JSON.parse(localStorage.getItem('departmentId') || '')
   const [formType, setFormType] = useState('')
   const [showModal, setShowModal] = useState(false)
   const openForm = (type: string) => {
     setFormType(type)
     setShowModal(true)
   }
+
+  useEffect(() => {
+    dispatch(getAllEmployee({ departmentId: departId }))
+  }, [dispatch, departId])
 
   useEffect(() => {
     dispatch(getAllServices({ categoryId: id }))

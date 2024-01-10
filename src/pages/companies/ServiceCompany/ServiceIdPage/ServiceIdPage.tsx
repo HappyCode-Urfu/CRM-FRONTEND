@@ -7,24 +7,18 @@ import { Loading } from 'components/loading/Loading.tsx'
 import { Button } from 'components/UI/Button/Button.tsx'
 import { ServiceForm } from 'components/company/ServiceForm/ServiceForm.tsx'
 import { Option } from 'components/UI/Select/Select.tsx'
-import { getAllEmployee } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 
 const ServiceIdPage = () => {
   const dispatch = useTypedDispatch()
   const EmployeeList = JSON.parse(localStorage.getItem('Employee') || '[]') as Option[]
   const { dataId, isLoading, error } = useTypedSelector((state) => state.serviceReducer)
   const { id } = useParams()
-  const departId = JSON.parse(localStorage.getItem('departmentId') || '')
   const [formType, setFormType] = useState('')
   const [showModal, setShowModal] = useState(false)
   const openForm = (type: string) => {
     setFormType(type)
     setShowModal(true)
   }
-
-  useEffect(() => {
-    dispatch(getAllEmployee({ departmentId: departId }))
-  }, [dispatch, departId])
 
   useEffect(() => {
     dispatch(getIdService({ serviceId: id }))
