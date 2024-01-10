@@ -1,9 +1,10 @@
 import { useForms } from '../index.ts'
 import s from './CreateForm.module.scss'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Select } from 'components/UI/Select/Select.tsx'
 import { delSession } from 'store/reducers/Events/ActionCreators.ts'
 import { useTypedDispatch } from 'hooks/redux.ts'
+import { getAllEmployee } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 
 interface IProps {
   formType: string
@@ -17,6 +18,11 @@ export const CreateForm: React.FC<IProps> = ({
   formType,
 }) => {
   const dispatch = useTypedDispatch()
+  const departId = JSON.parse(localStorage.getItem('departmentId') || '')
+
+  useEffect(() => {
+    dispatch(getAllEmployee({ departmentId: departId }))
+  }, [dispatch, departId])
 
   const {
     useData,

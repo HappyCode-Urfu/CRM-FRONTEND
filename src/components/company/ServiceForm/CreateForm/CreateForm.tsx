@@ -41,8 +41,6 @@ export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
     employeeId: dataId?.employeeId ?? '',
   })
 
-  console.log(serviceData)
-
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setServiceData({ ...serviceData, serviceType: event.target.value })
   }

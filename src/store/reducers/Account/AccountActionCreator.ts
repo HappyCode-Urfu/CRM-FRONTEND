@@ -13,7 +13,6 @@ export const getInfoUser = createAsyncThunk('user/getInfoUser', async (_, thunkA
     // eslint-disable-next-line prefer-const
     token = jwtDecode(accessToken)
     const response = await $api.get(`accounts/user/${token.sub}`)
-    console.log(response)
     return response.data
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e.response?.data?.message)
@@ -26,7 +25,6 @@ export const sendAvatar = createAsyncThunk<string, FormData>(
     try {
       const { data } = await $api.post('accounts/upload-avatar', formData)
       localStorage.setItem('avatarUrl', data)
-      console.log(data)
       return data
     } catch {
       return thunkAPI.rejectWithValue('Не удалось отправить изображение изображение')

@@ -25,7 +25,6 @@ const CategoryCompany = memo(() => {
   const { data, isLoading, error } = useTypedSelector((state) => state.categoryReducer)
   const { dataId, employees } = useTypedSelector((state) => state.departmentReducer)
   const { id } = useParams()
-
   const [formType, setFormType] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [employeeId, setEmployeeId] = useState<string | undefined>('')

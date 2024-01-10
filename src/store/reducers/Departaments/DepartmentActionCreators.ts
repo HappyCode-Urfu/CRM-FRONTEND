@@ -151,6 +151,7 @@ export const addEmployee = createAsyncThunk(
           workMode: data.workMode,
         }
       )
+      toast('Добавлен Сотрудник')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
@@ -178,6 +179,7 @@ export const editEmployee = createAsyncThunk(
           workMode: data.workMode,
         }
       )
+      toast('Данные изменены')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
@@ -215,6 +217,7 @@ export const delEmployeeId = createAsyncThunk(
       const response = await $api.delete(
         `/departments/employee/${departmentId}/${employeeId}`
       )
+      toast('Сотрудник удалён')
       return response.data
     } catch (e) {
       return thunkAPI.rejectWithValue('Не удалось получить список филиалов')
