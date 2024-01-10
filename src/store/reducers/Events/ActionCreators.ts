@@ -31,7 +31,7 @@ export const getAllSessions = createAsyncThunk(
 
 export const getIdSessions = createAsyncThunk(
   'events/getId',
-  async ({ sessionId }: { sessionId: string }, thunkAPI) => {
+  async ({ sessionId }: { sessionId: string | undefined }, thunkAPI) => {
     try {
       const response = await $api.get(`/sessions/${sessionId}`)
       return response.data
@@ -68,7 +68,7 @@ export const postSession = createAsyncThunk(
 )
 
 interface IPutSession {
-  sessionsId: string
+  sessionsId: string | undefined
   data: IEvents
 }
 
@@ -95,7 +95,7 @@ export const putSession = createAsyncThunk(
 
 export const delSession = createAsyncThunk(
   'event/put',
-  async ({ sessionsId }: { sessionsId: string }, thunkAPI) => {
+  async ({ sessionsId }: { sessionsId: string | undefined }, thunkAPI) => {
     try {
       const response = await $api.delete<IEvents>(`/sessions/${sessionsId}`)
       return response.data

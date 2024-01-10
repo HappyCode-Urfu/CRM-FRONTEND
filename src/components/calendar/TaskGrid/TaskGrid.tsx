@@ -3,6 +3,8 @@ import s from './TaskGrid.module.scss'
 import { hours, minutes } from 'utils/constsTimes.ts'
 import { IEvents } from 'models/IEvents.ts'
 import { UseTaskGrid, Modal } from '../index.ts'
+import { eventSlice } from 'store/reducers/Events/EventSlice.ts'
+import { useTypedDispatch } from 'hooks/redux.ts'
 
 interface TaskGridProps {
   selectedWeek: Date
@@ -13,6 +15,8 @@ export const TaskGrid: FC<TaskGridProps> = memo(({ selectedWeek, events }) => {
   const [lastHoveredTime, setLastHoveredTime] = useState<string | null>(null)
   const [hoveredTime, setHoveredTime] = useState<string | number | null>(null)
   const [hoveredColumn, setHoveredColumn] = useState<Date | null>(null)
+  const dispatch = useTypedDispatch()
+  const { selectTask } = eventSlice.actions
 
   const days = useMemo(() => {
     return Array.from({ length: 7 }, (_, i) => {
@@ -68,7 +72,10 @@ export const TaskGrid: FC<TaskGridProps> = memo(({ selectedWeek, events }) => {
                 key={event.sessionId}
                 className={s.event}
                 style={eventStyle}
-                onClick={() => openForm('view')}
+                onClick={() => {
+                  openForm('edit')
+                  dispatch(selectTask(event))
+                }}
               >
                 <p className={s.name}>{event.serviceName}</p>
                 <p className={s.time}>

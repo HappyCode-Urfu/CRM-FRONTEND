@@ -41,6 +41,17 @@ export const eventSlice = createSlice({
     selectDate(state, action: PayloadAction<Date>) {
       state.dateSelect = action.payload
     },
+    selectTask(state, action: PayloadAction<IEvents>) {
+      state.eventId.sessionId = action.payload.sessionId
+      state.eventId.serviceName = action.payload.serviceName
+      state.eventId.visitDate = action.payload.visitDate
+      state.eventId.startTime = action.payload.startTime
+      state.eventId.endTime = action.payload.endTime
+      state.eventId.employeeId = action.payload.employeeId
+      state.eventId.clientName = action.payload.clientName
+      state.eventId.clientPhoneNumber = action.payload.clientPhoneNumber
+      state.eventId.clientEmail = action.payload.clientEmail
+    },
   },
   extraReducers: {
     [getAllSessions.fulfilled.type]: (state, action: PayloadAction<IEvents[]>) => {
