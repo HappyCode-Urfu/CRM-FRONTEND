@@ -17,6 +17,7 @@ interface IProps {
 export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
   const dispatch = useTypedDispatch()
   const EmployeeList = JSON.parse(localStorage.getItem('Employee') || '[]') as Option[]
+  console.log(EmployeeList)
   const [serviceData, setServiceData] = useState({
     name: dataId?.name ?? '',
     priceFrom: dataId?.priceFrom ?? 0,
@@ -39,6 +40,8 @@ export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
     employeeList: EmployeeList,
     employeeId: dataId?.employeeId ?? '',
   })
+
+  console.log(serviceData)
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setServiceData({ ...serviceData, serviceType: event.target.value })

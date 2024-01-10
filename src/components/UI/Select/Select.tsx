@@ -15,6 +15,7 @@ export const Select: FC<SelectProps> = ({ options, children, ...otherProps }) =>
     <div className={s.container}>
       <p>{children}</p>
       <select {...otherProps}>
+        <option>Выберите</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
