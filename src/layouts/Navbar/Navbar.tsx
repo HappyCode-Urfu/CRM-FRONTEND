@@ -33,10 +33,7 @@ export const Navbar = memo(() => {
         selectedDate={dateSelect}
         selectDate={(date) => dispatch(selectDate(date))}
       />
-      <div className={s.widgets}>
-        {/*  <h3 style={{ color: 'white' }}>Виджеты:</h3>*/}
-        {/*  /!*<WidgetsButton name={'Настройки записи'} router={ServiceRoute} />*!/*/}
-      </div>
+      <div className={s.widgets}></div>
       <Button onClick={logoutAction}>Выйти из профиля</Button>
     </div>
   )

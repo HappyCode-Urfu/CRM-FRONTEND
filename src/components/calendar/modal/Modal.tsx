@@ -3,7 +3,6 @@ import s from './Modal.module.scss'
 import { CreateForm } from './index.ts'
 
 interface IModal {
-  // id?: number
   showModal: boolean
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   formType: string
@@ -15,7 +14,6 @@ interface IModal {
 enum Form {
   Create = 'create',
   Edit = 'edit',
-  View = 'view',
 }
 
 export const Modal: React.FC<IModal> = ({
@@ -40,7 +38,18 @@ export const Modal: React.FC<IModal> = ({
               X
             </button>
             {formType === Form.Create && (
-              <CreateForm hoveredColumn={hoveredColumn} hoveredTime={hoveredTime} />
+              <CreateForm
+                hoveredColumn={hoveredColumn}
+                hoveredTime={hoveredTime}
+                formType={formType}
+              />
+            )}
+            {formType === Form.Edit && (
+              <CreateForm
+                formType={formType}
+                hoveredColumn={hoveredColumn}
+                hoveredTime={hoveredTime}
+              />
             )}
           </div>
         </div>

@@ -2,18 +2,36 @@ import { useForms } from '../index.ts'
 import s from './CreateForm.module.scss'
 import React from 'react'
 import { Select } from 'components/UI/Select/Select.tsx'
+import { delSession } from 'store/reducers/Events/ActionCreators.ts'
+import { useTypedDispatch } from 'hooks/redux.ts'
 
 interface IProps {
+  formType: string
   hoveredTime?: string | null
   hoveredColumn?: string | null
 }
 
-export const CreateForm: React.FC<IProps> = ({ hoveredColumn, hoveredTime }) => {
-  const { useData, setUseData, handleSubmit, handleSelectEmployeeChange, EmployeeList } =
-    useForms({ hoveredColumn, hoveredTime })
+export const CreateForm: React.FC<IProps> = ({
+  hoveredColumn,
+  hoveredTime,
+  formType,
+}) => {
+  const dispatch = useTypedDispatch()
+
+  const {
+    useData,
+    setUseData,
+    handleSubmit,
+    handleSelectEmployeeChange,
+    EmployeeList,
+    handleEditSubmit,
+  } = useForms({ hoveredColumn, hoveredTime, formType })
 
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
+    <form
+      className={s.form}
+      onSubmit={formType === 'create' ? handleSubmit : handleEditSubmit}
+    >
       <div className={s.formGroup}>
         <label htmlFor="task">Название задачи</label>
         <div className={s.InputBlock}>
@@ -110,8 +128,15 @@ export const CreateForm: React.FC<IProps> = ({ hoveredColumn, hoveredTime }) => 
           />
         </div>
       </div>
-
-      <button type="submit">Отправить</button>
+      {formType === 'edit' && (
+        <button
+          type="button"
+          onClick={() => dispatch(delSession({ sessionsId: useData.sessionId }))}
+        >
+          Удалить
+        </button>
+      )}
+      <button type="submit">{formType === 'create' ? 'Отправить' : 'Обновить'}</button>
     </form>
   )
 }
