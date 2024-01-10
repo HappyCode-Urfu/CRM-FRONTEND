@@ -12,6 +12,20 @@ import { Controller, useForm } from 'react-hook-form'
 import { registerUser } from 'store/reducers/registration/RegistrationActionCreator.ts'
 import { login } from 'store/reducers/auth/AuthActionCreator.ts'
 import PasswordInput from 'components/fields/passwordInput/PasswordInput.tsx'
+import {
+  emailRegEx,
+  maxLengthEmailMessage,
+  maxLengthNameMessage,
+  maxLengthPasswordMessage,
+  minLengthNameMessage,
+  minLengthPasswordMessage,
+  nameRegEX,
+  passwordRegEx,
+  requiredField,
+  validationEmailMessage,
+  validationNameMessage,
+  validationPasswordMessage,
+} from 'utils/const.ts'
 
 const Registration: FC = () => {
   const navigate = useNavigate()
@@ -77,18 +91,18 @@ const Registration: FC = () => {
               control={control}
               name="name"
               rules={{
-                required: 'Поле обязательно к заполнению',
+                required: requiredField,
                 minLength: {
                   value: 3,
-                  message: 'Имя должно содержать не менее 3 символов',
+                  message: minLengthNameMessage,
                 },
                 maxLength: {
                   value: 50,
-                  message: 'Имя не должно содержать более 50 символов',
+                  message: maxLengthNameMessage,
                 },
                 pattern: {
-                  value: /^[A-Za-zА-Яа-я]+$/,
-                  message: 'Имя может содержать только буквы',
+                  value: nameRegEX,
+                  message: validationNameMessage,
                 },
               }}
               render={({ field, fieldState }) => (
@@ -104,14 +118,14 @@ const Registration: FC = () => {
               control={control}
               name="email"
               rules={{
-                required: 'Поле обязательно к заполнению',
+                required: requiredField,
                 maxLength: {
                   value: 60,
-                  message: 'Email не должен превышать 60 символов',
+                  message: maxLengthEmailMessage,
                 },
                 pattern: {
-                  value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
-                  message: 'Введите действительный адрес электронной почты',
+                  value: emailRegEx,
+                  message: validationEmailMessage,
                 },
               }}
               render={({ field, fieldState }) => (
@@ -127,18 +141,18 @@ const Registration: FC = () => {
               control={control}
               name="password"
               rules={{
-                required: 'Поле обязательно к заполнению',
+                required: requiredField,
                 minLength: {
                   value: 8,
-                  message: 'Пароль должен содержать не менее 8 символов',
+                  message: minLengthPasswordMessage,
                 },
                 maxLength: {
                   value: 30,
-                  message: 'Пароль не должен превышать 30 символов',
+                  message: maxLengthPasswordMessage,
                 },
                 pattern: {
-                  value: /^[A-Za-zА-Яа-я0-9]+$/,
-                  message: 'Пароль может содержать только буквы и цифры',
+                  value: passwordRegEx,
+                  message: validationPasswordMessage,
                 },
               }}
               render={({ field, fieldState }) => (
@@ -146,7 +160,7 @@ const Registration: FC = () => {
                   {...field}
                   isError={!!fieldState.error}
                   helperText={fieldState.error?.message}
-                  label="Password"
+                  label="Пароль"
                 />
               )}
             />

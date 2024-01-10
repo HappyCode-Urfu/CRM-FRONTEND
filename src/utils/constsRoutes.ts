@@ -1,6 +1,6 @@
 export const MAIN_ROUTE = '/calendar'
 export const CABINET_ROUTE = '/cabinet'
-export const LOGIN = '/login'
+export const LOGIN = '/'
 export const REGISTRATION = '/register'
 export const FORGOT_PASSWORD = '/forgot-password'
 export const CONFIRM_PASSWORD = `/confirm-password?email`

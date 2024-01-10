@@ -1,12 +1,7 @@
 import { FC, useState } from 'react'
 import classes from './Login.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  CABINET_ROUTE,
-  FORGOT_PASSWORD,
-  NOT_FOUND,
-  REGISTRATION,
-} from 'utils/constsRoutes.ts'
+import { CABINET_ROUTE, NOT_FOUND, REGISTRATION } from 'utils/constsRoutes.ts'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { login } from 'store/reducers/auth/AuthActionCreator.ts'
 import { ResponseLogin, TLogin } from 'models/Auth.ts'
@@ -14,6 +9,16 @@ import { Button } from 'components/button/Button.tsx'
 import { Controller, useForm } from 'react-hook-form'
 import Input from 'components/fields/input/Input.tsx'
 import PasswordInput from 'components/fields/passwordInput/PasswordInput.tsx'
+import {
+  emailRegEx,
+  maxLengthEmailMessage,
+  maxLengthPasswordMessage,
+  minLengthPasswordMessage,
+  passwordRegEx,
+  requiredField,
+  validationEmailMessage,
+  validationPasswordMessage,
+} from 'utils/const.ts'
 const Login: FC = () => {
   const navigate = useNavigate()
 
@@ -75,14 +80,14 @@ const Login: FC = () => {
               control={control}
               name="username"
               rules={{
-                required: 'Поле обязательно к заполнению',
+                required: requiredField,
                 maxLength: {
                   value: 60,
-                  message: 'Email не должен превышать 60 символов',
+                  message: maxLengthEmailMessage,
                 },
                 pattern: {
-                  value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
-                  message: 'Введите действительный адрес электронной почты',
+                  value: emailRegEx,
+                  message: validationEmailMessage,
                 },
               }}
               render={({ field, fieldState }) => (
@@ -98,18 +103,18 @@ const Login: FC = () => {
               control={control}
               name="password"
               rules={{
-                required: 'Поле обязательно к заполнению',
+                required: requiredField,
                 minLength: {
                   value: 8,
-                  message: 'Пароль должен содержать не менее 8 символов',
+                  message: minLengthPasswordMessage,
                 },
                 maxLength: {
                   value: 30,
-                  message: 'Пароль должен содержать не более 30 символов',
+                  message: maxLengthPasswordMessage,
                 },
                 pattern: {
-                  value: /^[A-Za-zА-Яа-я0-9]+$/,
-                  message: 'Пароль должен содержать только буквы и цифры',
+                  value: passwordRegEx,
+                  message: validationPasswordMessage,
                 },
               }}
               render={({ field, fieldState }) => (
@@ -117,14 +122,14 @@ const Login: FC = () => {
                   {...field}
                   isError={!!fieldState.error}
                   helperText={fieldState.error?.message}
-                  label="Password"
+                  label="Пароль"
                 />
               )}
             />
             <div>
-              <Link to={FORGOT_PASSWORD} className={classes.forgot_password}>
-                Забыли пароль?
-              </Link>
+              {/*<Link to={FORGOT_PASSWORD} className={classes.forgot_password}>*/}
+              {/*  Забыли пароль?*/}
+              {/*</Link>*/}
             </div>
             <Button type="submit" disabled={isValid}>
               {loadingLoginForm ? 'Загрузка...' : 'Войти'}
