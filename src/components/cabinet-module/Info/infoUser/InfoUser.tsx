@@ -37,6 +37,7 @@ export const InfoUser = memo(() => {
           <div className={s.title}>Личные данные</div>
           <div className={s.block}>
             <AvatarBlock
+              data={data}
               avatarUrl={avatarUrl}
               onImageChange={handleImageChange}
               onUpload={handleUpload}
@@ -47,7 +48,10 @@ export const InfoUser = memo(() => {
             <ModalUniversal active={nestedModalActive} setActive={setNestedModalActive}>
               <div className={s.modal_avatar_container}>
                 <div className={s.avatar_container}>
-                  <img src={selectedImage ?? avatarUrl ?? Image} alt="Update-avater" />
+                  <img
+                    src={selectedImage ?? (data.downloadLink || Image)}
+                    alt="Update-avater"
+                  />
                   <label className={s.label_container}>
                     Выбрать
                     <input onChange={handleImageChange} className={s.input} type="file" />
