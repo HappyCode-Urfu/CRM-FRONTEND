@@ -68,6 +68,9 @@ const Registration: FC = () => {
         dispatch(login(modal))
         console.log('modal', modal)
         navigate(CABINET_ROUTE)
+        setTimeout(() => {
+          window.location.reload()
+        }, 500)
       }
     } catch (e) {
       navigate(NOT_FOUND)
