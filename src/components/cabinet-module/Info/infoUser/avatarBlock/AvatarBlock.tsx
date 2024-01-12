@@ -1,35 +1,29 @@
 import s from './AvatarBlock.module.scss'
 import Avatar from 'assets/icon/avatar.svg'
-import { ChangeEvent, FC, MutableRefObject } from 'react'
+import { ChangeEvent, Dispatch, FC, MutableRefObject, SetStateAction } from 'react'
 
 interface AvatarBlockProps {
   avatarUrl: string | null
   onImageChange: (e: ChangeEvent<HTMLInputElement>) => void
   onUpload: () => void
-  show: boolean
-  toggleBlock: () => void
   fileRef: MutableRefObject<HTMLDivElement | null>
+  setNestedModalActive: Dispatch<SetStateAction<boolean>>
 }
 
 const AvatarBlock: FC<AvatarBlockProps> = ({
   avatarUrl,
   onImageChange,
   onUpload,
-  show,
-  toggleBlock,
+  setNestedModalActive,
   fileRef,
 }) => (
   <div className={s.avatar}>
     <img
       src={avatarUrl ?? localStorage.getItem('avatarUrl') ?? Avatar}
       alt="user-avatar"
-      onClick={toggleBlock}
+      onClick={() => setNestedModalActive(true)}
     />
-    <div
-      ref={fileRef}
-      className={s.fileList}
-      style={{ display: show ? 'block' : 'none' }}
-    >
+    <div ref={fileRef} className={s.fileList}>
       <div className={s.file_container}>
         <label className={s.label_container}>
           Выбрать

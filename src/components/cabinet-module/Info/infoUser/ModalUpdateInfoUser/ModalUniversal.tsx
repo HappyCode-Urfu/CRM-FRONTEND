@@ -1,15 +1,17 @@
 import cl from './ModalUnivrsal.module.scss'
-import { Dispatch, ReactNode, SetStateAction } from 'react'
+import { CSSProperties, Dispatch, ReactNode, SetStateAction } from 'react'
 
 interface UpdateInfoUserProps {
   active: boolean
   setActive: Dispatch<SetStateAction<boolean>>
   children: ReactNode
+  style?: CSSProperties
 }
 
-const ModalUniversal = ({ active, setActive, children }: UpdateInfoUserProps) => {
+const ModalUniversal = ({ active, setActive, children, style }: UpdateInfoUserProps) => {
   return (
     <div
+      style={style}
       className={`${cl.modal} ${active ? cl.active : ''}`}
       onClick={() => setActive(false)}
     >

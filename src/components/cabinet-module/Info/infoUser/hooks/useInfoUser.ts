@@ -14,9 +14,10 @@ export const useInfoUser = () => {
     (state) => state.accountReducer
   )
   const [img, setImg] = useState<File | null>(null)
-  const [show, setShow] = useState<boolean>(false)
   const [modalActive, setModalActive] = useState<boolean>(false)
   const fileRef = useRef<HTMLDivElement | null>(null)
+  const [nestedModalActive, setNestedModalActive] = useState<boolean>(false)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   const { values, handleChange } = useInput({
     name: '',
@@ -28,19 +29,13 @@ export const useInfoUser = () => {
     dispatch(getInfoUser())
   }, [dispatch])
 
-  const toggleBlock = () => {
-    if (fileRef.current) {
-      fileRef.current.style.display = show ? 'none' : 'block'
-      setShow(!show)
-    }
-  }
-
   const handleUpload = async () => {
     if (img) {
       const formData = new FormData()
       formData.append('userId', data.id)
       formData.append('image', img)
       dispatch(sendAvatar(formData))
+      setNestedModalActive(false)
     } else {
       toast('Выберите изображение перед тем как его сохранить')
     }
@@ -49,7 +44,7 @@ export const useInfoUser = () => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setImg(e.target.files[0])
-      toast('Сохраните изображение')
+      setSelectedImage(URL.createObjectURL(e.target.files[0]))
     }
   }
 
@@ -60,20 +55,21 @@ export const useInfoUser = () => {
   }
 
   return {
+    selectedImage,
+    nestedModalActive,
     data,
     fileRef,
     error,
     isLoading,
     avatarUrl,
     img,
-    show,
     modalActive,
     values,
     handleChange,
-    toggleBlock,
     handleUpload,
     handleImageChange,
     handleSubmit,
     setModalActive,
+    setNestedModalActive,
   }
 }

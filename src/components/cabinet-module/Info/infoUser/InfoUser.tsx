@@ -7,23 +7,25 @@ import AvatarBlock from 'components/cabinet-module/Info/infoUser/avatarBlock/Ava
 import UserInfoBlock from 'components/cabinet-module/Info/infoUser/userInfoBlock/UserInfoBlock.tsx'
 import { useInfoUser } from 'components/cabinet-module/Info/infoUser/hooks/useInfoUser.ts'
 import Button from 'components/button/Button.tsx'
+import Image from '../../../../assets/icon/account.svg'
 
 export const InfoUser = memo(() => {
   const {
+    selectedImage,
+    nestedModalActive,
     data,
     fileRef,
     error,
     isLoading,
     avatarUrl,
-    show,
     modalActive,
     values,
     handleChange,
-    toggleBlock,
     handleUpload,
     handleImageChange,
     handleSubmit,
     setModalActive,
+    setNestedModalActive,
   } = useInfoUser()
 
   return (
@@ -38,10 +40,28 @@ export const InfoUser = memo(() => {
               avatarUrl={avatarUrl}
               onImageChange={handleImageChange}
               onUpload={handleUpload}
-              show={show}
-              toggleBlock={toggleBlock}
               fileRef={fileRef}
+              setNestedModalActive={setNestedModalActive}
             />
+
+            <ModalUniversal active={nestedModalActive} setActive={setNestedModalActive}>
+              <div className={s.modal_avatar_container}>
+                <div className={s.avatar_container}>
+                  <img src={selectedImage ?? avatarUrl ?? Image} alt="Update-avater" />
+                  <label className={s.label_container}>
+                    Выбрать
+                    <input onChange={handleImageChange} className={s.input} type="file" />
+                  </label>
+                </div>
+              </div>
+              <p className={s.p}>Максимальный размер файла: 5 мб</p>
+              <div className={s.button_container}>
+                <span className={s.button} onClick={handleUpload}>
+                  Загрузить
+                </span>
+              </div>
+            </ModalUniversal>
+
             <UserInfoBlock
               name={data.name}
               email={data.email}
@@ -49,6 +69,7 @@ export const InfoUser = memo(() => {
               emailConfirmed={data.emailConfirmed}
               setModalActive={setModalActive}
             />
+
             <ModalUniversal active={modalActive} setActive={setModalActive}>
               <form onSubmit={handleSubmit}>
                 <h1 className={s.title_modal}>Изменить данные</h1>
