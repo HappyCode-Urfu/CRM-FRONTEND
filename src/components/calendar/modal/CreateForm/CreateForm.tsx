@@ -68,8 +68,8 @@ export const CreateForm: React.FC<IProps> = ({
   }, [categoryId, dispatch])
 
   useEffect(() => {
-    dispatch(getIdService({ serviceId: useData.serviceName }))
-  }, [dispatch, useData.serviceName])
+    dispatch(getIdService({ serviceId: useData.serviceId }))
+  }, [dispatch, useData.serviceId])
 
   return (
     <form
@@ -104,7 +104,7 @@ export const CreateForm: React.FC<IProps> = ({
         </div>
       )}
 
-      {formType === 'create' && useData.serviceName !== '' && (
+      {formType === 'create' && useData.serviceId !== '' && (
         <div className={s.formGroup}>
           <label htmlFor="task">Выберите Сотрудника</label>
           <div className={s.InputBlock}>

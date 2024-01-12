@@ -40,7 +40,7 @@ export const useForms = ({ hoveredTime, hoveredColumn, formType }: IForms) => {
   }
 
   const handleSelectServiceNameChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setUseData({ ...useData, serviceName: event.target.value })
+    setUseData({ ...useData, serviceId: event.target.value })
   }
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
