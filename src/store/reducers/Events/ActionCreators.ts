@@ -1,25 +1,18 @@
 import { $api } from '../../../http'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IEvents } from 'models/IEvents.ts'
-import { jwtDecode, JwtPayload } from 'jwt-decode'
 
 interface IGetAll {
+  departmentId: string | undefined
   startDate: string
   endDate: string
 }
 
 export const getAllSessions = createAsyncThunk(
   'events/getAll',
-  async ({ endDate, startDate }: IGetAll, thunkAPI) => {
+  async ({ endDate, startDate, departmentId }: IGetAll, thunkAPI) => {
     try {
-      let token: JwtPayload
-      const accessToken = localStorage.getItem('access_token')
-      if (!accessToken) {
-        return new Error('Access token not found')
-      }
-      // eslint-disable-next-line prefer-const
-      token = jwtDecode(accessToken)
-      const response = await $api.get(`/sessions/all/${token.sub}`, {
+      const response = await $api.get(`/sessions/all/${departmentId}`, {
         params: { startDate, endDate },
       })
       return response.data
@@ -42,7 +35,7 @@ export const getIdSessions = createAsyncThunk(
 )
 
 interface IPostSession {
-  departmentId: string
+  departmentId: string | undefined
   data: IEvents
 }
 
@@ -51,7 +44,7 @@ export const postSession = createAsyncThunk(
   async ({ departmentId, data }: IPostSession, thunkAPI) => {
     try {
       const response = await $api.post<IEvents>(`/sessions/${departmentId}`, {
-        serviceName: data.serviceName,
+        serviceId: data.serviceId,
         visitDate: data.visitDate,
         startTime: data.startTime,
         endTime: data.endTime,
@@ -77,7 +70,7 @@ export const putSession = createAsyncThunk(
   async ({ sessionsId, data }: IPutSession, thunkAPI) => {
     try {
       const response = await $api.put<IEvents>(`/sessions/${sessionsId}`, {
-        serviceName: data.serviceName,
+        serviceId: data.serviceId,
         visitDate: data.visitDate,
         startTime: data.startTime,
         endTime: data.endTime,

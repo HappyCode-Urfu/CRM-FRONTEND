@@ -1,6 +1,7 @@
 export interface IEvents {
   sessionId?: string
-  serviceName: string
+  serviceName?: string
+  serviceId: string
   visitDate: string
   startTime: string
   endTime: string

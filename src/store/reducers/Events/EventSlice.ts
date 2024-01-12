@@ -21,6 +21,7 @@ const initialState: EventState = {
   eventId: {
     sessionId: '',
     serviceName: '',
+    serviceId: '',
     visitDate: '',
     startTime: '',
     endTime: '',
@@ -43,6 +44,7 @@ export const eventSlice = createSlice({
     },
     selectTask(state, action: PayloadAction<IEvents>) {
       state.eventId.sessionId = action.payload.sessionId
+      state.eventId.serviceId = action.payload.serviceId
       state.eventId.serviceName = action.payload.serviceName
       state.eventId.visitDate = action.payload.visitDate
       state.eventId.startTime = action.payload.startTime
@@ -86,9 +88,10 @@ export const eventSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [postSession.fulfilled.type]: (state) => {
+    [postSession.fulfilled.type]: (state, action: PayloadAction<IEvents>) => {
       state.isLoading = false
       state.error = ''
+      state.events.push(action.payload)
     },
     [postSession.pending.type]: (state) => {
       state.isLoading = true
@@ -97,9 +100,22 @@ export const eventSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [putSession.fulfilled.type]: (state) => {
+    [putSession.fulfilled.type]: (state, action: PayloadAction<IEvents>) => {
       state.isLoading = false
       state.error = ''
+      state.events.find((id) => {
+        if (id.sessionId === action.payload.sessionId) {
+          id.serviceId = action.payload.serviceId
+          id.serviceName = action.payload.serviceName
+          id.visitDate = action.payload.visitDate
+          id.startTime = action.payload.startTime
+          id.endTime = action.payload.endTime
+          id.employeeId = action.payload.employeeId
+          id.clientName = action.payload.clientName
+          id.clientPhoneNumber = action.payload.clientPhoneNumber
+          id.clientEmail = action.payload.clientEmail
+        }
+      })
     },
     [putSession.pending.type]: (state) => {
       state.isLoading = true
@@ -108,7 +124,8 @@ export const eventSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
-    [delSession.fulfilled.type]: (state) => {
+    [delSession.fulfilled.type]: (state, action: PayloadAction<string>) => {
+      state.events = state.events.filter((id) => id.sessionId !== action.payload)
       state.isLoading = false
       state.error = ''
     },

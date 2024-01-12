@@ -9,13 +9,11 @@ import {
 } from 'store/reducers/Departaments/DepartmentActionCreators.ts'
 import { Loading } from 'components/loading/Loading.tsx'
 import { departmentSlice } from 'store/reducers/Departaments/DepartmentSlice.ts'
-import { categorySlice } from 'store/reducers/Category/CategorySlice.ts'
 import { Button } from 'components/UI/Button/Button.tsx'
 
 export const InfoCompany = memo(() => {
   const dispatch = useTypedDispatch()
   const { selectId } = departmentSlice.actions
-  const { selectDepartmentId } = categorySlice.actions
   const { data, isLoading, error } = useTypedSelector((state) => state.departmentReducer)
 
   useEffect(() => {
@@ -42,7 +40,6 @@ export const InfoCompany = memo(() => {
                       <NavButton
                         onClick={() => {
                           dispatch(selectId(res.id))
-                          dispatch(selectDepartmentId(res.id))
                         }}
                         route={CATEGORY_COMPANY + '/' + res.id}
                         children={'Посмотреть'}
@@ -55,11 +52,9 @@ export const InfoCompany = memo(() => {
                   </div>
                 ))}
               </div>
-              {data.length == 0 && (
-                <div className={s.route}>
-                  <NavButton route={COMPANIES_ROUTE} children={'Создать филиал'} />
-                </div>
-              )}
+              <div className={s.route}>
+                <NavButton route={COMPANIES_ROUTE} children={'Создать филиал'} />
+              </div>
             </div>
           </div>
         </>

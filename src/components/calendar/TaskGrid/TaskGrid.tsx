@@ -48,80 +48,82 @@ export const TaskGrid: FC<TaskGridProps> = memo(({ selectedWeek, events }) => {
   const { showModal, formType, openForm, setFormType, setShowModal } = UseTaskGrid()
 
   return (
-    <div className={s.task}>
-      {days.map((day) => (
-        <div key={day.toISOString()} className={s.day}>
-          {filterEventsByDayAndTime(day).map((event) => {
-            const eventStart = event.startTime.split(':')
-            const eventEnd = event.endTime.split(':')
-            const eventTopPosition =
-              parseInt(eventStart[0]) * 60 + parseInt(eventStart[1]) - 8 * 60
-            const eventStartTime =
-              parseInt(eventStart[0]) * 60 + parseInt(eventStart[1]) - 8 * 60
-            const eventEndTime =
-              parseInt(eventEnd[0]) * 60 + parseInt(eventEnd[1]) - 8 * 60
-            const eventHeight = eventEndTime - eventStartTime
+    <>
+      <div className={s.task}>
+        {days.map((day) => (
+          <div key={day.toISOString()} className={s.day}>
+            {filterEventsByDayAndTime(day).map((event) => {
+              const eventStart = event.startTime.split(':')
+              const eventEnd = event.endTime.split(':')
+              const eventTopPosition =
+                parseInt(eventStart[0]) * 60 + parseInt(eventStart[1]) - 8 * 60
+              const eventStartTime =
+                parseInt(eventStart[0]) * 60 + parseInt(eventStart[1]) - 8 * 60
+              const eventEndTime =
+                parseInt(eventEnd[0]) * 60 + parseInt(eventEnd[1]) - 8 * 60
+              const eventHeight = eventEndTime - eventStartTime
 
-            const eventStyle = {
-              top: `${eventTopPosition}px`,
-              height: `${eventHeight}px`,
-            }
+              const eventStyle = {
+                top: `${eventTopPosition}px`,
+                height: `${eventHeight}px`,
+              }
 
-            return (
-              <div
-                key={event.sessionId}
-                className={s.event}
-                style={eventStyle}
-                onClick={() => {
-                  openForm('edit')
-                  dispatch(selectTask(event))
-                }}
-              >
-                <p className={s.name}>{event.serviceName}</p>
-                <p className={s.time}>
-                  {event.startTime} - {event.endTime}
-                </p>
-              </div>
-            )
-          })}
-          {hours.map((hour) => (
-            <div key={hour} className={s.hour}>
-              {minutes.map((minute) => (
+              return (
                 <div
-                  key={minute}
-                  className={s.minutes}
-                  onMouseEnter={() => handleHover(hour, minute, day)}
-                  onMouseLeave={() => {
-                    setHoveredTime(null)
-                    setHoveredColumn(null)
+                  key={event.sessionId}
+                  className={s.event}
+                  style={eventStyle}
+                  onClick={() => {
+                    openForm('edit')
+                    dispatch(selectTask(event))
                   }}
-                  onClick={() => openForm('create')}
                 >
-                  {hoveredTime ===
-                    `${hour.toString().padStart(2, '0')}:${(minute * 10)
-                      .toString()
-                      .padStart(2, '0')}` &&
-                    day === hoveredColumn && (
-                      <div className={s.timeIndicator}>
-                        {`${hour.toString().padStart(2, '0')}:${(minute * 10)
-                          .toString()
-                          .padStart(2, '0')}`}
-                      </div>
-                    )}
+                  <p className={s.name}>{event.serviceName}</p>
+                  <p className={s.time}>
+                    {event.startTime} - {event.endTime}
+                  </p>
                 </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      ))}
-      <Modal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        formType={formType}
-        hoveredTime={lastHoveredTime}
-        hoveredColumn={hoveredColumn?.toISOString().split('T')[0]}
-        setFormType={setFormType}
-      />
-    </div>
+              )
+            })}
+            {hours.map((hour) => (
+              <div key={hour} className={s.hour}>
+                {minutes.map((minute) => (
+                  <div
+                    key={minute}
+                    className={s.minutes}
+                    onMouseEnter={() => handleHover(hour, minute, day)}
+                    onMouseLeave={() => {
+                      setHoveredTime(null)
+                      setHoveredColumn(null)
+                    }}
+                    onClick={() => openForm('create')}
+                  >
+                    {hoveredTime ===
+                      `${hour.toString().padStart(2, '0')}:${(minute * 10)
+                        .toString()
+                        .padStart(2, '0')}` &&
+                      day === hoveredColumn && (
+                        <div className={s.timeIndicator}>
+                          {`${hour.toString().padStart(2, '0')}:${(minute * 10)
+                            .toString()
+                            .padStart(2, '0')}`}
+                        </div>
+                      )}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ))}
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          formType={formType}
+          hoveredTime={lastHoveredTime}
+          hoveredColumn={hoveredColumn?.toISOString().split('T')[0]}
+          setFormType={setFormType}
+        />
+      </div>
+    </>
   )
 })

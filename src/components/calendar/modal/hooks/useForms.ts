@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useTypedDispatch, useTypedSelector } from 'hooks/redux.ts'
 import { postSession, putSession } from 'store/reducers/Events/ActionCreators.ts'
-import { Option } from 'components/UI/Select/Select.tsx'
 import { IEvents } from 'models/IEvents.ts'
 
 interface IForms {
@@ -12,11 +11,15 @@ interface IForms {
 
 export const useForms = ({ hoveredTime, hoveredColumn, formType }: IForms) => {
   const { eventId } = useTypedSelector((state) => state.eventReducer)
+  const { data } = useTypedSelector((state) => state.serviceReducer)
+  const ServiceList = data.map((val) => ({
+    value: val.id,
+    label: val.name,
+  }))
   const dispatch = useTypedDispatch()
-  const EmployeeList = JSON.parse(localStorage.getItem('Employee') || '[]') as Option[]
-  const DepartmentId = JSON.parse(localStorage.getItem('departmentId') || '')
   const [useData, setUseData] = useState({
     sessionId: formType === 'edit' ? eventId.sessionId : '',
+    serviceId: formType === 'edit' ? eventId.serviceId : '',
     serviceName: formType === 'edit' ? eventId.serviceName : '',
     visitDate:
       formType === 'edit' ? eventId.visitDate?.split('T')[0] : hoveredColumn ?? '',
@@ -28,14 +31,22 @@ export const useForms = ({ hoveredTime, hoveredColumn, formType }: IForms) => {
     clientEmail: formType === 'edit' ? eventId.clientEmail : '',
   })
 
+  console.log(useData)
+
+  const { dataId: DepartmentId } = useTypedSelector((state) => state.departmentReducer)
+
   const handleSelectEmployeeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setUseData({ ...useData, employeeId: event.target.value })
+  }
+
+  const handleSelectServiceNameChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setUseData({ ...useData, serviceName: event.target.value })
   }
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data: IEvents = {
-      serviceName: useData.serviceName,
+      serviceId: useData.serviceId,
       visitDate: useData.visitDate,
       startTime: useData.startTime,
       endTime: useData.endTime,
@@ -44,13 +55,13 @@ export const useForms = ({ hoveredTime, hoveredColumn, formType }: IForms) => {
       clientPhoneNumber: useData.clientPhoneNumber,
       clientEmail: useData.clientEmail,
     }
-    dispatch(postSession({ departmentId: DepartmentId, data }))
+    dispatch(postSession({ departmentId: DepartmentId?.id, data }))
   }
 
   const handleEditSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data: IEvents = {
-      serviceName: useData.serviceName,
+      serviceId: useData.serviceId,
       visitDate: useData.visitDate,
       startTime: useData.startTime,
       endTime: useData.endTime,
@@ -64,7 +75,8 @@ export const useForms = ({ hoveredTime, hoveredColumn, formType }: IForms) => {
 
   return {
     useData,
-    EmployeeList,
+    ServiceList,
+    handleSelectServiceNameChange,
     handleEditSubmit,
     handleSelectEmployeeChange,
     setUseData,

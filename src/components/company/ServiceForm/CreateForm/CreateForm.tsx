@@ -184,6 +184,7 @@ export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
       )}
 
       <Select
+        def={true}
         children={'Формат'}
         value={serviceData.serviceType}
         options={serviceData.list}
@@ -191,6 +192,7 @@ export const ServiceCreateForm = ({ id, dataId, type }: IProps) => {
       />
 
       <Select
+        def={true}
         children={'Сотрудник'}
         value={serviceData.employeeId}
         options={serviceData.employeeList}

@@ -112,6 +112,7 @@ export const CreateForm = () => {
               </div>
             </div>
             <Select
+              def={true}
               children={'Сфера бизнеса'}
               value={formData.businessName}
               options={formData.businessList}
