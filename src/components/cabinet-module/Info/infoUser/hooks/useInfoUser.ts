@@ -10,9 +10,7 @@ import { useInput } from 'hooks/useInput.ts'
 
 export const useInfoUser = () => {
   const dispatch = useTypedDispatch()
-  const { data, error, isLoading, avatarUrl } = useTypedSelector(
-    (state) => state.accountReducer
-  )
+  const { data, error, isLoading } = useTypedSelector((state) => state.accountReducer)
   const [img, setImg] = useState<File | null>(null)
   const [modalActive, setModalActive] = useState<boolean>(false)
   const fileRef = useRef<HTMLDivElement | null>(null)
@@ -29,19 +27,19 @@ export const useInfoUser = () => {
     dispatch(getInfoUser())
   }, [dispatch])
 
-  // useEffect(() => {
-  //   if (data) {
-  //     if (!values.name) {
-  //       values.name = data.name
-  //     }
-  //     if (!values.email) {
-  //       values.email = data.email
-  //     }
-  //     if (!values.city) {
-  //       values.city = data.city
-  //     }
-  //   }
-  // }, [data, values])
+  useEffect(() => {
+    if (data) {
+      if (!values.name) {
+        values.name = data.name
+      }
+      if (!values.email) {
+        values.email = data.email
+      }
+      if (!values.city) {
+        values.city = data.city
+      }
+    }
+  }, [data, values])
 
   const handleUpload = async () => {
     if (img) {
@@ -75,7 +73,6 @@ export const useInfoUser = () => {
     fileRef,
     error,
     isLoading,
-    avatarUrl,
     img,
     modalActive,
     values,
