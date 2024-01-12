@@ -29,6 +29,20 @@ export const useInfoUser = () => {
     dispatch(getInfoUser())
   }, [dispatch])
 
+  useEffect(() => {
+    if (data) {
+      if (!values.name) {
+        values.name = data.name
+      }
+      if (!values.email) {
+        values.email = data.email
+      }
+      if (!values.city) {
+        values.city = data.city
+      }
+    }
+  }, [data, values])
+
   const handleUpload = async () => {
     if (img) {
       const formData = new FormData()
