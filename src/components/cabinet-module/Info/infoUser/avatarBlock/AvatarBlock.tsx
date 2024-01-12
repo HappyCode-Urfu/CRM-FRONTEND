@@ -4,7 +4,6 @@ import { ChangeEvent, Dispatch, FC, MutableRefObject, SetStateAction } from 'rea
 import { IAccount } from 'models/Account.ts'
 
 interface AvatarBlockProps {
-  avatarUrl: string | null
   data: IAccount
   onImageChange: (e: ChangeEvent<HTMLInputElement>) => void
   onUpload: () => void
@@ -13,7 +12,6 @@ interface AvatarBlockProps {
 }
 
 const AvatarBlock: FC<AvatarBlockProps> = ({
-  avatarUrl,
   data,
   onImageChange,
   onUpload,
@@ -23,7 +21,7 @@ const AvatarBlock: FC<AvatarBlockProps> = ({
   return (
     <div className={s.avatar}>
       <img
-        src={avatarUrl ?? (data.downloadLink || Avatar)}
+        src={data.downloadLink || Avatar}
         alt="user-avatar"
         onClick={() => setNestedModalActive(true)}
       />

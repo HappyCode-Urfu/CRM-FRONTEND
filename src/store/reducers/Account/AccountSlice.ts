@@ -10,7 +10,6 @@ interface AccountState {
   data: IAccount
   isLoading: boolean
   error: string
-  avatarUrl: string | null
 }
 
 const initialState: AccountState = {
@@ -28,7 +27,6 @@ const initialState: AccountState = {
   },
   isLoading: false,
   error: '',
-  avatarUrl: null,
 }
 
 const AccountSlice = createSlice({
@@ -61,7 +59,7 @@ const AccountSlice = createSlice({
       state.isLoading = true
     },
     [sendAvatar.fulfilled.type]: (state, action: PayloadAction<string>) => {
-      state.avatarUrl = action.payload
+      state.data.downloadLink = action.payload
       state.isLoading = false
     },
     [updateUserInfo.pending.type]: (state) => {

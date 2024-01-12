@@ -17,7 +17,6 @@ export const InfoUser = memo(() => {
     fileRef,
     error,
     isLoading,
-    avatarUrl,
     modalActive,
     values,
     handleChange,
@@ -38,7 +37,6 @@ export const InfoUser = memo(() => {
           <div className={s.block}>
             <AvatarBlock
               data={data}
-              avatarUrl={avatarUrl}
               onImageChange={handleImageChange}
               onUpload={handleUpload}
               fileRef={fileRef}
